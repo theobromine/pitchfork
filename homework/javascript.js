@@ -1,3 +1,4 @@
+//Takes in R,G,B, outputs hex value
 function hexFromRGB(r, g, b) {
     var hex = [
       r.toString( 16 ),
@@ -12,6 +13,7 @@ function hexFromRGB(r, g, b) {
     return hex.join( "" ).toUpperCase();
   }
 
+//Update the sliders based on text input values
 function refreshSwatch() {
         var red = $( "#red" ).slider( "value" ),
           green = $( "#green" ).slider( "value" ),
@@ -22,16 +24,16 @@ function refreshSwatch() {
         $("input[name=greenin]").val(hex[2]+hex[3]);
         $("input[name=bluein]").val(hex[4]+hex[5]);
     }
-
+//Main plugin function
 (function ( $ ) {
-
+    //Init
     $.fn.hexed = function( options ) {
-
-        // This is the easiest way to have default options.
+        //Get random values for RGB
         var colorR = Math.floor((Math.random() * 256));
         var colorG = Math.floor((Math.random() * 256));
         var colorB = Math.floor((Math.random() * 256));
 
+        //Default values
         var settings = $.extend({
             // These are the defaults.
             color: hexFromRGB(colorR, colorG, colorB),
@@ -39,7 +41,9 @@ function refreshSwatch() {
             difficulty: 5,
             turns: 10
         }, options );
+        //Start adding html for game
         $(this).before("\n\n<p>Color Game</p>Difficulty: <input type='text' name='difficulty' value='5'><br> Turns: <input type='text' name='turns' value='10'><br>");
+        //add html for sliders
         $(this).after(" <br></br>Blue: <div id='blue'> </div> <input type='text' name='bluein'><br></br>  </div>");
         $( "#blue" ).slider({
             orientation: "horizontal",
@@ -79,6 +83,7 @@ function refreshSwatch() {
             var bin = $("input[name=bluein]").val();
             var result = rin+gin+bin;
             $(this).after("<div id='result' style='height: 100px; width: 100px;' > </div>");
+            // $("#")
             if (result == settings.color){
               alert("Sucess! You found the color");
             }
@@ -107,9 +112,6 @@ function refreshSwatch() {
             $("#blue").slider("value", bin);
           });
 
-        // alert(settings.turns);
-        // alert(settings.color);
-        // Greenify the collection based on the settings variable.
         this.css({
             color: settings.color,
             backgroundColor: settings.backgroundColor
