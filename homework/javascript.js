@@ -83,7 +83,8 @@ function refreshSwatch() {
             var bin = $("input[name=bluein]").val();
             var result = rin+gin+bin;
             $(this).after("<div id='result' style='height: 100px; width: 100px;' > </div>");
-            // $("#")
+            $("#result").css("background-color", "rgb("+parseInt(rin,16)+","+parseInt(gin,16)+","+parseInt(bin,16));
+
             if (result == settings.color){
               alert("Sucess! You found the color");
             }
