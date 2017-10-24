@@ -1,3 +1,11 @@
+//TODO
+//percentDifferent
+//scoreboard
+//difficulty
+//next button
+//save and load json
+
+
 //Takes in R,G,B, outputs hex value
 function hexFromRGB(r, g, b) {
     var hex = [
@@ -77,100 +85,100 @@ function percentDifferent(guessColor, expectedColor){
           //We call refreshSwatch to update the textboxes to each slider value
           refreshSwatch();
           //Create button for user
-          $(this).append("<button id='check'>Check values </button>");
+        $(this).append("<button id='check'>Check values </button>");
 
           //When the user checks the input
-          $("#check").click( function(){
-            //Aquire values for red, green, blue from input
-            var rin = $("input[name=redin]").val();
-            var gin = $("input[name=greenin]").val();
-            var bin = $("input[name=bluein]").val();
-            //Result is the combination of RGB
-            var result = rin+gin+bin;
-            //Create a square in the color of the input color
-            $(this).after("<div id='result' style='height: 100px; width: 100px;' > "+result+" </div>");
-            $("#result").css("background-color", "rgb("+parseInt(rin,16)+","+parseInt(gin,16)+","+parseInt(bin,16));
-            //Calculate how far off we are from the expected RGB
-            var redOff = percentDifferent(rin, settings.color[0]+settings.color[1]);
-            var greenOff = percentDifferent(rin, settings.color[2]+settings.color[3]);
-            var blueOff = percentDifferent(rin, settings.color[4]+settings.color[5]);
-            //Print out the % off for the user
-            $("#result").after("Your red was %" + redOff + " off. Your green was %"+ greenOff+ " off. Your blue was %"+blueOff+" off.");
+        $("#check").click( function(){
+          //Aquire values for red, green, blue from input
+          var rin = $("input[name=redin]").val();
+          var gin = $("input[name=greenin]").val();
+          var bin = $("input[name=bluein]").val();
+          //Result is the combination of RGB
+          var result = rin+gin+bin;
+          //Create a square in the color of the input color
+          $(this).after("<div id='result' style='height: 100px; width: 100px;' > "+result+" </div>");
+          $("#result").css("background-color", "rgb("+parseInt(rin,16)+","+parseInt(gin,16)+","+parseInt(bin,16));
+          //Calculate how far off we are from the expected RGB
+          var redOff = percentDifferent(rin, settings.color[0]+settings.color[1]);
+          var greenOff = percentDifferent(rin, settings.color[2]+settings.color[3]);
+          var blueOff = percentDifferent(rin, settings.color[4]+settings.color[5]);
+          //Print out the % off for the user
+          $("#result").after("Your red was %" + redOff + " off. Your green was %"+ greenOff+ " off. Your blue was %"+blueOff+" off.");
 
-            //WIP: Create an area to place the score, and a method to update it.
-            // From the doc:
-            //  After each guess, the score earned should be added to a visible running tally,
-            //  along with how many points were earned for that color.
-            //  If the score would be less than zero for a color,
-            //  it should be counted as zero.  Scores should not have more than 2 points precision.
-            //  (ie round to the nearest 100th)
-
-
-            //Check to see if the guess was correct
-            if (result == settings.color){
-              alert("Sucess! You found the color");
-            }
-            //If not correct
-            else {
-              console.log("The correct color is: " + settings.color + " Input: " + result );
-              //Take one turn away
-              settings.turns = settings.turns - 1;
-              alert("You fail. You have " + settings.turns + " turns left. Good luck");
-            }
-            //No more turns
-            if(settings.turns == 0){
-              alert("You really failed. GG no re");
-            }
-
-            //WIP: Create a next button, have it properly set the new color
-            // From the doc:
-            //  Clicking "Next" will present a new color, until the predetermined
-            //  number of turns have passed, at which point the final score is
-            //  presented and the user is prompted to play again (using the same
-            //  or different settings).
+          //WIP: Create an area to place the score, and a method to update it.
+          // From the doc:
+          //  After each guess, the score earned should be added to a visible running tally,
+          //  along with how many points were earned for that color.
+          //  If the score would be less than zero for a color,
+          //  it should be counted as zero.  Scores should not have more than 2 points precision.
+          //  (ie round to the nearest 100th)
 
 
-
-            //WIP: Create an area to save our score.
-            // From the doc:
-            //  At the end of the game, provide a form for users to provide their
-            //  name and save their score. Once the user clicks on the "Submit Score"
-            //  button, use the Web Storage API to store a list of high scores as a
-            //  JSON string in the user's localStorage (you'll have to parse and
-            //  stringify the JSON each time you want to load and save the high score list).
-            // Each high score should include the following, collected at the end of each game:
-            //    Player Name
-            //    Difficulty
-            //    Turns
-            //    Score
-            //    Timestamp
-              //WIP PART 2:
-              //  Create a new page, Team#Scores.html, using HTML5.
-              //  This page will read from localStorage to retrieve
-              //  the high scores list, and print them in a neatly
-              //  formatted table, sorted by score, then timestamp.
-
-
-          });
-
-          function check(){
-            alert(settings.color);
+          //Check to see if the guess was correct
+          if (result == settings.color){
+            alert("Sucess! You found the color");
           }
-          check();
+          //If not correct
+          else {
+            console.log("The correct color is: " + settings.color + " Input: " + result );
+            //Take one turn away
+            settings.turns = settings.turns - 1;
+            alert("You fail. You have " + settings.turns + " turns left. Good luck");
+          }
+          //No more turns
+          if(settings.turns == 0){
+            alert("You really failed. GG no re");
+          }
 
-          //Called whenever an input box is changed
-          //Changes sliders to match input
-          $("input").change(function () {
+          //WIP: Create a next button, have it properly set the new color
+          // From the doc:
+          //  Clicking "Next" will present a new color, until the predetermined
+          //  number of turns have passed, at which point the final score is
+          //  presented and the user is prompted to play again (using the same
+          //  or different settings).
 
-            var value = this.value.substring(1);
-            var rin = parseInt($("input[name=redin]").val(),16);
-            var gin = parseInt($("input[name=greenin]").val(),16);
-            var bin = parseInt($("input[name=bluein]").val(),16);
-            console.log(rin, "B, ", gin, "C", bin);
-            $("#red").slider("value", rin);
-            $("#green").slider("value", gin);
-            $("#blue").slider("value", bin);
-          });
+
+
+          //WIP: Create an area to save our score.
+          // From the doc:
+          //  At the end of the game, provide a form for users to provide their
+          //  name and save their score. Once the user clicks on the "Submit Score"
+          //  button, use the Web Storage API to store a list of high scores as a
+          //  JSON string in the user's localStorage (you'll have to parse and
+          //  stringify the JSON each time you want to load and save the high score list).
+          // Each high score should include the following, collected at the end of each game:
+          //    Player Name
+          //    Difficulty
+          //    Turns
+          //    Score
+          //    Timestamp
+            //WIP PART 2:
+            //  Create a new page, Team#Scores.html, using HTML5.
+            //  This page will read from localStorage to retrieve
+            //  the high scores list, and print them in a neatly
+            //  formatted table, sorted by score, then timestamp.
+
+
+        });
+
+        function check(){
+          alert(settings.color);
+        }
+        check();
+
+        //Called whenever an input box is changed
+        //Changes sliders to match input
+        $("input").change(function () {
+          var value = this.value.substring(1);
+          var rin = parseInt($("input[name=redin]").val(),16);
+          var gin = parseInt($("input[name=greenin]").val(),16);
+          var bin = parseInt($("input[name=bluein]").val(),16);
+          //Log user input to console
+          console.log("R: ", rin, " B: ", gin, " C: ", bin);
+          $("#red").slider("value", rin);
+          $("#green").slider("value", gin);
+          $("#blue").slider("value", bin);
+        });
 
         this.css({
             color: settings.color,
