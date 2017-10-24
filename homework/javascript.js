@@ -45,25 +45,10 @@ function refreshSwatch() {
         $(this).before("\n\n<p>Color Game</p>Difficulty: <input type='text' name='difficulty' value='5'><br> Turns: <input type='text' name='turns' value='10'><br>");
         //add html for sliders
         $(this).after(" <br></br>Blue: <div id='blue'> </div> <input type='text' name='bluein'><br></br>  </div>");
-        $( "#blue" ).slider({
-            orientation: "horizontal",
-            range: "min",
-            max: 255,
-            value: 127,
-            slide: refreshSwatch,
-            change: refreshSwatch
-          });
-          $(this).after("<br></br> Green: <div id='green'> </div> <input type='text' name='greenin'><br></br>  </div>\n");
-          $( "#green" ).slider({
-              orientation: "horizontal",
-              range: "min",
-              max: 255,
-              value: 127,
-              slide: refreshSwatch,
-              change: refreshSwatch
-            });
+        $(this).after("<br></br> Green: <div id='green'> </div> <input type='text' name='greenin'><br></br>  </div>\n");
         $(this).after("<br></br>Red: <div id='red'> </div> <input type='text' name='redin'><br></br> </div>\n");
-        $( "#red" ).slider({
+        //Sliders are now added with css to make them functional
+        $( "#red, #green, #blue" ).slider({
             orientation: "horizontal",
             range: "min",
             max: 255,
@@ -72,37 +57,54 @@ function refreshSwatch() {
             change: refreshSwatch
           });
 
-
+          //We call refreshSwatch to update the textboxes to each slider value
           refreshSwatch();
+          //Create input for user
           $(this).after(" <input type='text' name='guess' value='Enter Hex Here'><br></br>  </div>");
           $(this).after("<button id='check'>Check values </button>");
 
+          //When the user checks the input
           $("#check").click( function(){
+            //Aquire values for red, green, blue from input
             var rin = $("input[name=redin]").val();
             var gin = $("input[name=greenin]").val();
             var bin = $("input[name=bluein]").val();
+            //Result is the combination of RGB
             var result = rin+gin+bin;
-            $(this).after("<div id='result' style='height: 100px; width: 100px;' > </div>");
+            //Create a square in the color of the input color
+            $(this).after("<div id='result' style='height: 100px; width: 100px;' > "+result+" </div>");
             $("#result").css("background-color", "rgb("+parseInt(rin,16)+","+parseInt(gin,16)+","+parseInt(bin,16));
-
+            var redOff;
+            var greenOff;
+            var blueOff;
+            $("#result").after("You were % " + + " SEttings: " + settings.color );
+            //Check to see if the guess was correct
             if (result == settings.color){
               alert("Sucess! You found the color");
             }
+            //If not correct
             else {
-              console.log("Good " + settings.color + " Bad: " + result );
+              console.log("The correct color is: " + settings.color + " Input: " + result );
+              //Take one turn away
               settings.turns = settings.turns - 1;
               alert("You fail. You have " + settings.turns + " turns left. Good luck");
             }
+            //No more turns
             if(settings.turns == 0){
               alert("You really failed. GG no re");
             }
 
           });
+
           function check(){
             alert(settings.color);
           }
           check();
+
+          //Called whenever an input box is changed
+          //Changes sliders to match input
           $("input").change(function () {
+
             var value = this.value.substring(1);
             var rin = parseInt($("input[name=redin]").val(),16);
             var gin = parseInt($("input[name=greenin]").val(),16);
@@ -122,11 +124,13 @@ function refreshSwatch() {
     };
 
 }( jQuery ));
-
+//Init
 $(function() {
-
+  //When the button is clicked for the first time
   $("#random_color").one("click", (function() {
+      //Create a game section
       $(this).after("<div id='game' style='height: 100px; width: 100px;' > test </div>");
+      //Init plugin to game
       $( "#game" ).hexed({
           difficulty: $("input[name=difficulty]").val(),
           turns: $("input[name=turns]").val()
@@ -134,6 +138,7 @@ $(function() {
       // alert($("#game").hexed.settings);
       console.log($("#game"));
   }));
+  //If clicked a second time +
   $("#random_color").click(function() {
     var colorR = Math.floor((Math.random() * 256));
     var colorG = Math.floor((Math.random() * 256));
@@ -146,15 +151,15 @@ $(function() {
   });
 
 
-
-  $( "#red, #green, #blue" ).slider({
-      orientation: "horizontal",
-      range: "min",
-      max: 255,
-      value: 127,
-      slide: refreshSwatch,
-      change: refreshSwatch
-    });
+  // Css for sliders. Now not used as they are no longer in the html.
+  // $( "#red, #green, #blue" ).slider({
+  //     orientation: "horizontal",
+  //     range: "min",
+  //     max: 255,
+  //     value: 127,
+  //     slide: refreshSwatch,
+  //     change: refreshSwatch
+  //   });
 
 
   refreshSwatch();
