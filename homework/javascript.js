@@ -54,11 +54,13 @@ function percentDifferent(guessColor, expectedColor){
             turns: 10
         }, options );
         //Start adding html for game
-        $(this).before("\n\n<p>Color Game</p>Difficulty: <input type='text' name='difficulty' value='5'><br> Turns: <input type='text' name='turns' value='10'><br>");
+        // $(this).append("\n\n<p>Color Game</p>Difficulty: <input type='text' name='difficulty' value='5'><br> Turns: <input type='text' name='turns' value='10'><br>");
+        $(this).append("\n\n<p>Color Game</p>");
+        $(this).append("<div id='game' style='height: 100px; width: 100px;' > Guess This Color! </div>");
         //add html for sliders
-        $(this).after(" <br></br>Blue: <div id='blue'> </div> <input type='text' name='bluein'><br></br>  </div>");
-        $(this).after("<br></br> Green: <div id='green'> </div> <input type='text' name='greenin'><br></br>  </div>\n");
-        $(this).after("<br></br>Red: <div id='red'> </div> <input type='text' name='redin'><br></br> </div>\n");
+        $(this).append(" <br></br>Blue: <div id='blue'> </div> <input type='text' name='bluein'><br></br>  </div>");
+        $(this).append("<br></br> Green: <div id='green'> </div> <input type='text' name='greenin'><br></br>  </div>\n");
+        $(this).append("<br></br>Red: <div id='red'> </div> <input type='text' name='redin'><br></br> </div>\n");
         //Sliders are now added with css to make them functional
         $( "#red, #green, #blue" ).slider({
             orientation: "horizontal",
@@ -72,8 +74,8 @@ function percentDifferent(guessColor, expectedColor){
           //We call refreshSwatch to update the textboxes to each slider value
           refreshSwatch();
           //Create input for user
-          $(this).after(" <input type='text' name='guess' value='Enter Hex Here'><br></br>  </div>");
-          $(this).after("<button id='check'>Check values </button>");
+          $(this).append(" <input type='text' name='guess' value='Enter Hex Here'><br></br>  </div>");
+          $(this).append("<button id='check'>Check values </button>");
 
           //When the user checks the input
           $("#check").click( function(){
@@ -84,14 +86,14 @@ function percentDifferent(guessColor, expectedColor){
             //Result is the combination of RGB
             var result = rin+gin+bin;
             //Create a square in the color of the input color
-            $(this).after("<div id='result' style='height: 100px; width: 100px;' > "+result+" </div>");
+            $(this).append("<div id='result' style='height: 100px; width: 100px;' > "+result+" </div>");
             $("#result").css("background-color", "rgb("+parseInt(rin,16)+","+parseInt(gin,16)+","+parseInt(bin,16));
             //Calculate how far off we are from the expected RGB
             var redOff = percentDifferent(rin, settings.color[0]+settings.color[1]);
             var greenOff = percentDifferent(rin, settings.color[2]+settings.color[3]);
             var blueOff = percentDifferent(rin, settings.color[4]+settings.color[5]);
             //Print out the % off for the user
-            $("#result").after("Your red was %" + redOff + " off. Your green was %"+ greenOff+ " off. Your blue was %"+blueOff+" off.");
+            $("#result").append("Your red was %" + redOff + " off. Your green was %"+ greenOff+ " off. Your blue was %"+blueOff+" off.");
 
             //WIP: Create an area to place the score, and a method to update it.
             // From the doc:
@@ -183,14 +185,13 @@ $(function() {
   //When the button is clicked for the first time
   $("#random_color").one("click", (function() {
       //Create a game section
-      $(this).after("<div id='game' style='height: 100px; width: 100px;' > test </div>");
       //Init plugin to game
-      $( "#game" ).hexed({
+      $( "#placeholder" ).hexed({
           difficulty: $("input[name=difficulty]").val(),
           turns: $("input[name=turns]").val()
       });
       // alert($("#game").hexed.settings);
-      console.log($("#game"));
+      // console.log($("#game"));
   }));
   //If clicked a second time +
   $("#random_color").click(function() {
