@@ -57,10 +57,13 @@ function percentDifferent(guessColor, expectedColor){
         // $(this).append("\n\n<p>Color Game</p>Difficulty: <input type='text' name='difficulty' value='5'><br> Turns: <input type='text' name='turns' value='10'><br>");
         $(this).append("\n\n<p>Color Game</p>");
         $(this).append("<div id='game' style='height: 100px; width: 100px;' > Guess This Color! </div>");
+        $("#game").css("background-color", "rgb(" + colorR + "," + colorG + "," + colorB + ")");
+
         //add html for sliders
-        $(this).append(" <br></br>Blue: <div id='blue'> </div> <input type='text' name='bluein'><br></br>  </div>");
-        $(this).append("<br></br> Green: <div id='green'> </div> <input type='text' name='greenin'><br></br>  </div>\n");
-        $(this).append("<br></br>Red: <div id='red'> </div> <input type='text' name='redin'><br></br> </div>\n");
+        $(this).append("<br></br> Red:    <div id='red'></div>    <input type='text' name='redin'><br></br>   </div>");
+        $(this).append("<br></br> Green:  <div id='green'></div>  <input type='text' name='greenin'><br></br> </div>");
+        $(this).append("<br></br> Blue:   <div id='blue'></div>   <input type='text' name='bluein'><br></br>  </div>");
+
         //Sliders are now added with css to make them functional
         $( "#red, #green, #blue" ).slider({
             orientation: "horizontal",
@@ -197,7 +200,7 @@ $(function() {
     var colorR = Math.floor((Math.random() * 256));
     var colorG = Math.floor((Math.random() * 256));
     var colorB = Math.floor((Math.random() * 256));
-    $("#game").css("background-color", "rgb(" + colorR + "," + colorG + "," + colorB + ")");
+    // $("#game").css("background-color", "rgb(" + colorR + "," + colorG + "," + colorB + ")");
 
   });
   $("#check").click(function() {
