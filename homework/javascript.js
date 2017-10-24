@@ -24,6 +24,18 @@ function refreshSwatch() {
         $("input[name=greenin]").val(hex[2]+hex[3]);
         $("input[name=bluein]").val(hex[4]+hex[5]);
     }
+
+
+//WIP
+//Takes in two hex colors and returns the % difference.
+
+//From the doc
+// Percentage off is calculated as follow:
+// (|expected value – actual value| / 255) * 100
+
+function percentDifferent(guessColor, expectedColor){
+  return 1;
+}
 //Main plugin function
 (function ( $ ) {
     //Init
@@ -74,10 +86,22 @@ function refreshSwatch() {
             //Create a square in the color of the input color
             $(this).after("<div id='result' style='height: 100px; width: 100px;' > "+result+" </div>");
             $("#result").css("background-color", "rgb("+parseInt(rin,16)+","+parseInt(gin,16)+","+parseInt(bin,16));
-            var redOff;
-            var greenOff;
-            var blueOff;
-            $("#result").after("You were % " + + " SEttings: " + settings.color );
+            //Calculate how far off we are from the expected RGB
+            var redOff = percentDifferent(rin, settings.color[0]+settings.color[1]);
+            var greenOff = percentDifferent(rin, settings.color[2]+settings.color[3]);
+            var blueOff = percentDifferent(rin, settings.color[4]+settings.color[5]);
+            //Print out the % off for the user
+            $("#result").after("Your red was %" + redOff + " off. Your green was %"+ greenOff+ " off. Your blue was %"+blueOff+" off.");
+
+            //WIP: Create an area to place the score, and a method to update it.
+            // From the doc:
+            //  After each guess, the score earned should be added to a visible running tally,
+            //  along with how many points were earned for that color.
+            //  If the score would be less than zero for a color,
+            //  it should be counted as zero.  Scores should not have more than 2 points precision.
+            //  (ie round to the nearest 100th)
+
+
             //Check to see if the guess was correct
             if (result == settings.color){
               alert("Sucess! You found the color");
@@ -93,6 +117,35 @@ function refreshSwatch() {
             if(settings.turns == 0){
               alert("You really failed. GG no re");
             }
+
+            //WIP: Create a next button, have it properly set the new color
+            // From the doc:
+            //  Clicking "Next" will present a new color, until the predetermined
+            //  number of turns have passed, at which point the final score is
+            //  presented and the user is prompted to play again (using the same
+            //  or different settings).
+
+
+
+            //WIP: Create an area to save our score.
+            // From the doc:
+            //  At the end of the game, provide a form for users to provide their
+            //  name and save their score. Once the user clicks on the "Submit Score"
+            //  button, use the Web Storage API to store a list of high scores as a
+            //  JSON string in the user's localStorage (you'll have to parse and
+            //  stringify the JSON each time you want to load and save the high score list).
+            // Each high score should include the following, collected at the end of each game:
+            //    Player Name
+            //    Difficulty
+            //    Turns
+            //    Score
+            //    Timestamp
+              //WIP PART 2:
+              //  Create a new page, Team#Scores.html, using HTML5.
+              //  This page will read from localStorage to retrieve
+              //  the high scores list, and print them in a neatly
+              //  formatted table, sorted by score, then timestamp.
+
 
           });
 
@@ -125,6 +178,7 @@ function refreshSwatch() {
 
 }( jQuery ));
 //Init
+//This section is used to create the game.
 $(function() {
   //When the button is clicked for the first time
   $("#random_color").one("click", (function() {
