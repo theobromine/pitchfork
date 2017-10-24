@@ -73,8 +73,7 @@ function percentDifferent(guessColor, expectedColor){
 
           //We call refreshSwatch to update the textboxes to each slider value
           refreshSwatch();
-          //Create input for user
-          $(this).append(" <input type='text' name='guess' value='Enter Hex Here'><br></br>  </div>");
+          //Create button for user
           $(this).append("<button id='check'>Check values </button>");
 
           //When the user checks the input
@@ -86,14 +85,14 @@ function percentDifferent(guessColor, expectedColor){
             //Result is the combination of RGB
             var result = rin+gin+bin;
             //Create a square in the color of the input color
-            $(this).append("<div id='result' style='height: 100px; width: 100px;' > "+result+" </div>");
+            $(this).after("<div id='result' style='height: 100px; width: 100px;' > "+result+" </div>");
             $("#result").css("background-color", "rgb("+parseInt(rin,16)+","+parseInt(gin,16)+","+parseInt(bin,16));
             //Calculate how far off we are from the expected RGB
             var redOff = percentDifferent(rin, settings.color[0]+settings.color[1]);
             var greenOff = percentDifferent(rin, settings.color[2]+settings.color[3]);
             var blueOff = percentDifferent(rin, settings.color[4]+settings.color[5]);
             //Print out the % off for the user
-            $("#result").append("Your red was %" + redOff + " off. Your green was %"+ greenOff+ " off. Your blue was %"+blueOff+" off.");
+            $("#result").after("Your red was %" + redOff + " off. Your green was %"+ greenOff+ " off. Your blue was %"+blueOff+" off.");
 
             //WIP: Create an area to place the score, and a method to update it.
             // From the doc:
