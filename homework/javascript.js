@@ -42,7 +42,8 @@ function refreshSwatch() {
 // (|expected value – actual value| / 255) * 100
 
 function percentDifferent(guessColor, expectedColor){
-  return 1;
+// (|expected value – actual value| / 255) * 100
+  return (Math.abs(parseInt(guessColor,16) - parseInt(expectedColor,16) ) / 255 * 100).toFixed(2);
 }
 //Main plugin function
 (function ( $ ) {
@@ -100,8 +101,8 @@ function percentDifferent(guessColor, expectedColor){
           $("#result").css("background-color", "rgb("+parseInt(rin,16)+","+parseInt(gin,16)+","+parseInt(bin,16));
           //Calculate how far off we are from the expected RGB
           var redOff = percentDifferent(rin, settings.color[0]+settings.color[1]);
-          var greenOff = percentDifferent(rin, settings.color[2]+settings.color[3]);
-          var blueOff = percentDifferent(rin, settings.color[4]+settings.color[5]);
+          var greenOff = percentDifferent(gin, settings.color[2]+settings.color[3]);
+          var blueOff = percentDifferent(bin, settings.color[4]+settings.color[5]);
           //Print out the % off for the user
           $("#result").after("Your red was %" + redOff + " off. Your green was %"+ greenOff+ " off. Your blue was %"+blueOff+" off.");
 
@@ -116,7 +117,7 @@ function percentDifferent(guessColor, expectedColor){
 
           //Check to see if the guess was correct
           if (result == settings.color){
-            alert("Sucess! You found the color");
+            alert("Success! You found the color");
           }
           //If not correct
           else {
