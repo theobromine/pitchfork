@@ -89,6 +89,7 @@ function percentDifferent(guessColor, expectedColor){
         $(this).append("<br></br> Red:    <div id='red'></div>    <input type='text' name='redin'><br></br>   </div>");
         $(this).append("<br></br> Green:  <div id='green'></div>  <input type='text' name='greenin'><br></br> </div>");
         $(this).append("<br></br> Blue:   <div id='blue'></div>   <input type='text' name='bluein'><br></br>  </div>");
+		
 
         //Sliders are now added with css to make them functional
         $( "#red, #green, #blue" ).slider({
@@ -118,8 +119,16 @@ function percentDifferent(guessColor, expectedColor){
           $("#result").css("background-color", "rgb("+parseInt(rin,16)+","+parseInt(gin,16)+","+parseInt(bin,16));
           //Calculate how far off we are from the expected RGB
           var redOff = percentDifferent(rin, settings.color[0]+settings.color[1]);
-          var greenOff = percentDifferent(rin, settings.color[2]+settings.color[3]);
-          var blueOff = percentDifferent(rin, settings.color[4]+settings.color[5]);
+          var greenOff = percentDifferent(gin, settings.color[2]+settings.color[3]);
+          var blueOff = percentDifferent(bin, settings.color[4]+settings.color[5]); // all 3 of these fuction calls called for Rin, I fixed them,
+		  
+		  var milliseconds_taken = 5000; //guessed 5 seconds, TODO: where does milliseconds_taken come from?
+		  var finnalScore = scoringFormula(redOff, blueOff, greenOff, settings.difficulty, milliseconds_taken); 
+		  runningScore = finnalScore + runningScore;
+		  runningScore = parseInt(runningScore).toFixed(2);
+			
+		  $("#runningScore").html(runningScore);
+		  
           //Print out the % off for the user
           $("#result").after("Your red was %" + redOff + " off. Your green was %"+ greenOff+ " off. Your blue was %"+blueOff+" off.");
 
