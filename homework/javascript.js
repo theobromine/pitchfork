@@ -34,12 +34,30 @@ function refreshSwatch() {
     }
 
 
-//WIP
-//Takes in two hex colors and returns the % difference.
+var runningScore = 0;
 
-//From the doc
-// Percentage off is calculated as follow:
-// (|expected value – actual value| / 255) * 100
+function percentDifferent(guessColor, expectedColor){ //example of call: var redOff = percentDifferent(rin, settings.color[0]+settings.color[1]); 
+	var guessColorInt, expectedColorInt;
+	guessColorInt = parseInt(guessColor, 16); // Converting the color hex string into a integer 
+	expectedColorInt = parseInt(expectedColor, 16); // Converting the expected color hex string into a integer 
+	
+	var percent_off = (Math.abs(guessColorInt-expectedColorInt)/255)*100;  // calculating each color Percentage off //
+	percent_off = percent_off.toFixed(2);
+	return percent_off;
+}
+
+function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_taken){ //example of call: var finnalScore = scoringFormula(redOff, blueOff, greenOff,difficulty, milliseconds_taken);
+	var percent_off = (parseInt(redOff) + parseInt(blueOff) + parseInt(greenOff))/3;  
+	var finnalScore = ((15-difficulty-percent_off) / (15-difficulty)) * (15000-milliseconds_taken);
+
+	if (finnalScore < 0) { //If the score would be less than zero for a color, it should be counted as zero.
+		finnalScore =  0;
+	}
+	
+	finnalScore = finnalScore.toFixed(2); // Scores should not have more than 2 points precision. (ie round to the nearest 100th)
+	
+	return finnalScore;
+}
 
 function percentDifferent(guessColor, expectedColor){
   return 1;
