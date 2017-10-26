@@ -84,11 +84,11 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
 
         $(this).append("<div id='game' style='height: 100px; width: 100px; text-align:center; margin: 0 auto;' > Guess This Color! </div>");
         $("#game").css("background-color", "rgb(" + colorR + "," + colorG + "," + colorB + ")");
-        $(this).append("<div id='inputs' style='width: 70%; text-align:center; margin: 0 auto;'></div>")
+        $(this).append("<div id='inputs' style='width: 70%; text-align:center; margin: 0 auto;''></div>")
         //add html for sliders
-        $("#inputs").append("<br></br> Red:    <div id='red' style='text-align:center;'></div>    <input type='text' name='redin'><br></br>  ");
-        $("#inputs").append("<br></br> Green:  <div id='green' style='text-align:center;'></div>  <input type='text' name='greenin'><br></br>");
-        $("#inputs").append("<br></br> Blue:   <div id='blue' style='text-align:center;'></div>   <input type='text' name='bluein'><br></br> ");
+        $("#inputs").append("<br></br> Red:    <div id='red'></div>    <input type='text' name='redin'><br></br>  ");
+        $("#inputs").append("<br></br> Green:  <div id='green'></div>  <input type='text' name='greenin'><br></br>");
+        $("#inputs").append("<br></br> Blue:   <div id='blue'></div>   <input type='text' name='bluein'><br></br> ");
 
 
         //Sliders are now added with css to make them functional
@@ -104,7 +104,7 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
           //We call refreshSwatch to update the textboxes to each slider value
           refreshSwatch();
           //Create button for user
-        $(this).append("<button id='check'>Check values </button>");
+        $("#inputs").append("<button id='check'>Check values </button>");
 
           //When the user checks the input
         $("#check").click( function(){
