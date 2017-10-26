@@ -58,10 +58,6 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
 
 	return finnalScore;
 }
-
-function percentDifferent(guessColor, expectedColor){
-  return 1;
-}
 //Main plugin function
 (function ( $ ) {
     //Init
