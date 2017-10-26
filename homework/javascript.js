@@ -36,26 +36,26 @@ function refreshSwatch() {
 
 var runningScore = 0;
 
-function percentDifferent(guessColor, expectedColor){ //example of call: var redOff = percentDifferent(rin, settings.color[0]+settings.color[1]); 
+function percentDifferent(guessColor, expectedColor){ //example of call: var redOff = percentDifferent(rin, settings.color[0]+settings.color[1]);
 	var guessColorInt, expectedColorInt;
-	guessColorInt = parseInt(guessColor, 16); // Converting the color hex string into a integer 
-	expectedColorInt = parseInt(expectedColor, 16); // Converting the expected color hex string into a integer 
-	
+	guessColorInt = parseInt(guessColor, 16); // Converting the color hex string into a integer
+	expectedColorInt = parseInt(expectedColor, 16); // Converting the expected color hex string into a integer
+
 	var percent_off = (Math.abs(guessColorInt-expectedColorInt)/255)*100;  // calculating each color Percentage off //
 	percent_off = percent_off.toFixed(2);
 	return percent_off;
 }
 
 function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_taken){ //example of call: var finnalScore = scoringFormula(redOff, blueOff, greenOff,difficulty, milliseconds_taken);
-	var percent_off = (parseInt(redOff) + parseInt(blueOff) + parseInt(greenOff))/3;  
+	var percent_off = (parseInt(redOff) + parseInt(blueOff) + parseInt(greenOff))/3;
 	var finnalScore = ((15-difficulty-percent_off) / (15-difficulty)) * (15000-milliseconds_taken);
 
 	if (finnalScore < 0) { //If the score would be less than zero for a color, it should be counted as zero.
 		finnalScore =  0;
 	}
-	
+
 	finnalScore = finnalScore.toFixed(2); // Scores should not have more than 2 points precision. (ie round to the nearest 100th)
-	
+
 	return finnalScore;
 }
 
@@ -89,7 +89,7 @@ function percentDifferent(guessColor, expectedColor){
         $(this).append("<br></br> Red:    <div id='red'></div>    <input type='text' name='redin'><br></br>   </div>");
         $(this).append("<br></br> Green:  <div id='green'></div>  <input type='text' name='greenin'><br></br> </div>");
         $(this).append("<br></br> Blue:   <div id='blue'></div>   <input type='text' name='bluein'><br></br>  </div>");
-		
+
 
         //Sliders are now added with css to make them functional
         $( "#red, #green, #blue" ).slider({
@@ -121,14 +121,14 @@ function percentDifferent(guessColor, expectedColor){
           var redOff = percentDifferent(rin, settings.color[0]+settings.color[1]);
           var greenOff = percentDifferent(gin, settings.color[2]+settings.color[3]);
           var blueOff = percentDifferent(bin, settings.color[4]+settings.color[5]); // all 3 of these fuction calls called for Rin, I fixed them,
-		  
-		  var milliseconds_taken = 5000; //guessed 5 seconds, TODO: where does milliseconds_taken come from?
-		  var finnalScore = scoringFormula(redOff, blueOff, greenOff, settings.difficulty, milliseconds_taken); 
-		  runningScore = finnalScore + runningScore;
-		  runningScore = parseInt(runningScore).toFixed(2);
-			
-		  $("#runningScore").html(runningScore);
-		  
+
+          var milliseconds_taken = 5000; //guessed 5 seconds, TODO: where does milliseconds_taken come from?
+          var finnalScore = scoringFormula(redOff, blueOff, greenOff, settings.difficulty, milliseconds_taken);
+          runningScore = finnalScore + runningScore;
+          runningScore = parseInt(runningScore).toFixed(2);
+
+          $("#runningScore").html(runningScore);
+
           //Print out the % off for the user
           $("#result").after("Your red was %" + redOff + " off. Your green was %"+ greenOff+ " off. Your blue was %"+blueOff+" off.");
 
