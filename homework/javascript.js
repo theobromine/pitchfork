@@ -71,20 +71,24 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
         var settings = $.extend({
             // These are the defaults.
             color: hexFromRGB(colorR, colorG, colorB),
-            backgroundColor: "white",
+            backgroundColor: "MistyRose",
             difficulty: 5,
             turns: 10
         }, options );
         //Start adding html for game
         // $(this).append("\n\n<p>Color Game</p>Difficulty: <input type='text' name='difficulty' value='5'><br> Turns: <input type='text' name='turns' value='10'><br>");
-        $(this).append("\n\n<p>Color Game</p>");
-        $(this).append("<div id='game' style='height: 100px; width: 100px;' > Guess This Color! </div>");
-        $("#game").css("background-color", "rgb(" + colorR + "," + colorG + "," + colorB + ")");
+        $(this).append("\n\n<h1 align='center'>Color Game</h1>");
+        $(this).css("width","80%","margin","0 auto");
+        $(this).css("margin","0 auto");
+        $(this).css("padding", "10px 5px 10px 5px");
 
+        $(this).append("<div id='game' style='height: 100px; width: 100px; text-align:center; margin: 0 auto;' > Guess This Color! </div>");
+        $("#game").css("background-color", "rgb(" + colorR + "," + colorG + "," + colorB + ")");
+        $(this).append("<div id='inputs' style='width: 70%; text-align:center; margin: 0 auto;'></div>")
         //add html for sliders
-        $(this).append("<br></br> Red:    <div id='red'></div>    <input type='text' name='redin'><br></br>   </div>");
-        $(this).append("<br></br> Green:  <div id='green'></div>  <input type='text' name='greenin'><br></br> </div>");
-        $(this).append("<br></br> Blue:   <div id='blue'></div>   <input type='text' name='bluein'><br></br>  </div>");
+        $("#inputs").append("<br></br> Red:    <div id='red' style='text-align:center;'></div>    <input type='text' name='redin'><br></br>  ");
+        $("#inputs").append("<br></br> Green:  <div id='green' style='text-align:center;'></div>  <input type='text' name='greenin'><br></br>");
+        $("#inputs").append("<br></br> Blue:   <div id='blue' style='text-align:center;'></div>   <input type='text' name='bluein'><br></br> ");
 
 
         //Sliders are now added with css to make them functional
