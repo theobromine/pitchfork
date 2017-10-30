@@ -6,6 +6,7 @@
 //save and load json
 
 var time = new Date();
+
 //Takes in R,G,B, outputs hex value
 function hexFromRGB(r, g, b) {
     var hex = [
@@ -146,7 +147,7 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
 
             //Check to see if the guess was correct
             if (result == settings.color) {
-                alert("Sucess! You found the color");
+                alert("Success! You found the color");
             }
             //If not correct
             else {
@@ -166,6 +167,23 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
             //  number of turns have passed, at which point the final score is
             //  presented and the user is prompted to play again (using the same
             //  or different settings).
+
+
+            $("#submit").click(function () {
+                var player_name = $("#player").val();
+                if (player_name != "") {
+                    var data_obj = {
+                        "playerName": player_name,
+                        "difficulty": settings.difficulty,
+                        "turns": settings.turns,
+                        "score": finnalScore,
+                        "timestamp": new Date()
+                    };
+                    localStorage.setItem(player_name, JSON.stringify(data_obj));
+                }
+                var retrievedObject = localStorage.getItem(player_name);
+                console.log('retrievedObject: ', JSON.parse(retrievedObject));
+            });
 
 
             //WIP: Create an area to save our score.
