@@ -5,7 +5,7 @@
 //next button
 //save and load json
 
-
+var time = new Date();
 //Takes in R,G,B, outputs hex value
 function hexFromRGB(r, g, b) {
     var hex = [
@@ -109,6 +109,7 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
 
         //When the user checks the input
         $("#check").click(function () {
+
             //Aquire values for red, green, blue from input
             var rin = $("input[name=redin]").val();
             var gin = $("input[name=greenin]").val();
@@ -123,7 +124,8 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
             var greenOff = percentDifferent(gin, settings.color[2] + settings.color[3]);
             var blueOff = percentDifferent(bin, settings.color[4] + settings.color[5]); // all 3 of these fuction calls called for Rin, I fixed them,
 
-            var milliseconds_taken = 5000; //guessed 5 seconds, TODO: where does milliseconds_taken come from?
+            var milliseconds_taken = new Date().getTime() - time.getTime(); // Use function to add time taken
+            console.log(milliseconds_taken);
             var finnalScore = scoringFormula(redOff, blueOff, greenOff, settings.difficulty, milliseconds_taken);
             runningScore = finnalScore + runningScore;
             runningScore = parseInt(runningScore).toFixed(2);
