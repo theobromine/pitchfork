@@ -6,6 +6,17 @@
 //save and load json
 
 var time = new Date();
+var difset = [3,5,10,25,50,85,130,170,210,255]
+//lv 1 = 3 options
+//lv 2 = 5 options
+//lv 3 = 10 options
+//lv 4 = 25 options
+//lv 5 = 50 options
+//lv 6 = 85 options
+//lv 7 = 130 options
+//lv 8 = 170 options
+//lv 9 = 210 options
+//lv 10 = 255 options
 
 //Takes in R,G,B, outputs hex value
 function hexFromRGB(r, g, b) {
@@ -94,7 +105,33 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
 
 
         //Sliders are now added with css to make them functional
-        $("#red, #green, #blue").slider({
+        //read difficulty level
+        // read random red value
+        // find difficulty value set length
+        // pick random number of size of set
+        // set lower bound of red bar
+        // put it under the red bar left side
+        // set higher bound of red bar
+        // put it under the red bar right side
+
+
+        $("#red").slider({
+            orientation: "horizontal",
+            range: "min",
+            max: 255,
+            value: 127,
+            slide: refreshSwatch,
+            change: refreshSwatch
+        });
+        $("#green").slider({
+            orientation: "horizontal",
+            range: "min",
+            max: 255,
+            value: 127,
+            slide: refreshSwatch,
+            change: refreshSwatch
+        });
+        $("#blue").slider({
             orientation: "horizontal",
             range: "min",
             max: 255,
