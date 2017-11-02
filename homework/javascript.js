@@ -115,7 +115,7 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
         // put it under the red bar right side
 
 
-        var difficulty = 1;
+        var difficulty = 5;
 
 
         //set red ranges
