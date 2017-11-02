@@ -113,13 +113,22 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
         // put it under the red bar left side
         // set higher bound of red bar
         // put it under the red bar right side
+        var difficulty = 1;
+
+        var varied = difset[difficulty-1];
+        var redrand = Math.floor((Math.random() * 256)); 
+        var redrand = redrand % varied;
+        var redmax = colorR + redrand;
+        var redmin = colorR - (varied - redrand);
+         console.log(redrand, redmax, redmin);
+        
 
 
         $("#red").slider({
             orientation: "horizontal",
             range: "min",
-            max: 255,
-            value: 127,
+            max: redmax,
+            value: redmin,
             slide: refreshSwatch,
             change: refreshSwatch
         });
