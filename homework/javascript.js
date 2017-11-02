@@ -113,38 +113,136 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
         // put it under the red bar left side
         // set higher bound of red bar
         // put it under the red bar right side
+
+
         var difficulty = 1;
 
+
+        //set red ranges
+        //if max difficulty, set to full range
+        if (difficulty == 10){
+            redmax = 255;
+            redmin = 0;
+            redcent = 127;
+        }
+        //else set to smaller range
+        else{
+            //read the max level of variance from the difficulty
         var varied = difset[difficulty-1];
+            //get random value to modulo and modulo it
         var redrand = Math.floor((Math.random() * 256)); 
         var redrand = redrand % varied;
+            //set max and min from modulo
         var redmax = colorR + redrand;
         var redmin = colorR - (varied - redrand);
-         console.log(redrand, redmax, redmin);
+        //check edge cases
+        if (redmax > 255){
+            var diff = redmax-255;
+            redmax = 255;
+            redmin -= diff;
+        }
+        if (redmin < 0){
+            var diff = math.abs(redmin);
+            redmin = 0;
+            redmax += diff;
+        }        
+        //set centerpoint
+        var redcent = ((redmax-redmin)/2)+redmin;
+        //console.log(redrand, redmax, redmin);
+        }
         
+        //set green ranges
+        //if max difficulty, set to full range
+        if (difficulty == 10){
+            greenmax = 255;
+            greenmin = 0;
+            greencent = 127;
+        }
+        //else set to smaller range
+        else{
+            //read the max level of variance from the difficulty
+        var varied = difset[difficulty-1];
+            //get random value to modulo and modulo it
+        var greenrand = Math.floor((Math.random() * 256)); 
+        var greenrand = greenrand % varied;
+            //set max and min from modulo
+        var greenmax = colorG + greenrand;
+        var greenmin = colorG - (varied - greenrand);
+        //check edge cases
+        if (greenmax > 255){
+            var diff = greenmax-255;
+            greenmax = 255;
+            greenmin -= diff;
+        }
+        if (greenmin < 0){
+            var diff = math.abs(greenmin);
+            greenmin = 0;
+            greenmax += diff;
+        }        
+        //set centerpoint
+        var greencent = ((greenmax-greenmin)/2)+greenmin;
+        //console.log(redrand, redmax, redmin);
+        }
+
+
+        //set blue ranges
+        //if max difficulty, set to full range
+        if (difficulty == 10){
+            bluemax = 255;
+            bluemin = 0;
+            bluecent = 127;
+        }
+        //else set to smaller range
+        else{
+            //read the max level of variance from the difficulty
+        var varied = difset[difficulty-1];
+            //get random value to modulo and modulo it
+        var bluerand = Math.floor((Math.random() * 256)); 
+        var bluerand = bluerand % varied;
+            //set max and min from modulo
+        var bluemax = colorB + bluerand;
+        var bluemin = colorB - (varied - bluerand);
+        //check edge cases
+        if (bluemax > 255){
+            var diff = bluemax-255;
+            bluemax = 255;
+            bluemin -= diff;
+        }
+        if (bluemin < 0){
+            var diff = math.abs(bluemin);
+            bluemin = 0;
+            bluemax += diff;
+        }        
+        //set centerpoint
+        var bluecent = ((bluemax-bluemin)/2)+bluemin;
+        //console.log(redrand, redmax, redmin);
+        }
 
 
         $("#red").slider({
             orientation: "horizontal",
             range: "min",
             max: redmax,
-            value: redmin,
+            min: redmin,
+            value: redcent,
             slide: refreshSwatch,
             change: refreshSwatch
         });
         $("#green").slider({
             orientation: "horizontal",
             range: "min",
-            max: 255,
-            value: 127,
+            max: greenmax,
+            min: greenmin,
+            value: greencent,
             slide: refreshSwatch,
             change: refreshSwatch
         });
         $("#blue").slider({
             orientation: "horizontal",
             range: "min",
-            max: 255,
-            value: 127,
+            max: bluemax,
+            min: bluemin,
+            value: bluecent,
             slide: refreshSwatch,
             change: refreshSwatch
         });
