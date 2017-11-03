@@ -14,3 +14,13 @@
 #forms{
   float: right;
 }
+
+#scoreArea{
+	text-align:center;
+	padding: 3px;
+	margin: 3px;
+	border-size: 1px;
+	border-color: grey;
+	border-style: solid;
+	width:100px;
+}

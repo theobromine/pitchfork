@@ -60,7 +60,7 @@ function percentDifferent(guessColor, expectedColor) { //example of call: var re
 
 function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_taken) { //example of call: var finnalScore = scoringFormula(redOff, blueOff, greenOff,difficulty, milliseconds_taken);
     var percent_off = (parseInt(redOff) + parseInt(blueOff) + parseInt(greenOff)) / 3;
-    var finnalScore = ((15 - difficulty - percent_off) / (15 - difficulty)) * (15000 - milliseconds_taken);
+    var finnalScore = ((15 - difficulty - percent_off) / (15 - difficulty)) * (15000 - milliseconds_taken); // this game IS way too hard at 15 seconds
 
     if (finnalScore < 0) { //If the score would be less than zero for a color, it should be counted as zero.
         finnalScore = 0;
@@ -90,7 +90,8 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
         }, options);
         //Start adding html for game
         // $(this).append("\n\n<p>Color Game</p>Difficulty: <input type='text' name='difficulty' value='5'><br> Turns: <input type='text' name='turns' value='10'><br>");
-        $(this).append("\n\n<h1 align='center'>Color Game</h1>");
+		$(this).append('<div id="scoreArea"> <p>Running Score</p> <div id="runningScore">0</div></div>');
+		$(this).append("\n\n<h1 align='center'>Color Game</h1>");
         $(this).css("width", "80%", "margin", "0 auto");
         $(this).css("margin", "0 auto");
         $(this).css("padding", "10px 5px 10px 5px");
@@ -274,7 +275,7 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
             var finnalScore = scoringFormula(redOff, blueOff, greenOff, settings.difficulty, milliseconds_taken);
             runningScore = finnalScore + runningScore;
             runningScore = parseInt(runningScore).toFixed(2);
-
+			//alert(finnalScore); // test
             $("#runningScore").html(runningScore);
 
             //Print out the % off for the user
