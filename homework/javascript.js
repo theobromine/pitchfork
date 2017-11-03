@@ -4,9 +4,10 @@
 //difficulty
 //next button
 //save and load json
-
+var difficulty = 5;
 var time = new Date();
-var difset = [3,5,10,25,50,85,130,170,210,255]
+var difset = [3,5,10,25,50,85,130,170,210,255];
+var turnss = 10;
 //lv 1 = 3 options
 //lv 2 = 5 options
 //lv 3 = 10 options
@@ -86,7 +87,7 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
             color: hexFromRGB(colorR, colorG, colorB),
             backgroundColor: "MistyRose",
             difficulty: 5,
-            turns: 10
+            turns: turnss
         }, options);
         //Start adding html for game
         // $(this).append("\n\n<p>Color Game</p>Difficulty: <input type='text' name='difficulty' value='5'><br> Turns: <input type='text' name='turns' value='10'><br>");
@@ -115,7 +116,7 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
         // put it under the red bar right side
 
 
-        var difficulty = 5;
+        //var difficulty = 5;
 
 
         //set red ranges
@@ -142,7 +143,7 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
             redmin -= diff;
         }
         if (redmin < 0){
-            var diff = math.abs(redmin);
+            var diff = Math.abs(redmin);
             redmin = 0;
             redmax += diff;
         }        
@@ -175,7 +176,7 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
             greenmin -= diff;
         }
         if (greenmin < 0){
-            var diff = math.abs(greenmin);
+            var diff = Math.abs(greenmin);
             greenmin = 0;
             greenmax += diff;
         }        
@@ -209,7 +210,7 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
             bluemin -= diff;
         }
         if (bluemin < 0){
-            var diff = math.abs(bluemin);
+            var diff = Math.abs(bluemin);
             bluemin = 0;
             bluemax += diff;
         }        
@@ -386,11 +387,13 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
 $(function () {
     //When the button is clicked for the first time
     $("#random_color").one("click", (function () {
+        difficulty = $("input[name=difficulty]").val();
+        turnss = $("input[name=turns]").val();
         //Create a game section
         //Init plugin to game
         $("#placeholder").hexed({
-            difficulty: $("input[name=difficulty]").val(),
-            turns: $("input[name=turns]").val()
+            
+            
         });
         // alert($("#game").hexed.settings);
         // console.log($("#game"));
