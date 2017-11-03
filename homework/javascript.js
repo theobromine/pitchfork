@@ -1,7 +1,6 @@
 //TODO
 //Create a timer
 //Scoreboard: Move to javascript.js, add code to work with timer
-//difficulty
 //next button
 //save and load json
 var difficulty = 5;
