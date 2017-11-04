@@ -286,7 +286,7 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
             $("#result").after("Your red was " + redOff + "% off. Your green was " + greenOff + "% off. Your blue was " + blueOff + "% off.");
 			
 
-			$("#result").after('<button id="next_button">Next</button>'); 
+			$("#check").after('<button id="next_button">Next</button>'); //adding next button after check, when the check button is removed, the next button will replace it. 
 			$("#next_button").click(function () {
 				$("#placeholder").html("");
 				$("#placeholder").hexed({
