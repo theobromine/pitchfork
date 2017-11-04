@@ -1,12 +1,14 @@
 //TODO
-//Create a timer
-//Scoreboard: Move to javascript.js, add code to work with timer
+
 //next button
 //save and load json
 var difficulty = 5;
 var time = new Date();
 var difset = [3,5,10,25,50,85,130,170,210,255];
 var turnss = 10;
+var totalRunningScore = 0;
+var currentTurn = 1;
+
 //lv 1 = 3 options
 //lv 2 = 5 options
 //lv 3 = 10 options
@@ -46,8 +48,6 @@ function refreshSwatch() {
 }
 
 
-var runningScore = 0;
-
 function percentDifferent(guessColor, expectedColor) { //example of call: var redOff = percentDifferent(rin, settings.color[0]+settings.color[1]);
     var guessColorInt, expectedColorInt;
     guessColorInt = parseInt(guessColor, 16); // Converting the color hex string into a integer
@@ -58,17 +58,17 @@ function percentDifferent(guessColor, expectedColor) { //example of call: var re
     return percent_off;
 }
 
-function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_taken) { //example of call: var finnalScore = scoringFormula(redOff, blueOff, greenOff,difficulty, milliseconds_taken);
+function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_taken) { //example of call: var currentRoundScore = scoringFormula(redOff, blueOff, greenOff,difficulty, milliseconds_taken);
     var percent_off = (parseInt(redOff) + parseInt(blueOff) + parseInt(greenOff)) / 3;
-    var finnalScore = ((15 - difficulty - percent_off) / (15 - difficulty)) * (15000 - milliseconds_taken); // this game IS way too hard at 15 seconds
+    var currentRoundScore = ((15 - difficulty - percent_off) / (15 - difficulty)) * (30000 - milliseconds_taken); // this game is way too hard at 15 seconds
 
-    if (finnalScore < 0) { //If the score would be less than zero for a color, it should be counted as zero.
-        finnalScore = 0;
+    if (currentRoundScore < 0) { //If the score would be less than zero for a color, it should be counted as zero.
+        currentRoundScore = 0;
     }
 
-    finnalScore = finnalScore.toFixed(2); // Scores should not have more than 2 points precision. (ie round to the nearest 100th)
+    currentRoundScore = currentRoundScore.toFixed(2); // Scores should not have more than 2 points precision. (ie round to the nearest 100th)
 
-    return finnalScore;
+    return currentRoundScore;
 }
 
 //Main plugin function
@@ -90,8 +90,11 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
         }, options);
         //Start adding html for game
         // $(this).append("\n\n<p>Color Game</p>Difficulty: <input type='text' name='difficulty' value='5'><br> Turns: <input type='text' name='turns' value='10'><br>");
-		$(this).append('<div id="scoreArea"> <p>Running Score</p> <div id="runningScore">0</div></div>');
+
 		$(this).append("\n\n<h1 align='center'>Color Game</h1>");
+		var totalTurns = settings.turns;
+		$(this).append("<div style= 'text-align: center'> Round "  + currentTurn + " of " + settings.turns + "</div>");
+		$(this).append('<div id="scoreArea"> <p>Running Score</p> <div id="totalRunningScore">' + totalRunningScore + '</div></div>');		
         $(this).css("width", "80%", "margin", "0 auto");
         $(this).css("margin", "0 auto");
         $(this).css("padding", "10px 5px 10px 5px");
@@ -272,15 +275,26 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
 
             var milliseconds_taken = new Date().getTime() - time.getTime(); // Use function to add time taken
             console.log(milliseconds_taken);
-            var finnalScore = scoringFormula(redOff, blueOff, greenOff, settings.difficulty, milliseconds_taken);
-            runningScore = finnalScore + runningScore;
-            runningScore = parseInt(runningScore).toFixed(2);
-			//alert(finnalScore); // test
-            $("#runningScore").html(runningScore);
+            var currentRoundScore = scoringFormula(redOff, blueOff, greenOff, settings.difficulty, milliseconds_taken);
+            totalRunningScore = parseInt(currentRoundScore) + parseInt(totalRunningScore);
+            totalRunningScore = parseInt(totalRunningScore).toFixed(2);
+			//alert(currentRoundScore); // test
+            $("#totalRunningScore").html(totalRunningScore);
 
             //Print out the % off for the user
-            $("#result").after("Your red was %" + redOff + " off. Your green was %" + greenOff + " off. Your blue was %" + blueOff + " off.");
+			$("#result").after("<br> This round's Score is " + currentRoundScore);
+            $("#result").after("Your red was " + redOff + "% off. Your green was " + greenOff + "% off. Your blue was " + blueOff + "% off.");
+			
 
+			$("#result").after('<button id="next_button">Next</button>'); 
+			$("#next_button").click(function () {
+				$("#placeholder").html("");
+				$("#placeholder").hexed({
+					
+					
+				});							
+			})
+			
             //WIP: Create an area to place the score, and a method to update it.
             // From the doc:
             //  After each guess, the score earned should be added to a visible running tally,
@@ -297,12 +311,12 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
             //If not correct
             else {
                 console.log("The correct color is: " + settings.color + " Input: " + result);
-                //Take one turn away
-                settings.turns = settings.turns - 1;
-                alert("You fail. You have " + settings.turns + " turns left. Good luck");
+                //Next turn
+                currentTurn = currentTurn + 1;
+                alert("You fail. You have " + (settings.turns - currentTurn) + " turns left. Good luck");
             }
             //No more turns
-            if (settings.turns == 0) {
+            if (settings.turns == currentTurn) {
                 alert("You really failed. GG no re");
             }
 
@@ -321,7 +335,7 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
                         "playerName": player_name,
                         "difficulty": settings.difficulty,
                         "turns": settings.turns,
-                        "score": finnalScore,
+                        "score": totalRunningScore,  
                         "timestamp": new Date()
                     };
                     localStorage.setItem(player_name, JSON.stringify(data_obj));
@@ -350,7 +364,7 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
             //  the high scores list, and print them in a neatly
             //  formatted table, sorted by score, then timestamp.
 
-
+		$("#check").remove(); // Removing "check value" button after it has been clicked.
         });
 
         function check() {
@@ -389,6 +403,7 @@ $(function () {
     $("#random_color").one("click", (function () {
         difficulty = $("input[name=difficulty]").val();
         turnss = $("input[name=turns]").val();
+		currentTurn = 1;
         //Create a game section
         //Init plugin to game
         $("#placeholder").hexed({
@@ -406,6 +421,7 @@ $(function () {
         // $("#game").css("background-color", "rgb(" + colorR + "," + colorG + "," + colorB + ")");
 
     });
+
     $("#check").click(function () {
 
     });
