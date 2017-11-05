@@ -278,7 +278,6 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
             var currentRoundScore = scoringFormula(redOff, blueOff, greenOff, settings.difficulty, milliseconds_taken);
             totalRunningScore = parseInt(currentRoundScore) + parseInt(totalRunningScore);
             totalRunningScore = parseInt(totalRunningScore).toFixed(2);
-			//alert(currentRoundScore); // test
             $("#totalRunningScore").html(totalRunningScore);
 
             //Print out the % off for the user
