@@ -84,27 +84,23 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
         var settings = $.extend({
             // These are the defaults.
             color: hexFromRGB(colorR, colorG, colorB),
-            backgroundColor: "MistyRose",
             difficulty: 5,
             turns: turnss
         }, options);
+
         //Start adding html for game
 
-    		$(this).append("\n\n<h1 align='center'>Color Game</h1>");
-    		var totalTurns = settings.turns;
-    		$(this).append("<div id= 'turns'> Round "  + currentTurn + " of " + settings.turns + "</div>");
-    		$(this).append('<div id="scoreArea"> <p>Running Score</p> <div id="totalRunningScore">' + totalRunningScore + '</div></div>');
-        $(this).css("width", "80%", "margin", "0 auto");
-        $(this).css("margin", "0 auto");
-        $(this).css("padding", "10px 5px 10px 5px");
+    	var totalTurns = settings.turns;
+        $('#placeholder').append("<div style= 'text-align: center'> Round "  + currentTurn + " of " + settings.turns + "</div>");
+        $('#placeholder').append('<div id="scoreArea"> Running Score: <div id="totalRunningScore"> ' + totalRunningScore + '</div></div><br>'); 
 
         $(this).append("<div id='game'> Guess This Color! </div>");
         $("#game").css("background-color", "rgb(" + colorR + "," + colorG + "," + colorB + ")");
         $(this).append("<div id='inputs'></div>")
         //add html for sliders
-        $("#inputs").append("<br></br> Red:    <div id='red'></div>    <input type='text' name='redin'><br></br>  ");
-        $("#inputs").append("<br></br> Green:  <div id='green'></div>  <input type='text' name='greenin'><br></br>");
-        $("#inputs").append("<br></br> Blue:   <div id='blue'></div>   <input type='text' name='bluein'><br></br> ");
+        $("#inputs").append("<br></br> Red:    <div id='red'></div>    <input type='text' name='redin'>");
+        $("#inputs").append("<br></br> Green:  <div id='green'></div>  <input type='text' name='greenin'>");
+        $("#inputs").append("<br></br> Blue:   <div id='blue'></div>   <input type='text' name='bluein'><br><br>");
 
 
         //Sliders are now added with css to make them functional
@@ -249,7 +245,7 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
         //We call refreshSwatch to update the textboxes to each slider value
         refreshSwatch();
         //Create button for user
-        $("#inputs").append("<button id='check'>Check values </button>");
+        $("#inputs").append("<button id='check' class='button'>Check values </button>");
 
         //When the user checks the input
         $("#check").click(function () {
@@ -280,7 +276,7 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
             $("#result").after("Your red was " + redOff + "% off. Your green was " + greenOff + "% off. Your blue was " + blueOff + "% off.");
 
 
-      			$("#check").after('<button id="next_button">Next</button>'); //adding next button after check, when the check button is removed, the next button will replace it.
+      			$("#check").after('<button id="next_button" class="button">Next</button>'); //adding next button after check, when the check button is removed, the next button will replace it.
       			$("#next_button").click(function () {
       				$("#placeholder").html("");
 			        $("#placeholder").hexed({});
@@ -377,6 +373,10 @@ $(function () {
             //Init plugin to game
         $("#placeholder").hexed({});
 
+    });
+
+    $("#random_color").click(function(){
+        $("#b1").hide();
     });
 
 

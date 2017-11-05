@@ -2,33 +2,39 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Hexed!</title>
+    <script src="./jquery-3.2.1.js"></script>
+    <script src="./jq/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="./jq/jquery-ui.css">
+    <link rel="stylesheet" href="./team4-hw1.css">
+    <script src="./team4-hw1.js"></script>
+    <!-- google font -->
+    <link href="https://fonts.googleapis.com/css?family=Sigmar+One" rel="stylesheet">
+
 </head>
+
 <body>
-
-
-<script src="./jquery-3.2.1.js"></script>
-<script src="./jq/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="./jq/jquery-ui.css">
-<link rel="stylesheet" href="./team4-hw1.css">
-<script src="./team4-hw1.js"></script>
+<h1 id="header">Hexed!</h1>
 <div id='b1'>
-
-    <button id="random_color">Random colors</button>
+    <p align="center">Pick your difficulty (1-10) and how many turns you want, then click 'Let's Go!' to start!</p>
     <form>
-        Difficulty: <input type="text" name="difficulty" value="5"><br>
-        Turns: <input type="text" name="turns" value="10"><br>
+        Difficulty: <input type="text" name="difficulty" value="5">
+               Turns:<input type="text" name="turns" value="10"><br>
+        <br>
     </form>
-
-    <div id="placeholder"></div>
+    <div align="center"><button align="center" id="random_color" class="button">Let's Go!</button></div>
+    
 </div>
+<div id="placeholder">
+    
+</div>
+<!--
 <div>
     <form id="forms" action="">
-        <label>Player Name
-            <input id="player" type="text" name="player">
-        </label>
-        <button id="submit">Submit Score</button>
+        <label>Player Name<input id="player" type="text" name="player"></label>
+        <button class="button" id="submit">Submit Score</button>
     </form>
-</div>
+</div>-->
+
 </body>
 </html>

@@ -1,3 +1,26 @@
+body {
+	background-color: rgb(214, 234, 253);
+	font-family: 'Sigmar One', cursive;
+	min-width: 100vh;
+}
+
+.button {
+	background-color: white;
+	font-family: 'Sigmar One', cursive;
+	width: 100px;
+	height: 50px;
+	border-radius: 8px;
+}
+
+input {
+	height:30px;
+	width:70px;
+}
+
+#header {
+	text-align:center;
+}
+
 #red, #green, #blue {
   float: left;
   clear: left;
@@ -15,14 +38,20 @@
   float: right;
 }
 
+#b1 {
+	width:30%;
+	margin:auto;
+}
+
 #scoreArea{
 	text-align:center;
-	padding: 3px;
-	margin: 3px;
-	border-size: 1px;
-	border-color: grey;
-	border-style: solid;
-	width:100px;
+}
+
+#placeholder {
+	margin:auto;
+	width:70%;
+	height: 40%;
+	text-align: center;
 }
 
 #result{
