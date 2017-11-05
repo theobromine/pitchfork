@@ -312,14 +312,15 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
             else {
                 console.log("The correct color is: " + settings.color + " Input: " + result);
                 //Next turn
-                currentTurn = currentTurn + 1;
                 alert("You fail. You have " + (settings.turns - currentTurn) + " turns left. Good luck");
+				
             }
             //No more turns
             if (settings.turns == currentTurn) {
-                alert("You really failed. GG no re");
+                alert("Game Over, Your final score was " + totalRunningScore);
             }
-
+			currentTurn = currentTurn + 1;
+			
             //WIP: Create a next button, have it properly set the new color
             // From the doc:
             //  Clicking "Next" will present a new color, until the predetermined
@@ -418,8 +419,7 @@ $(function () {
 			return; 
 		}
 				
-		
-		
+				
         //Create a game section
         //Init plugin to game
         $("#placeholder").hexed({
