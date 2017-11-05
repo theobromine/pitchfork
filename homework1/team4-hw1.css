@@ -17,6 +17,14 @@ input {
 	width:70px;
 }
 
+#scoresubmit {
+	width:30%;
+	margin:auto;
+	text-align:center;
+	display:none;
+
+}
+
 #header {
 	text-align:center;
 }

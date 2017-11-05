@@ -296,6 +296,7 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
             //No more turns
             if (settings.turns == currentTurn) {
                 alert("Game Over, Your final score was " + totalRunningScore);
+                $("#scoresubmit").css("display", "block");
             }
 			      currentTurn = currentTurn + 1;
 
