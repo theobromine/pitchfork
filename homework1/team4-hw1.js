@@ -89,12 +89,11 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
             turns: turnss
         }, options);
         //Start adding html for game
-        // $(this).append("\n\n<p>Color Game</p>Difficulty: <input type='text' name='difficulty' value='5'><br> Turns: <input type='text' name='turns' value='10'><br>");
 
-		$(this).append("\n\n<h1 align='center'>Color Game</h1>");
-		var totalTurns = settings.turns;
-		$(this).append("<div id= 'turns'> Round "  + currentTurn + " of " + settings.turns + "</div>");
-		$(this).append('<div id="scoreArea"> <p>Running Score</p> <div id="totalRunningScore">' + totalRunningScore + '</div></div>');		
+    		$(this).append("\n\n<h1 align='center'>Color Game</h1>");
+    		var totalTurns = settings.turns;
+    		$(this).append("<div id= 'turns'> Round "  + currentTurn + " of " + settings.turns + "</div>");
+    		$(this).append('<div id="scoreArea"> <p>Running Score</p> <div id="totalRunningScore">' + totalRunningScore + '</div></div>');
         $(this).css("width", "80%", "margin", "0 auto");
         $(this).css("margin", "0 auto");
         $(this).css("padding", "10px 5px 10px 5px");
@@ -118,10 +117,6 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
         // set higher bound of red bar
         // put it under the red bar right side
 
-
-        //var difficulty = 5;
-
-
         //set red ranges
         //if max difficulty, set to full range
         if (difficulty == 10){
@@ -134,7 +129,7 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
             //read the max level of variance from the difficulty
         var varied = difset[difficulty-1];
             //get random value to modulo and modulo it
-        var redrand = Math.floor((Math.random() * 256)); 
+        var redrand = Math.floor((Math.random() * 256));
         var redrand = redrand % varied;
             //set max and min from modulo
         var redmax = colorR + redrand;
@@ -149,12 +144,12 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
             var diff = Math.abs(redmin);
             redmin = 0;
             redmax += diff;
-        }        
+        }
         //set centerpoint
         var redcent = ((redmax-redmin)/2)+redmin;
         //console.log(redrand, redmax, redmin);
         }
-        
+
         //set green ranges
         //if max difficulty, set to full range
         if (difficulty == 10){
@@ -167,7 +162,7 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
             //read the max level of variance from the difficulty
         var varied = difset[difficulty-1];
             //get random value to modulo and modulo it
-        var greenrand = Math.floor((Math.random() * 256)); 
+        var greenrand = Math.floor((Math.random() * 256));
         var greenrand = greenrand % varied;
             //set max and min from modulo
         var greenmax = colorG + greenrand;
@@ -182,7 +177,7 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
             var diff = Math.abs(greenmin);
             greenmin = 0;
             greenmax += diff;
-        }        
+        }
         //set centerpoint
         var greencent = ((greenmax-greenmin)/2)+greenmin;
         //console.log(redrand, redmax, redmin);
@@ -201,7 +196,7 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
             //read the max level of variance from the difficulty
         var varied = difset[difficulty-1];
             //get random value to modulo and modulo it
-        var bluerand = Math.floor((Math.random() * 256)); 
+        var bluerand = Math.floor((Math.random() * 256));
         var bluerand = bluerand % varied;
             //set max and min from modulo
         var bluemax = colorB + bluerand;
@@ -216,7 +211,7 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
             var diff = Math.abs(bluemin);
             bluemin = 0;
             bluemax += diff;
-        }        
+        }
         //set centerpoint
         var bluecent = ((bluemax-bluemin)/2)+bluemin;
         //console.log(redrand, redmax, redmin);
@@ -281,27 +276,15 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
             $("#totalRunningScore").html(totalRunningScore);
 
             //Print out the % off for the user
-			$("#result").after("<br> This round's Score is " + currentRoundScore);
+      			$("#result").after("<br> This round's Score is " + currentRoundScore);
             $("#result").after("Your red was " + redOff + "% off. Your green was " + greenOff + "% off. Your blue was " + blueOff + "% off.");
-			
 
-			$("#check").after('<button id="next_button">Next</button>'); //adding next button after check, when the check button is removed, the next button will replace it. 
-			$("#next_button").click(function () {
-				$("#placeholder").html("");
-				$("#placeholder").hexed({
-					
-					
-				});							
-			})
-			
-            //WIP: Create an area to place the score, and a method to update it.
-            // From the doc:
-            //  After each guess, the score earned should be added to a visible running tally,
-            //  along with how many points were earned for that color.
-            //  If the score would be less than zero for a color,
-            //  it should be counted as zero.  Scores should not have more than 2 points precision.
-            //  (ie round to the nearest 100th)
 
+      			$("#check").after('<button id="next_button">Next</button>'); //adding next button after check, when the check button is removed, the next button will replace it.
+      			$("#next_button").click(function () {
+      				$("#placeholder").html("");
+			        $("#placeholder").hexed({});
+            });
 
             //Check to see if the guess was correct
             if (result == settings.color) {
@@ -312,21 +295,13 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
                 console.log("The correct color is: " + settings.color + " Input: " + result);
                 //Next turn
                 alert("You fail. You have " + (settings.turns - currentTurn) + " turns left. Good luck");
-				
+
             }
             //No more turns
             if (settings.turns == currentTurn) {
                 alert("Game Over, Your final score was " + totalRunningScore);
             }
-			currentTurn = currentTurn + 1;
-			
-            //WIP: Create a next button, have it properly set the new color
-            // From the doc:
-            //  Clicking "Next" will present a new color, until the predetermined
-            //  number of turns have passed, at which point the final score is
-            //  presented and the user is prompted to play again (using the same
-            //  or different settings).
-
+			      currentTurn = currentTurn + 1;
 
             $("#submit").click(function () {
                 var player_name = $("#player").val();
@@ -335,7 +310,7 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
                         "playerName": player_name,
                         "difficulty": settings.difficulty,
                         "turns": settings.turns,
-                        "score": totalRunningScore,  
+                        "score": totalRunningScore,
                         "timestamp": new Date()
                     };
                     localStorage.setItem(player_name, JSON.stringify(data_obj));
@@ -344,31 +319,12 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
                 console.log('retrievedObject: ', JSON.parse(retrievedObject));
             });
 
-
-            //WIP: Create an area to save our score.
-            // From the doc:
-            //  At the end of the game, provide a form for users to provide their
-            //  name and save their score. Once the user clicks on the "Submit Score"
-            //  button, use the Web Storage API to store a list of high scores as a
-            //  JSON string in the user's localStorage (you'll have to parse and
-            //  stringify the JSON each time you want to load and save the high score list).
-            // Each high score should include the following, collected at the end of each game:
-            //    Player Name
-            //    Difficulty
-            //    Turns
-            //    Score
-            //    Timestamp
-            //WIP PART 2:
-            //  Create a new page, Team#Scores.html, using HTML5.
-            //  This page will read from localStorage to retrieve
-            //  the high scores list, and print them in a neatly
-            //  formatted table, sorted by score, then timestamp.
-
-		$("#check").remove(); // Removing "check value" button after it has been clicked.
+            $("#check").remove(); // Removing "check value" button after it has been clicked.
         });
 
         function check() {
-            alert(settings.color);
+            //Uncomment for easy debugging / ezwin
+            // alert(settings.color);
         }
 
         check();
@@ -402,43 +358,26 @@ $(function () {
     //When the button is clicked for the first time
     $("#random_color").click(function () {
         difficulty = $("input[name=difficulty]").val();
-		
-		if (!(parseInt(difficulty) >= 1 &&  parseInt(difficulty) <= 10)) {
-			alert("Difficulty must be set from 1 to 10");
-			$("input[name=difficulty]").val(5);
-			return; 
-		}
-		
-        turnss = $("input[name=turns]").val();
-		currentTurn = 1;
-		
-		if (!(parseInt(turnss) >=1)) {
-			alert("Turns must be set to a positive number.");
-			$("input[name=turns]").val(10);
-			return; 
-		}
-				
-				
-        //Create a game section
-        //Init plugin to game
-        $("#placeholder").hexed({
-            
-            
-        });
-        // alert($("#game").hexed.settings);
-        // console.log($("#game"));
+
+    		if (!(parseInt(difficulty) >= 1 &&  parseInt(difficulty) <= 10)) {
+    			alert("Difficulty must be set from 1 to 10");
+    			$("input[name=difficulty]").val(5);
+    			return;
+    		}
+
+            turnss = $("input[name=turns]").val();
+    		currentTurn = 1;
+
+    		if (!(parseInt(turnss) >=1)) {
+    			alert("Turns must be set to a positive number.");
+    			$("input[name=turns]").val(10);
+    			return;
+    		}
+            //Create a game section
+            //Init plugin to game
+        $("#placeholder").hexed({});
+
     });
-
-
-    // Css for sliders. Now not used as they are no longer in the html.
-    // $( "#red, #green, #blue" ).slider({
-    //     orientation: "horizontal",
-    //     range: "min",
-    //     max: 255,
-    //     value: 127,
-    //     slide: refreshSwatch,
-    //     change: refreshSwatch
-    //   });
 
 
     refreshSwatch();
