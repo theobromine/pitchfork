@@ -93,15 +93,15 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
 
 		$(this).append("\n\n<h1 align='center'>Color Game</h1>");
 		var totalTurns = settings.turns;
-		$(this).append("<div style= 'text-align: center'> Round "  + currentTurn + " of " + settings.turns + "</div>");
+		$(this).append("<div id= 'turns'> Round "  + currentTurn + " of " + settings.turns + "</div>");
 		$(this).append('<div id="scoreArea"> <p>Running Score</p> <div id="totalRunningScore">' + totalRunningScore + '</div></div>');		
         $(this).css("width", "80%", "margin", "0 auto");
         $(this).css("margin", "0 auto");
         $(this).css("padding", "10px 5px 10px 5px");
 
-        $(this).append("<div id='game' style='height: 100px; width: 100px; text-align:center; margin: 0 auto;' > Guess This Color! </div>");
+        $(this).append("<div id='game'> Guess This Color! </div>");
         $("#game").css("background-color", "rgb(" + colorR + "," + colorG + "," + colorB + ")");
-        $(this).append("<div id='inputs' style='width: 70%; text-align:center; margin: 0 auto;''></div>")
+        $(this).append("<div id='inputs'></div>")
         //add html for sliders
         $("#inputs").append("<br></br> Red:    <div id='red'></div>    <input type='text' name='redin'><br></br>  ");
         $("#inputs").append("<br></br> Green:  <div id='green'></div>  <input type='text' name='greenin'><br></br>");
@@ -266,7 +266,7 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
             //Result is the combination of RGB
             var result = rin + gin + bin;
             //Create a square in the color of the input color
-            $(this).after("<div id='result' style='height: 100px; width: 100px;' > " + result + " </div>");
+            $(this).after("<div id='result'> " + result + " </div>");
             $("#result").css("background-color", "rgb(" + parseInt(rin, 16) + "," + parseInt(gin, 16) + "," + parseInt(bin, 16));
             //Calculate how far off we are from the expected RGB
             var redOff = percentDifferent(rin, settings.color[0] + settings.color[1]);

@@ -24,3 +24,22 @@
 	border-style: solid;
 	width:100px;
 }
+
+#result{
+	 height: 100px;
+	 width: 100px;
+}
+#turns {
+	text-align: center;
+}
+#game {
+	height: 100px;
+	width: 100px;
+	text-align:center; 
+	margin: 0 auto;
+}
+#inputs {
+	width: 70%;
+	text-align:center;
+	margin: 0 auto;
+}
