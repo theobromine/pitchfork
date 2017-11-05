@@ -400,10 +400,26 @@ function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_take
 //This section is used to create the game.
 $(function () {
     //When the button is clicked for the first time
-    $("#random_color").one("click", (function () {
+    $("#random_color").click(function () {
         difficulty = $("input[name=difficulty]").val();
+		
+		if (parseInt(difficulty) <1 || parseInt(difficulty) >10){
+			alert("Difficulty must be set from 1 to 10");
+			$("input[name=difficulty]").val(5);
+			return; 
+		}
+		
         turnss = $("input[name=turns]").val();
 		currentTurn = 1;
+		
+		if (parseInt(turnss) <1){
+			alert("Turns must be set to a positive number.");
+			$("input[name=turns]").val(10);
+			return; 
+		}
+				
+		
+		
         //Create a game section
         //Init plugin to game
         $("#placeholder").hexed({
@@ -412,18 +428,6 @@ $(function () {
         });
         // alert($("#game").hexed.settings);
         // console.log($("#game"));
-    }));
-    //If clicked a second time +
-    $("#random_color").click(function () {
-        var colorR = Math.floor((Math.random() * 256));
-        var colorG = Math.floor((Math.random() * 256));
-        var colorB = Math.floor((Math.random() * 256));
-        // $("#game").css("background-color", "rgb(" + colorR + "," + colorG + "," + colorB + ")");
-
-    });
-
-    $("#check").click(function () {
-
     });
 
 
