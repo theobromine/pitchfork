@@ -403,7 +403,7 @@ $(function () {
     $("#random_color").click(function () {
         difficulty = $("input[name=difficulty]").val();
 		
-		if (parseInt(difficulty) <1 || parseInt(difficulty) >10){
+		if (!(parseInt(difficulty) >= 1 &&  parseInt(difficulty) <= 10)) {
 			alert("Difficulty must be set from 1 to 10");
 			$("input[name=difficulty]").val(5);
 			return; 
@@ -412,7 +412,7 @@ $(function () {
         turnss = $("input[name=turns]").val();
 		currentTurn = 1;
 		
-		if (parseInt(turnss) <1){
+		if (!(parseInt(turnss) >=1)) {
 			alert("Turns must be set to a positive number.");
 			$("input[name=turns]").val(10);
 			return; 
