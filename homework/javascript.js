@@ -60,7 +60,7 @@ function percentDifferent(guessColor, expectedColor) { //example of call: var re
 
 function scoringFormula(redOff, blueOff, greenOff, difficulty, milliseconds_taken) { //example of call: var currentRoundScore = scoringFormula(redOff, blueOff, greenOff,difficulty, milliseconds_taken);
     var percent_off = (parseInt(redOff) + parseInt(blueOff) + parseInt(greenOff)) / 3;
-    var currentRoundScore = ((15 - difficulty - percent_off) / (15 - difficulty)) * (30000 - milliseconds_taken); // this game is way too hard at 15 seconds
+    var currentRoundScore = ((15 - difficulty - percent_off) / (15 - difficulty)) * (15000 - milliseconds_taken); // this game is way too hard at 15 seconds
 
     if (currentRoundScore < 0) { //If the score would be less than zero for a color, it should be counted as zero.
         currentRoundScore = 0;
