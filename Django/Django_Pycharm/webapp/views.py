@@ -65,3 +65,6 @@ def info(request):
 
 def contact(request):
     return render(request, 'webapp/contact.html')
+
+def paytest(request):
+    return render(request, 'webapp/paytest.html')

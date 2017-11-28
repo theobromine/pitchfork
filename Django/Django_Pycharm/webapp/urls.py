@@ -16,5 +16,6 @@ urlpatterns = [
                   url(r'^faq$', views.faq, name='faq'),
                   url(r'^info', views.faq, name='info'),
                   url(r'^contact', views.faq, name='contact'),
+                  url(r'^paytest', views.paytest, name='paytest'),
 
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
