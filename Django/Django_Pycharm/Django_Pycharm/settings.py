@@ -37,8 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'paypal.standard.ipn',
-    'paypal.standard.pdt',
     'webapp.apps.WebappConfig',
 ]
 
@@ -120,10 +118,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-#Paypal testing
-PAYPAL_TEST = True
-PAYPAL_IDENTITY_TOKEN = '2moPfvb8yV62YxxFP9uxXG5e0UgO9wMcq-621tpaakCJBEabQa1RQ5LYGbi'
 
 
 # Static files (CSS, JavaScript, Images)
