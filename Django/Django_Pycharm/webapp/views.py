@@ -56,3 +56,12 @@ def reg_user(request):
         ctx['rlt'] = request.POST['q']
         ctx['rlt'] = request.POST["first_name"]
     return render(request, 'webapp/index.html', ctx)
+
+def faq(request):
+    return render(request, 'webapp/faq.html')
+
+def info(request):
+    return render(request, 'webapp/info.html')
+
+def contact(request):
+    return render(request, 'webapp/contact.html')

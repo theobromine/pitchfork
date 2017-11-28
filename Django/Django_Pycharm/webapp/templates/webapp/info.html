@@ -22,13 +22,13 @@
     <nav class="navbar">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a href="index.html"><img id="logo" src="{% static "webapp/" %}"></a>
+                <a href="{% url 'webapp:index' %}"><img id="logo" src="{% static "webapp/" %}"></a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="index.html">HOME</a></li>
-                <li><a href="faq.html">FAQ</a></li>
-                <li><a href="info.html">INFO</a></li>
-                <li><a href="contact.html">CONTACT</a></li>
+                <li><a href="{% url 'webapp:index' %}">HOME</a></li>
+                <li><a href="{% url 'webapp:faq' %}">FAQ</a></li>
+                <li><a href="{% url 'webapp:info' %}">INFO</a></li>
+                <li><a href="{% url 'webapp:contact' %}">CONTACT</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-user"></span> SIGN UP</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> LOGIN</a></li>
             </ul>
