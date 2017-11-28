@@ -35,3 +35,29 @@ class User(models.Model):
 
 class Test(models.Model):
     test = models.CharField(max_length=20)
+
+
+# use `WebSys`
+# # Migrated from PaypalAPI docs
+#
+# class PitforkPayments(models.Model):
+#     PaymentId   = models.AutoField(primary_key=True)
+#     GroupId     = models.ForeignKey(Question, on_delete=models.CASCADE)
+#     UserId      =  int NOT NULL,
+#     Amount      = decimal(5,2) NOT NULL,
+#     Paidbit     = models.IntegerField(default=, max_length=1)
+#     PaypalId    = varchar(50) NULL,
+#     PaidDate    = datetime NULL,
+#   PRIMARY KEY (PaymentId)
+# );
+#
+# CREATE TABLE IF NOT EXISTS `pitchfork_payouts` (
+#   PayoutId int NOT NULL auto_increment,
+#   GroupId int NOT NULL,
+#   UserId int NOT NULL,
+#   Amount decimal(5,2) NOT NULL,
+#   Paid bit NOT NULL,
+#   PaypalId varchar(50) NULL,
+#   PaidDate datetime NULL,
+#   PRIMARY KEY PayoutId
+# );
