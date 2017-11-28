@@ -8,16 +8,7 @@ from webapp.models import Question, Choice
 
 
 def index(request):
-    latest_question_list = Question.objects.order_by('-pub_date')[:5]
-    print("test")
-    context = {'latest_question_list': latest_question_list}
-    ctx = {}
-    print("test")
-    if request.POST:
-        ctx['rlt'] = request.POST["first_name"]
-        return render(request, 'webapp/index.html', ctx)
-
-    return render(request, 'webapp/index.html', context)
+    return render(request, 'webapp/index.html')
 
 
 def detail(request, question_id):
@@ -50,21 +41,28 @@ def vote(request, question_id):
 
 
 def reg_user(request):
-    ctx = {}
+    context = {}
     print("test")
     if request.POST:
-        ctx['rlt'] = request.POST['q']
-        ctx['rlt'] = request.POST["first_name"]
-    return render(request, 'webapp/index.html', ctx)
+        firstname = request.POST["first_name"]
+        lastname = request.POST["last_name"]
+        email = request.POST["email"]
+        passwd = request.POST["passwd"]
+        return render(request, 'webapp/index.html', context)
+    return render(request, 'webapp/index.html')
+
 
 def faq(request):
     return render(request, 'webapp/faq.html')
 
+
 def info(request):
     return render(request, 'webapp/info.html')
 
+
 def contact(request):
     return render(request, 'webapp/contact.html')
+
 
 def paytest(request):
     return render(request, 'webapp/paytest.html')

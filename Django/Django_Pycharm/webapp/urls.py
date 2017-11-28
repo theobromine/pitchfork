@@ -12,10 +12,10 @@ urlpatterns = [
                   url(r'^(?P<question_id>[0-9]+)/results/$', views.results, name='results'),
                   # ex: /polls/5/vote/
                   url(r'^(?P<question_id>[0-9]+)/vote/$', views.vote, name='vote'),
-                  url(r'^$', views.reg_user, name='reg'),
                   url(r'^faq$', views.faq, name='faq'),
-                  url(r'^info', views.faq, name='info'),
-                  url(r'^contact', views.faq, name='contact'),
+                  url(r'^info', views.info, name='info'),
+                  url(r'^contact', views.contact, name='contact'),
                   url(r'^paytest', views.paytest, name='paytest'),
+                  url(r'^register$', views.reg_user, name='reg'),
 
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
