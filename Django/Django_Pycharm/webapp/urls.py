@@ -12,4 +12,6 @@ urlpatterns = [
                   url(r'^(?P<question_id>[0-9]+)/results/$', views.results, name='results'),
                   # ex: /polls/5/vote/
                   url(r'^(?P<question_id>[0-9]+)/vote/$', views.vote, name='vote'),
+                  url(r'^$', views.reg_user, name='reg'),
+
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

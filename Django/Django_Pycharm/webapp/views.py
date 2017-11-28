@@ -9,7 +9,14 @@ from webapp.models import Question, Choice
 
 def index(request):
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    print("test")
     context = {'latest_question_list': latest_question_list}
+    ctx = {}
+    print("test")
+    if request.POST:
+        ctx['rlt'] = request.POST["first_name"]
+        return render(request, 'webapp/index.html', ctx)
+
     return render(request, 'webapp/index.html', context)
 
 
@@ -40,3 +47,12 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('webapp:results', args=(question.id,)))
+
+
+def reg_user(request):
+    ctx = {}
+    print("test")
+    if request.POST:
+        ctx['rlt'] = request.POST['q']
+        ctx['rlt'] = request.POST["first_name"]
+    return render(request, 'webapp/index.html', ctx)
