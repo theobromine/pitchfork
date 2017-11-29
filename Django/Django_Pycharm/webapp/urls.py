@@ -17,5 +17,4 @@ urlpatterns = [
                   url(r'^contact', views.contact, name='contact'),
                   url(r'^paytest', views.paytest, name='paytest'),
                   url(r'^register$', views.reg_user, name='reg'),
-
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
