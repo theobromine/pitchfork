@@ -1,5 +1,9 @@
 from django.http import HttpResponse, HttpResponseRedirect
 
+
+from django.contrib.auth import login, authenticate
+from .forms.forms import SignUpForm
+
 # Create your views here.
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
@@ -8,7 +12,7 @@ from webapp.models import Question, Choice
 from . import paypal
 
 def index(request):
-    return render(request, 'webapp/index.html')
+    return render(request, 'webapp/index.html', {'form': SignUpForm})
 
 
 def detail(request, question_id):
@@ -39,17 +43,6 @@ def vote(request, question_id):
         # user hits the Back button.
         return HttpResponseRedirect(reverse('webapp:results', args=(question.id,)))
 
-
-def reg_user(request):
-    context = {}
-    print("test")
-    if request.POST:
-        firstname = request.POST["first_name"]
-        lastname = request.POST["last_name"]
-        email = request.POST["email"]
-        passwd = request.POST["passwd"]
-        return render(request, 'webapp/index.html', context)
-    return render(request, 'webapp/index.html')
 
 def faq(request):
     return render(request, 'webapp/faq.html')
@@ -92,4 +85,48 @@ def paytestReturn(request):
     paymentID = request.GET['paymentID']
     executePayment(payerID, paymentID)
     return render(request, 'webapp/paytest.html')
-    
+
+
+def reg_user(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('home')
+    else:
+        form = SignUpForm()
+    return render(request, 'webapp/signup.html', {'form': form})
+
+#
+# def reg_user(request):
+#     context = {}
+#     form = UserCreationForm()
+#
+#     print("test")
+#     if request.POST:
+#         form = UserCreationForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             username = form.cleaned_data.get('email')
+#             raw_password = form.cleaned_data.get('passwd')
+#
+#             user = authenticate(username=username, password=raw_password)
+#             login(request, user)
+#             # return redirect('home')
+#             return render(request, 'webapp/index.html', context)
+#
+#         # firstname = request.POST["first_name"]
+#         # lastname = request.POST["last_name"]
+#         # email = request.POST["email"]
+#         # passwd = request.POST["passwd"]
+#
+#     else:
+#         form = UserCreationForm()
+#     # return render(request, 'signup.html', {'form': form})
+#     #     return render(request, 'webapp/index.html', context)
+#     return render(request, 'webapp/index.html', {'form': form})
+#     # return render(request, 'webapp/index.html')
