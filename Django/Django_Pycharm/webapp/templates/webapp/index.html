@@ -5,28 +5,33 @@
 <div class="row">
     <div id="signup" class="col-md-10">
         <h4>Sign up</h4>
-          <form method="post">
-            {% csrf_token %}
-            {{ form.as_table }}
-            <button type="submit">Sign up</button>
-          </form>
+         {% include "webapp/signup.html" %}
 
         <div>{{ rlt }}</div>
     </div>
     <div id="login" class="col-md-4">
-        <h4 align="center">Already a Member? Log In</h4>
-        <form>
-            <div class="form-group">
-                <label for="email">Email address:</label>
-                <input type="email" class="form-control" id="email">
-            </div>
-            <div class="form-group">
-                <label for="pwd">Password:</label>
-                <input type="password" class="form-control" id="pwd">
-            </div>
-            <button type="submit" class="btn btn-default">Log In</button>
-        </form>
-    </div>
+     <h2>Log in to My Site</h2>
+      {% if form.errors %}
+        <p style="color: red">Your username and password didn't match. Please try again.</p>
+      {% endif %}
+      <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}" />
+        {% for field in form %}
+          <p>
+            {{ field.label_tag }}<br>
+            {{ field }}<br>
+            {% for error in field.errors %}
+              <p style="color: red">{{ error }}</p>
+            {% endfor %}
+            {% if field.help_text %}
+              <p><small style="color: grey">{{ field.help_text }}</small></p>
+            {% endif %}
+          </p>
+        {% endfor %}
+        <button type="submit">Log in</button>
+        <a href="{% url 'webapp:reg_user' %}">New to My Site? Sign up</a>
+      </form>
 </div>
 
 

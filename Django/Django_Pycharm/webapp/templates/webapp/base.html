@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 {% load static %}
-
 <html lang="en">
 <head>
     <!-- Latest compiled and minified CSS -->
@@ -16,7 +15,8 @@
     <link rel=stylesheet href="{% static 'webapp/index.css' %}"/>
 
     <!-- Scripts specefic to a page go here -->
-    {% block scripts %}{% endblock %}
+        {% block scripts %}
+{% endblock %}
 
     <title>Pitchfork</title>
 </head>
@@ -34,13 +34,12 @@
             <li><a href="{% url 'webapp:info' %}">INFO</a></li>
             <li><a href="{% url 'webapp:contact' %}">CONTACT</a></li>
             <li><a href="{% url 'webapp:reg_user' %}"><span class="glyphicon glyphicon-user"></span> SIGN UP</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> LOGIN</a></li>
+            <li><a href="{% url 'webapp:login' %}"><span class="glyphicon glyphicon-log-in"></span> LOGIN</a></li>
         </ul>
     </div>
 </nav>
 
 {% block content %}If you are seeing this please contact a site administrator.{% endblock %}
-<h3 align="center">Welcome to Pitchfork!</h3>
 </body>
 
 </html>

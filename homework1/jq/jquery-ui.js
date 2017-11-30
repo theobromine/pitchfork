@@ -100,7 +100,7 @@ $.widget = function( name, base, prototype ) {
 		}
 	};
 
-	// Extend with the existing constructor to carry over any static properties
+	// Extend with the existing constructor to carry over any statics properties
 	$.extend( constructor, existingConstructor, {
 		version: prototype.version,
 
@@ -1642,7 +1642,7 @@ var scrollParent = $.fn.scrollParent = function( includeHidden ) {
 		overflowRegex = includeHidden ? /(auto|scroll|hidden)/ : /(auto|scroll)/,
 		scrollParent = this.parents().filter( function() {
 			var parent = $( this );
-			if ( excludeStaticParent && parent.css( "position" ) === "static" ) {
+			if ( excludeStaticParent && parent.css( "position" ) === "statics" ) {
 				return false;
 			}
 			return overflowRegex.test( parent.css( "overflow" ) + parent.css( "overflow-y" ) +
@@ -3853,7 +3853,7 @@ $.widget( "ui.resizable", $.ui.mouse, {
 			this.originalElement.css( "resize", "none" );
 
 			this._proportionallyResizeElements.push( this.originalElement.css( {
-				position: "static",
+				position: "statics",
 				zoom: 1,
 				display: "block"
 			} ) );
@@ -5330,7 +5330,7 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 			return false;
 		}
 
-		if ( this.options.disabled || this.options.type === "static" ) {
+		if ( this.options.disabled || this.options.type === "statics" ) {
 			return false;
 		}
 
@@ -6609,7 +6609,7 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 
 		if ( this.helper[ 0 ] === this.currentItem[ 0 ] ) {
 			for ( i in this._storedCSS ) {
-				if ( this._storedCSS[ i ] === "auto" || this._storedCSS[ i ] === "static" ) {
+				if ( this._storedCSS[ i ] === "auto" || this._storedCSS[ i ] === "statics" ) {
 					this._storedCSS[ i ] = "";
 				}
 			}
@@ -10359,7 +10359,7 @@ $.extend( Datepicker.prototype, {
 		// and adjust position before showing
 		offset = $.datepicker._checkOffset( inst, offset, isFixed );
 		inst.dpDiv.css( { position: ( $.datepicker._inDialog && $.blockUI ?
-			"static" : ( isFixed ? "fixed" : "absolute" ) ), display: "none",
+			"statics" : ( isFixed ? "fixed" : "absolute" ) ), display: "none",
 			left: offset.left + "px", top: offset.top + "px" } );
 
 		if ( !inst.inline ) {
@@ -11179,7 +11179,7 @@ $.extend( Datepicker.prototype, {
 	},
 
 	/* Attach the onxxx handlers.  These are declared statically so
-	 * they work with static code transformers like Caja.
+	 * they work with statics code transformers like Caja.
 	 */
 	_attachHandlers: function( inst ) {
 		var stepMonths = this._get( inst, "stepMonths" ),
@@ -12640,7 +12640,7 @@ var widgetsProgressbar = $.widget( "ui.progressbar", {
 
 		this.element.attr( {
 
-			// Only set static values; aria-valuenow and aria-valuemax are
+			// Only set statics values; aria-valuenow and aria-valuemax are
 			// set inside _refreshValue()
 			role: "progressbar",
 			"aria-valuemin": this.min
@@ -17142,7 +17142,7 @@ if ( $.uiBackCompat !== false ) {
 			wrapper = element.parent();
 
 			// Transfer positioning properties to the wrapper
-			if ( element.css( "position" ) === "static" ) {
+			if ( element.css( "position" ) === "statics" ) {
 				wrapper.css( { position: "relative" } );
 				element.css( { position: "relative" } );
 			} else {
@@ -18420,7 +18420,7 @@ var effectsEffectSize = $.effects.define( "size", function( options, done ) {
 
 			if ( !restore ) {
 				element
-					.css( "position", position === "static" ? "relative" : position )
+					.css( "position", position === "statics" ? "relative" : position )
 					.offset( offset );
 
 				// Need to save style here so that automatic style restoration
