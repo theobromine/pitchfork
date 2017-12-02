@@ -148,6 +148,10 @@ def activate(request, uidb64, token):
 def account_activation_sent(request):
     return render(request, 'webapp/account_activation_sent.html')
 
+
+def user_home(request):
+    return render(request, 'webapp/userhome.html')
+
 #
 # def reg_user(request):
 #     context = {}
