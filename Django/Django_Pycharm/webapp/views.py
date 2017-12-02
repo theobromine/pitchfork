@@ -1,9 +1,9 @@
 from django.http import HttpResponse, HttpResponseRedirect
 
-
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 
+from webapp.paypal import executePayment
 from .forms.forms import SignUpForm
 from .tokens import account_activation_token
 
@@ -18,7 +18,6 @@ from django.contrib.auth.models import User
 
 from webapp.models import Question, Choice
 from . import paypal
-
 
 
 def index(request):
@@ -58,15 +57,18 @@ def vote(request, question_id):
 def faq(request):
     return render(request, 'webapp/faq.html')
 
+
 def info(request):
     return render(request, 'webapp/info.html')
+
 
 def contact(request):
     return render(request, 'webapp/contact.html')
 
+
 def paytest(request):
     message = ""
-    if request.method=="POST":
+    if request.method == "POST":
         paymentAmount = request.POST.get('paymentAmount', "")
         receiverEmail = request.POST.get('receiverEmail', "")
         reimbursementAmount = request.POST.get('reimbursementAmount', "")
@@ -79,18 +81,19 @@ def paytest(request):
             if paypal.createPayout(senderBatchID, reimbursementAmount, receiverEmail, senderItemID):
                 message = "Your payout has been Successfully executed."
             else:
-                message = "Unfortunately, your payout was unsucessful." 
-    payerID = request.GET.get("PayerID","")
-    paymentID = request.GET.get("paymentId","")
-    
+                message = "Unfortunately, your payout was unsucessful."
+    payerID = request.GET.get("PayerID", "")
+    paymentID = request.GET.get("paymentId", "")
+
     if payerID != "":
-        if paypal.executePayment(payerID, paymentID): 
+        if paypal.executePayment(payerID, paymentID):
             message = "Your payment has been Successfully executed."
         else:
-            message = "Unfortunately, your payment was unsucessful." 
-    context={"message":message}
+            message = "Unfortunately, your payment was unsucessful."
+    context = {"message": message}
     return render(request, 'webapp/paytest.html', context)
-    
+
+
 def paytestReturn(request):
     payerID = request.GET['payerID']
     paymentID = request.GET['paymentID']
@@ -118,11 +121,12 @@ def reg_user(request):
             })
             user.email_user(subject, message)
             print("user")
-            return redirect( 'webapp/account_activation_sent.html')
+            return redirect('webapp/account_activation_sent.html')
     else:
         print("unot")
         form = SignUpForm()
     return render(request, 'webapp/signup.html', {'form': form})
+
 
 def activate(request, uidb64, token):
     try:
@@ -139,6 +143,7 @@ def activate(request, uidb64, token):
         return redirect('webapp/paytest.html')
     else:
         return render(request, 'webapp/account_activation_invalid.html')
+
 
 def account_activation_sent(request):
     return render(request, 'webapp/account_activation_sent.html')
