@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 
-from webapp.paypal import executePayment
+from webapp.paypal import execute_payment
 from .forms.forms import SignUpForm
 from .tokens import account_activation_token
 
@@ -69,24 +69,24 @@ def contact(request):
 def paytest(request):
     message = ""
     if request.method == "POST":
-        paymentAmount = request.POST.get('paymentAmount', "")
-        receiverEmail = request.POST.get('receiverEmail', "")
-        reimbursementAmount = request.POST.get('reimbursementAmount', "")
-        if paymentAmount != "":
-            approval_url = paypal.createPayment(paymentAmount)
+        payment_amount = request.POST.get('paymentAmount', "")
+        receiver_email = request.POST.get('receiverEmail', "")
+        reimbursement_amount = request.POST.get('reimbursementAmount', "")
+        if payment_amount != "":
+            approval_url = paypal.create_payment(payment_amount)
             return redirect(approval_url)
         else:
-            senderBatchID = paypal.generateSenderBatchID()
-            senderItemID = "1"
-            if paypal.createPayout(senderBatchID, reimbursementAmount, receiverEmail, senderItemID):
+            sender_batch_id = paypal.generate_sender_batch_id()
+            sender_item_id = "1"
+            if paypal.create_payout(sender_batch_id, reimbursement_amount, receiver_email, sender_item_id):
                 message = "Your payout has been Successfully executed."
             else:
                 message = "Unfortunately, your payout was unsucessful."
-    payerID = request.GET.get("PayerID", "")
-    paymentID = request.GET.get("paymentId", "")
+    payer_id = request.GET.get("PayerID", "")
+    payment_id = request.GET.get("paymentId", "")
 
-    if payerID != "":
-        if paypal.executePayment(payerID, paymentID):
+    if payer_id != "":
+        if paypal.execute_payment(payer_id, payment_id):
             message = "Your payment has been Successfully executed."
         else:
             message = "Unfortunately, your payment was unsucessful."
@@ -94,10 +94,10 @@ def paytest(request):
     return render(request, 'webapp/paytest.html', context)
 
 
-def paytestReturn(request):
-    payerID = request.GET['payerID']
-    paymentID = request.GET['paymentID']
-    executePayment(payerID, paymentID)
+def paytest_return(request):
+    payer_id = request.GET['payerID']
+    payment_id = request.GET['paymentID']
+    execute_payment(payer_id, payment_id)
     return render(request, 'webapp/paytest.html')
 
 
