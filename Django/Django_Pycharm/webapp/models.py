@@ -26,7 +26,7 @@ class Choice(models.Model):
     def __str__(self):
         return self.choice_text
 
-#
+
 # class Profile(models.Model):
 #     user = models.OneToOneField(User, on_delete=models.CASCADE)
 #     email_confirmed = models.BooleanField(default=False)
@@ -44,28 +44,26 @@ class Choice(models.Model):
 # @receiver(post_save, sender=User)
 # def save_user_profile(sender, instance, **kwargs):
 #     instance.profile.save()
-#
-# use `WebSys`
-# # Migrated from PaypalAPI docs
-#
-# class PitforkPayments(models.Model):
-#     PaymentId   = models.AutoField(primary_key=True)
-#     GroupId     = models.ForeignKey(Question, on_delete=models.CASCADE)
-#     UserId      =  int NOT NULL,
-#     Amount      = decimal(5,2) NOT NULL,
-#     Paidbit     = models.IntegerField(default=, max_length=1)
-#     PaypalId    = varchar(50) NULL,
-#     PaidDate    = datetime NULL,
-#   PRIMARY KEY (PaymentId)
-# );
-#
-# CREATE TABLE IF NOT EXISTS `pitchfork_payouts` (
-#   PayoutId int NOT NULL auto_increment,
-#   GroupId int NOT NULL,
-#   UserId int NOT NULL,
-#   Amount decimal(5,2) NOT NULL,
-#   Paid bit NOT NULL,
-#   PaypalId varchar(50) NULL,
-#   PaidDate datetime NULL,
-#   PRIMARY KEY PayoutId
-# );
+
+
+
+class Payment(models.Model):
+    payment_id   = models.AutoField(primary_key = True)
+    #GroupId     = models.ForeignKey(Question, on_delete=models.CASCADE)
+    group_id    = models.IntegerField(default = 0)
+    user_id     = models.IntegerField(default = 0)
+    amount      = models.DecimalField(max_digits = 5, decimal_places = 2)
+    paid_bit     = models.BooleanField(default = False)
+    paypal_id    = models.CharField(max_length = 50)
+    paid_date    = models.DateTimeField(null = True)
+
+    
+class Payout(models.Model):
+    payout_id   = models.AutoField(primary_key = True)
+    #GroupId     = models.ForeignKey(Question, on_delete=models.CASCADE)
+    group_id    = models.IntegerField(default = 0)
+    user_id     = models.IntegerField(default = 0)
+    amount      = models.DecimalField(max_digits = 5, decimal_places = 2)
+    paid_bit     = models.BooleanField(default = False)
+    paypal_id    = models.CharField(max_length = 50)
+    paid_date    = models.DateTimeField(null = True)
