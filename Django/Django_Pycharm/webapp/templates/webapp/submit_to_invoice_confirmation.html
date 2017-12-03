@@ -3,17 +3,31 @@
 {% block content %}
 
 
-	<h1>Payment Submit Confirmation Test</h1>
-	Payouts: {{results.payouts}}<br>
+	<h1>Invoice Confirmation</h1>
+	<!-- Payouts: {{results.payouts}}<br>
 	Payments: {{results.payments}}<br>
 	No Action: {{results.no_action}}<br>
-	<!-- Error: {{results.error}}<br> !-->
+	Error: {{results.error}}<br>
 	Total: {{results.total}}<br>
-	Cost Per User: {{results.cost}}
+	Cost Per User: {{results.cost}} !-->
 
-<form action="../grouphome/{{group_id}}"><input type="submit" value="Back to Group"></input></form>
+Total Cost: ${{results.total_group_contribution|floatformat:2}} <br>
+Users: {{results.total}} <br>
+Cost Per User: ${{results.cost|floatformat:2}} <br><br>
 
+{% for user_contribution in results.user_contributions %}
+{{user_contribution.user_id}} contributed ${{user_contribution.contribution|floatformat:2}}, 
 
+{% if user_contribution.difference < 0 %} <!-- Payment owed -->
+	they were billed ${{user_contribution.difference_non_neg|floatformat:2}}.
+{% elif user_contribution.difference > 0 %} <!--Payout owed to user -->
+	they were paid ${{user_contribution.difference|floatformat:2}}.
+{% else %}
+	which was their fair share. 
+{% endif %} <br>
+{% endfor %} <br>
+
+<form action="../grouphome/{{group_id}}"><input type="submit" value="Back to Group"></input></form>  
 
 
 {% endblock %}

@@ -95,19 +95,21 @@ def generate_sender_batch_id():
     return ''.join(random.choice(string.ascii_uppercase) for i in range(12))
             
 def submit_to_invoice(group_id): 
-    user_contributions = [{"userID": "user1@email.com", "contribution": 3}, {"userID": "user2@email.com", "contribution": 0},{"userID": "user3@email.com", "contribution": 6}]
-    #TODO make sure user who will not get a payout and will also not pay in gets an email that says they are all set. 
+    #Sample Data
+    user_contributions = [{"user_id": "user1@email.com", "contribution": 3}, {"user_id": "user2@email.com", "contribution": 0},{"user_id": "user3@email.com", "contribution": 6}]
     total_group_contribution = 0
     for user_contribution in user_contributions:
         total_group_contribution += user_contribution["contribution"]
     cost_per_user = total_group_contribution/len(user_contributions)
-    results = {"payouts": 0, "payments": 0, "no_action": 0, "error": 0, "total": len(user_contributions), "cost":cost_per_user}
+    results = {"payouts": 0, "payments": 0, "no_action": 0, "error": 0, "total": len(user_contributions), "cost":cost_per_user, "user_contributions":user_contributions, "total_group_contribution":total_group_contribution}
     for user_contribution in user_contributions:
+        user_contribution["difference"] = user_contribution["contribution"]-cost_per_user
+        user_contribution["difference_non_neg"] = cost_per_user - user_contribution["contribution"]
         if cost_per_user < user_contribution["contribution"]: #User Over contributed. 
             #senderBatchID and group_id are the same thing.
-            #receiverEmail and UserId are the same thing. 
-            #senderItemID = userID+"-"+group_id.
-            create_payout_check = create_payout(group_id, user_contribution["contribution"]-cost_per_user, user_contribution["userID"], user_contribution["userID"]+"-"+group_id)
+            #receiverEmail and user_id are the same thing. 
+            #senderItemID = user_id+"-"+group_id.
+            create_payout_check = create_payout(group_id, user_contribution["contribution"]-cost_per_user, user_contribution["user_id"], user_contribution["user_id"]+"-"+group_id)
             if create_payout_check == True:
                 results ["payouts"] = results ["payouts"] + 1
             else:
