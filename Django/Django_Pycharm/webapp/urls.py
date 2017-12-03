@@ -17,7 +17,7 @@ urlpatterns = [
                   url(r'^info', views.info, name='info'),
                   url(r'^contact', views.contact, name='contact'),
                   url(r'^paytest', views.paytest, name='paytest'),
-                  url(r'^submit_to_invoice/(?P<groupID>[0-9]+)', views.submit_to_invoice, name='submit_to_invoice'),
+                  url(r'^submit_to_invoice/(?P<group_id>[0-9]+)', views.submit_to_invoice, name='submit_to_invoice'),
                   url(r'^register$', views.reg_user, name='reg'),
                   url(r'^signup$', views.reg_user, name='reg_user'),
                   url(r'^login/$', auth_views.login, {'template_name': 'webapp/login.html'}, name='login'),
@@ -28,6 +28,6 @@ urlpatterns = [
                   url(r'^userhome', views.user_home, name='userhome'),
                   url(r'^newgroup', views.new_group, name='newgroup'),
                   url(r'^settings', views.settings, name='settings'),
-                  url(r'^grouphome', views.group_home, name='grouphome')
+                  url(r'^grouphome/(?P<group_id>[0-9]+)', views.group_home, name='grouphome')
 
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

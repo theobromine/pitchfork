@@ -152,8 +152,9 @@ def account_activation_sent(request):
 def user_home(request):
     return render(request, 'webapp/userhome.html')
 
-def group_home(request):
-    return render(request, 'webapp/grouphome.html')
+def group_home(request, group_id):
+    context= {"group_id": group_id, "is_admin": True} #checks if they are an admin and displays only if they are. 
+    return render(request, 'webapp/grouphome.html', context)
 
 def new_group(request):
     return render(request, 'webapp/newgroup.html')
@@ -161,9 +162,9 @@ def new_group(request):
 def settings(request):
     return render(request, 'webapp/settings.html')
 
-def submit_to_invoice(request, groupID):
-    results = paypal.submit_to_invoice(groupID)
-    context = {"results": results}
+def submit_to_invoice(request, group_id):
+    results = paypal.submit_to_invoice(group_id)
+    context = {"results": results, "group_id": group_id}
     return render(request, 'webapp/submit_to_invoice_confirmation.html', context)
 #
 # def reg_user(request):

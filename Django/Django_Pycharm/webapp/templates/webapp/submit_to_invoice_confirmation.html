@@ -1,19 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<title>Payment Submit Confirmation Test</title>
-	</head>
+{% extends 'webapp/base.html' %}
 
-	<body>
-		<h1>Payment Submit Confirmation Test</h1>
+{% block content %}
+
+
+	<h1>Payment Submit Confirmation Test</h1>
 	Payouts: {{results.payouts}}<br>
 	Payments: {{results.payments}}<br>
 	No Action: {{results.no_action}}<br>
-	Error: {{results.error}}<br>
+	<!-- Error: {{results.error}}<br> !-->
 	Total: {{results.total}}<br>
 	Cost Per User: {{results.cost}}
 
+<form action="../grouphome/{{group_id}}"><input type="submit" value="Back to Group"></input></form>
 
-	</body>
-</html>
+
+
+
+{% endblock %}
