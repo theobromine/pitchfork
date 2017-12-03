@@ -1,9 +1,9 @@
 from django.http import HttpResponse, HttpResponseRedirect
 
-
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 
+from webapp.paypal import execute_payment
 from .forms.forms import SignUpForm
 from .tokens import account_activation_token
 
@@ -18,7 +18,6 @@ from django.contrib.auth.models import User
 
 from webapp.models import Question, Choice
 from . import paypal
-
 
 
 def index(request):
@@ -58,43 +57,47 @@ def vote(request, question_id):
 def faq(request):
     return render(request, 'webapp/faq.html')
 
+
 def info(request):
     return render(request, 'webapp/info.html')
+
 
 def contact(request):
     return render(request, 'webapp/contact.html')
 
+
 def paytest(request):
     message = ""
-    if request.method=="POST":
-        paymentAmount = request.POST.get('paymentAmount', "")
-        receiverEmail = request.POST.get('receiverEmail', "")
-        reimbursementAmount = request.POST.get('reimbursementAmount', "")
-        if paymentAmount != "":
-            approval_url = paypal.createPayment(paymentAmount)
+    if request.method == "POST":
+        payment_amount = request.POST.get('paymentAmount', "")
+        receiver_email = request.POST.get('receiverEmail', "")
+        reimbursement_amount = request.POST.get('reimbursementAmount', "")
+        if payment_amount != "":
+            approval_url = paypal.create_payment(payment_amount)
             return redirect(approval_url)
         else:
-            senderBatchID = paypal.generateSenderBatchID()
-            senderItemID = "1"
-            if paypal.createPayout(senderBatchID, reimbursementAmount, receiverEmail, senderItemID):
+            sender_batch_id = paypal.generate_sender_batch_id()
+            sender_item_id = "1"
+            if paypal.create_payout(sender_batch_id, reimbursement_amount, receiver_email, sender_item_id):
                 message = "Your payout has been Successfully executed."
             else:
-                message = "Unfortunately, your payout was unsucessful." 
-    payerID = request.GET.get("PayerID","")
-    paymentID = request.GET.get("paymentId","")
-    
-    if payerID != "":
-        if paypal.executePayment(payerID, paymentID): 
+                message = "Unfortunately, your payout was unsucessful."
+    payer_id = request.GET.get("PayerID", "")
+    payment_id = request.GET.get("paymentId", "")
+
+    if payer_id != "":
+        if paypal.execute_payment(payer_id, payment_id):
             message = "Your payment has been Successfully executed."
         else:
-            message = "Unfortunately, your payment was unsucessful." 
-    context={"message":message}
+            message = "Unfortunately, your payment was unsucessful."
+    context = {"message": message}
     return render(request, 'webapp/paytest.html', context)
-    
-def paytestReturn(request):
-    payerID = request.GET['payerID']
-    paymentID = request.GET['paymentID']
-    executePayment(payerID, paymentID)
+
+
+def paytest_return(request):
+    payer_id = request.GET['payerID']
+    payment_id = request.GET['paymentID']
+    execute_payment(payer_id, payment_id)
     return render(request, 'webapp/paytest.html')
 
 
@@ -118,11 +121,12 @@ def reg_user(request):
             })
             user.email_user(subject, message)
             print("user")
-            return redirect( 'webapp/account_activation_sent.html')
+            return redirect('webapp/account_activation_sent.html')
     else:
         print("unot")
         form = SignUpForm()
     return render(request, 'webapp/signup.html', {'form': form})
+
 
 def activate(request, uidb64, token):
     try:
@@ -140,13 +144,27 @@ def activate(request, uidb64, token):
     else:
         return render(request, 'webapp/account_activation_invalid.html')
 
+
 def account_activation_sent(request):
     return render(request, 'webapp/account_activation_sent.html')
 
-def submitToInvoice(request, groupID):
-    results = paypal.submitToInvoice(groupID)
+
+def user_home(request):
+    return render(request, 'webapp/userhome.html')
+
+def group_home(request):
+    return render(request, 'webapp/grouphome.html')
+
+def new_group(request):
+    return render(request, 'webapp/newgroup.html')
+
+def settings(request):
+    return render(request, 'webapp/settings.html')
+
+def submit_to_invoice(request, groupID):
+    results = paypal.submit_to_invoice(groupID)
     context = {"results": results}
-    return render(request, 'webapp/submitToInvoiceConfirmation.html', context)
+    return render(request, 'webapp/submit_to_invoice_confirmation.html', context)
 #
 # def reg_user(request):
 #     context = {}

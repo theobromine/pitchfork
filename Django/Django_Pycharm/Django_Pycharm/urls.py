@@ -18,6 +18,6 @@ from django.contrib import admin
 
 urlpatterns = [
     # url(r'^', include('webapp.urls', namespace='webapp')),
-    url(r'^webapp/', include('webapp.urls', namespace='webapp')),
+    url(r'^', include('webapp.urls', namespace='webapp')),
     url(r'^admin/', admin.site.urls),
 ]
