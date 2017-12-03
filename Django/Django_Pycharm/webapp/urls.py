@@ -17,6 +17,7 @@ urlpatterns = [
                   url(r'^info', views.info, name='info'),
                   url(r'^contact', views.contact, name='contact'),
                   url(r'^paytest', views.paytest, name='paytest'),
+                  url(r'^submitToInvoice/(?P<groupID>[0-9]+)', views.submitToInvoice, name='submitToInvoice'),
                   url(r'^register$', views.reg_user, name='reg'),
                   url(r'^signup$', views.reg_user, name='reg_user'),
                   url(r'^login/$', auth_views.login, {'template_name': 'webapp/login.html'}, name='login'),

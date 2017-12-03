@@ -143,6 +143,10 @@ def activate(request, uidb64, token):
 def account_activation_sent(request):
     return render(request, 'webapp/account_activation_sent.html')
 
+def submitToInvoice(request, groupID):
+    results = paypal.submitToInvoice(groupID)
+    context = {"results": results}
+    return render(request, 'webapp/submitToInvoiceConfirmation.html', context)
 #
 # def reg_user(request):
 #     context = {}
