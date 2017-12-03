@@ -152,6 +152,15 @@ def account_activation_sent(request):
 def user_home(request):
     return render(request, 'webapp/userhome.html')
 
+def group_home(request):
+    return render(request, 'webapp/grouphome.html')
+
+def new_group(request):
+    return render(request, 'webapp/newgroup.html')
+
+def settings(request):
+    return render(request, 'webapp/settings.html')
+
 #
 # def reg_user(request):
 #     context = {}
