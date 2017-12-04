@@ -162,10 +162,10 @@ def new_group(request):
 def settings(request):
     return render(request, 'webapp/settings.html')
 
-def submit_to_invoice(request, group_id):
-    results = paypal.submit_to_invoice(group_id)
+def invoice_confirmation(request, group_id):
+    results = paypal.invoice_confirmation(group_id)
     context = {"results": results, "group_id": group_id}
-    return render(request, 'webapp/submit_to_invoice_confirmation.html', context)
+    return render(request, 'webapp/invoice_confirmation.html', context)
 #
 # def reg_user(request):
 #     context = {}

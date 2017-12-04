@@ -94,7 +94,7 @@ def create_payout(sender_batch_id, reimbursement_amount, receiver_email, sender_
 def generate_sender_batch_id():
     return ''.join(random.choice(string.ascii_uppercase) for i in range(12))
             
-def submit_to_invoice(group_id): 
+def invoice_confirmation(group_id): 
     #Sample Data
     user_contributions = [{"user_id": "user1@email.com", "contribution": 3}, {"user_id": "user2@email.com", "contribution": 0},{"user_id": "user3@email.com", "contribution": 6}]
     total_group_contribution = 0
