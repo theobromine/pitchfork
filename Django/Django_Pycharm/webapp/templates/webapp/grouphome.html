@@ -2,9 +2,32 @@
 
 {% block content %}
 
-{% if is_admin %}
-	<span>Admin</span>
-	<form action="../invoice_confirmation/{{group_id}}"><input type="submit" value="Send to Paypal"></input></form>
+{% if status.group_invoiced_date != None %}
+
+	{% if status.reimbursement_date != None %} {# User needs a Reimbursement #}
+		<span>Your reimbursement was paid on {{status.reimbursement_date}} for ${{status.reimbursement_amount}}.</span>
+
+	{% elif status.paypal_url != None %} {# User needs to make a payment #}
+		<span>Your payment of ${{status.payment_amount}} was due as of {{status.group_invoiced_date}}</span><br> 
+		<input type="submit" value="Make a Payment" onclick="window.location='{{status.paypal_url}}'"></input>
+		
+	{% elif status.payment_date != None %} {# User is paid in full #}
+		<span>Your payment was made on {{status.payment_date}} for ${{status.payment_amount}}, you are all set.</span>
+		
+	{% else %} {# User didnt need to pay in #}
+		<span>You contributed your fair share to the group, you are all set.</span>
+	
+	{% endif %}
+	
+	
+	
+{% else %}
+
+	{% if is_admin %}
+		<span>For admin</span>
+		<form action="../invoice_confirmation/{{group_id}}"><input type="submit" value="Send to Paypal"></input></form>
+	{% endif %}
+	
 {% endif %}
 
 {% endblock %}

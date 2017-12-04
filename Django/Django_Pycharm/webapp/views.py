@@ -73,7 +73,8 @@ def paytest(request):
         receiver_email = request.POST.get('receiverEmail', "")
         reimbursement_amount = request.POST.get('reimbursementAmount', "")
         if payment_amount != "":
-            approval_url = paypal.create_payment(payment_amount)
+            paypal_id = paypal.create_payment(payment_amount, True)
+            approval_url = paypal.get_payment_url(paypal_id)
             return redirect(approval_url)
         else:
             sender_batch_id = paypal.generate_sender_batch_id()
@@ -93,14 +94,7 @@ def paytest(request):
     context = {"message": message}
     return render(request, 'webapp/paytest.html', context)
 
-
-def paytest_return(request):
-    payer_id = request.GET['payerID']
-    payment_id = request.GET['paymentID']
-    execute_payment(payer_id, payment_id)
-    return render(request, 'webapp/paytest.html')
-
-
+    
 def reg_user(request):
     print('mango')
     if request.method == 'POST':
@@ -148,25 +142,40 @@ def activate(request, uidb64, token):
 def account_activation_sent(request):
     return render(request, 'webapp/account_activation_sent.html')
 
-
+    
 def user_home(request):
     return render(request, 'webapp/userhome.html')
 
+    
 def group_home(request, group_id):
-    context= {"group_id": group_id, "is_admin": True} #checks if they are an admin and displays only if they are. 
+    user_id = 2 #TODO get currently logged in user, Currently hard coded.
+    is_admin = True #TODO is_admin is currently hard coded. 
+    status = paypal.get_group_payment_statuses(user_id, group_id)
+    context= {"group_id": group_id, "is_admin": is_admin, "status": status,} #checks if they are an admin and displays only if they are. 
     return render(request, 'webapp/grouphome.html', context)
+
 
 def new_group(request):
     return render(request, 'webapp/newgroup.html')
 
+    
 def settings(request):
     return render(request, 'webapp/settings.html')
 
+    
 def invoice_confirmation(request, group_id):
     results = paypal.invoice_confirmation(group_id)
     context = {"results": results, "group_id": group_id}
     return render(request, 'webapp/invoice_confirmation.html', context)
-#
+    
+    
+def paypal_return(request):
+    payment_id = request.GET.get("paymentId", "")
+    payer_id = request.GET.get("PayerID", "")
+    group_id = paypal.paypal_return(payment_id, payer_id)
+    return redirect("./grouphome/" + str(group_id))
+
+    
 # def reg_user(request):
 #     context = {}
 #     form = UserCreationForm()

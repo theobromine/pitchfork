@@ -17,6 +17,7 @@ urlpatterns = [
                   url(r'^info', views.info, name='info'),
                   url(r'^contact', views.contact, name='contact'),
                   url(r'^paytest', views.paytest, name='paytest'),
+                  url(r'^paypal_return', views.paypal_return, name='paypal_return'),
                   url(r'^invoice_confirmation/(?P<group_id>[0-9]+)', views.invoice_confirmation, name='invoice_confirmation'),
                   url(r'^register$', views.reg_user, name='reg'),
                   url(r'^signup$', views.reg_user, name='reg_user'),
