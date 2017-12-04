@@ -1,10 +1,78 @@
 {% extends 'webapp/base.html' %}
 
 {% block content %}
+	<h3 align="center">Group Home</h3>
+	<div class="col-md-1"></div>
+	<div class="col-md-10 ghome border">
+		<h4 align="center">Event Name</h4>
+		<div align="center"><i><var id="event_date">12/23/2017 &nbsp;</var><var id="event_place">Troy,NY</var></i></div>
+		<div class="col-md-3 border guestlist">
+			<h4 align="center">Guest List</h4>
+			<div class="border guests">
+				<ul class="list-group">
+  					<li class="list-group-item">Sydney Ruzicka</li>
+  					<li class="list-group-item">Elisa Franssen</li>
+  					<li class="list-group-item">Isaac Llewellyn</li>
+  					<li class="list-group-item">SummerRay A. Morrow</li>
+  					<li class="list-group-item">Ruowen Qin</li>
+				</ul>
+			</div>
+			<button type="button" class="btn btn-default btn-md"> Invite a Friend</button>
+		</div>
+		<div class="col-md-6 border itemlist">
+			<h4 align="center">Who's Bringing What?</h4>
+			<div class="border items">
+				<table style="width:100%" class="table itemtable">
+  				<tr>
+    				<th>Item</th>
+    				<th>Cost</th> 
+    				<th>Pitched?</th>
+    				<th>Edit</th>
+    				<th>Delete</th>
+  				</tr>
+  				<tr>
+  					<td>Burgers</td>
+  					<td>$7.99</td>
+  					<td><button type="button" class="btn btn-info"> Pitch Me!</button></td>
+  					<td><button type="button" class="btn btn-success"> Edit</button></td>
+  					<td><button type="button" class="btn btn-danger"> Delete</button></td>
+  				</tr>
+  				<tr>
+  					<td>Buns</td>
+  					<td>$3.00</td>
+  					<td>Pitched by Sydney</td>
+  					<td><button type="button" class="btn btn-success"> Edit</button></td>
+  					<td><button type="button" class="btn btn-danger"> Delete</button></td>
+  				</tr>
+			</table>
+			</div>
+		</div>
+		<div class="col-md-3 border pitchlist">
+			<h4 align="center">My Pitches</h4>
+			<div class="border pitches">
+				<table style="width:100%" class="table pitchtable">
+  				<tr>
+    				<th>Item</th>
+    				<th>Got It?</th>
+    				<th></th>
+  				</tr>
+  				<tr>
+  					<td>Burgers</td>
+  					<td><button type="button" class="btn btn-success">Yes</button></td>
+  					<td><button type="button" class="btn btn-danger">No</button></td>
+  				</tr>
+			</table>
+			</div>
+		</div>
+
+	</div>
+	<div class="col-md-1"></div>
+
 
 {% if is_admin %}
 	<span>Admin</span>
 	<form action="../invoice_confirmation/{{group_id}}"><input type="submit" value="Send to Paypal"></input></form>
+
 {% endif %}
 
 {% endblock %}
