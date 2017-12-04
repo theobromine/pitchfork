@@ -20,6 +20,7 @@ urlpatterns = [
                   url(r'^paypal_return', views.paypal_return, name='paypal_return'),
                   url(r'^invoice_confirmation/(?P<group_id>[0-9]+)', views.invoice_confirmation,
                       name='invoice_confirmation'),
+    
                   url(r'^register$', views.reg_user, name='reg'),
                   url(r'^signup$', views.reg_user, name='reg_user'),
                   url(r'^login/$', auth_views.login, {'template_name': 'webapp/login.html'}, name='login'),
@@ -27,6 +28,7 @@ urlpatterns = [
                       name='account_activation_sent'),
                   url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
                       views.activate, name='activate'),
+
                   url(r'^userhome', views.user_home, name='userhome'),
                   url(r'^newgroup', views.new_group, name='newgroup'),
                   url(r'^settings', views.settings, name='settings'),

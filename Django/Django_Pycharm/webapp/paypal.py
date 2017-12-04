@@ -2,8 +2,8 @@ import paypalrestsdk
 import random
 import string
 import datetime
-from webapp.models import Payout as models_payout
-from webapp.models import Payment as models_payment
+from webapp.models import Payout as Models_payout
+from webapp.models import Payment as Models_payment
 from paypalrestsdk import Payment, Payout, ResourceNotFound
 
 
@@ -65,7 +65,7 @@ def get_payment_url(paypal_id):
 
 def get_payment_url_from_user_and_group(user_id, group_id):
     try:
-        payment = models_payment.objects.get(user_id=user_id, group_id=group_id)
+        payment = Models_payment.objects.get(user_id=user_id, group_id=group_id)
         return get_payment_url(payment.paypal_id)
     except:
         return None
@@ -146,7 +146,7 @@ def invoice_confirmation(group_id):
                                       user_contribution["user_id"] + "-" + group_id)
             if payout_id is not None:
                 results["payouts"] = results["payouts"] + 1
-                payout = models_payout(group_id=group_id, user_id=index, amount=user_contribution["difference"],
+                payout = Models_payout(group_id=group_id, user_id=index, amount=user_contribution["difference"],
                                        # TODO change back to user_contribution["user_id"], Hard set
                                        paid_bit=True, paypal_id=payout_id, paid_date=datetime.datetime.now())
                 payout.save()
@@ -156,9 +156,9 @@ def invoice_confirmation(group_id):
         elif cost_per_user > user_contribution["contribution"]:  # User under contributed, payment.
             payment_id = create_payment(cost_per_user - user_contribution["contribution"], False)
 
-            if payment_id != None:
+            if payment_id is not None:
                 results["payments"] = results["payments"] + 1
-                payment = models_payment(group_id=group_id, user_id=index,
+                payment = Models_payment(group_id=group_id, user_id=index,
                                          amount=user_contribution["difference_non_neg"],
                                          # TODO change back to user_contribution["user_id"], Hard set
                                          paid_bit=False, paypal_id=payment_id, paid_date=None)
@@ -173,7 +173,7 @@ def invoice_confirmation(group_id):
 
 
 def paypal_return(payment_id, payer_id):
-    payment = models_payment.objects.get(paypal_id=payment_id)
+    payment = Models_payment.objects.get(paypal_id=payment_id)
     group_id = payment.group_id
     if execute_payment(payer_id, payment_id):
         print("The payment has been Successfully executed.")
@@ -192,7 +192,7 @@ def get_group_payment_statuses(user_id, group_id):
     reimbursement_amount = None
     payment_amount = None
     payment_date = None
-    group_payouts = models_payout.objects.filter(group_id=group_id)
+    group_payouts = Models_payout.objects.filter(group_id=group_id)
 
     if group_payouts.count() > 0:
         group_invoiced_date = group_payouts[0].paid_date
@@ -200,14 +200,14 @@ def get_group_payment_statuses(user_id, group_id):
         group_invoiced_date = None
 
     try:
-        payout_object = models_payout.objects.get(group_id=group_id, user_id=user_id)
+        payout_object = Models_payout.objects.get(group_id=group_id, user_id=user_id)
         reimbursement_date = payout_object.paid_date
         reimbursement_amount = payout_object.amount
     except:
         payout_object = None
 
     try:
-        payment_object = models_payment.objects.get(group_id=group_id, user_id=user_id)
+        payment_object = Models_payment.objects.get(group_id=group_id, user_id=user_id)
         payment_date = payment_object.paid_date
         payment_amount = payment_object.amount
     except:

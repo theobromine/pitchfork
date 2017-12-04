@@ -12,9 +12,6 @@ class Question(models.Model):
     pub_date = models.DateTimeField('date published')
 
     def __str__(self):
-        return self.question_text
-
-    def was_published_recently(self):
         return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
 
 
@@ -46,41 +43,37 @@ class Choice(models.Model):
 #     instance.profile.save()
 
 
-
-<<<<<<< HEAD
 class Item(models.Model):
     # Item Name
-    name        = models.CharField(max_length=50, blank=False)
+    name = models.CharField(max_length=50, blank=False)
     # Item Price
-    price       = models.DecimalField(max_digits=8, decimal_places=2)
+    price = models.DecimalField(max_digits=8, decimal_places=2)
     # Who is bringing the item.
-    pitched     = models.ForeignKey(User, on_delete=models.CASCADE)
+    pitched = models.ForeignKey(User, on_delete=models.CASCADE)
     # A link to a picture of the item
-    picture     = models.CharField(max_length=200, blank=True)
+    picture = models.CharField(max_length=200, blank=True)
     # Has the item been confirmed by the admin?
-    confirmed   = models.BooleanField(default=False)
+    confirmed = models.BooleanField(default=False)
 
 
-
-=======
+#
 class Payment(models.Model):
-    payment_id   = models.AutoField(primary_key = True)
-    #GroupId     = models.ForeignKey(Question, on_delete=models.CASCADE)
-    group_id    = models.IntegerField(default = 0)
-    user_id     = models.IntegerField(default = 0)
-    amount      = models.DecimalField(max_digits = 5, decimal_places = 2)
-    paid_bit     = models.BooleanField(default = False)
-    paypal_id    = models.CharField(max_length = 50)
-    paid_date    = models.DateTimeField(null = True)
->>>>>>> 6921b3ac682eee1ed6ce7e4bf08774e637e71e8b
+    payment_id = models.AutoField(primary_key=True)
+    # GroupId     = models.ForeignKey(Question, on_delete=models.CASCADE)
+    group_id = models.IntegerField(default=0)
+    user_id = models.IntegerField(default=0)
+    amount = models.DecimalField(max_digits=5, decimal_places=2)
+    paid_bit = models.BooleanField(default=False)
+    paypal_id = models.CharField(max_length=50)
+    paid_date = models.DateTimeField(null=True)
 
-    
+
 class Payout(models.Model):
-    payout_id   = models.AutoField(primary_key = True)
-    #GroupId     = models.ForeignKey(Question, on_delete=models.CASCADE)
-    group_id    = models.IntegerField(default = 0)
-    user_id     = models.IntegerField(default = 0)
-    amount      = models.DecimalField(max_digits = 5, decimal_places = 2)
-    paid_bit     = models.BooleanField(default = False)
-    paypal_id    = models.CharField(max_length = 50)
-    paid_date    = models.DateTimeField(null = True)
+    payout_id = models.AutoField(primary_key=True)
+    # GroupId     = models.ForeignKey(Question, on_delete=models.CASCADE)
+    group_id = models.IntegerField(default=0)
+    user_id = models.IntegerField(default=0)
+    amount = models.DecimalField(max_digits=5, decimal_places=2)
+    paid_bit = models.BooleanField(default=False)
+    paypal_id = models.CharField(max_length=50)
+    paid_date = models.DateTimeField(null=True)
