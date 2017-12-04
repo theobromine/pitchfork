@@ -6,6 +6,7 @@ from django.dispatch import receiver
 # Create your models here.
 from django.utils import timezone
 
+
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
@@ -26,23 +27,27 @@ class Choice(models.Model):
         return self.choice_text
 
 
-class Profile(models.Model):
+# class Profile(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     email_confirmed = models.BooleanField(default=False)
+#     bio = models.TextField(max_length=500, blank=True)
+#     location = models.CharField(max_length=30, blank=True)
+#     birth_date = models.DateField(null=True, blank=True)
+#
+#
+# @receiver(post_save, sender=User)
+# def create_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#         Profile.objects.create(user=instance)
+#
+#
+# @receiver(post_save, sender=User)
+# def save_user_profile(sender, instance, **kwargs):
+#     instance.profile.save()
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    email_confirmed = models.BooleanField(default=False)
-    bio = models.TextField(max_length=500, blank=True)
-    location = models.CharField(max_length=30, blank=True)
-    birth_date = models.DateField(null=True, blank=True)
 
-@receiver(post_save, sender=User)
-def update_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-    instance.profile.save()
 
-class Test(models.Model):
-    test = models.CharField(max_length=20)
-
+<<<<<<< HEAD
 class Item(models.Model):
     # Item Name
     name        = models.CharField(max_length=50, blank=False)
@@ -57,28 +62,25 @@ class Item(models.Model):
 
 
 
+=======
+class Payment(models.Model):
+    payment_id   = models.AutoField(primary_key = True)
+    #GroupId     = models.ForeignKey(Question, on_delete=models.CASCADE)
+    group_id    = models.IntegerField(default = 0)
+    user_id     = models.IntegerField(default = 0)
+    amount      = models.DecimalField(max_digits = 5, decimal_places = 2)
+    paid_bit     = models.BooleanField(default = False)
+    paypal_id    = models.CharField(max_length = 50)
+    paid_date    = models.DateTimeField(null = True)
+>>>>>>> 6921b3ac682eee1ed6ce7e4bf08774e637e71e8b
 
-# use `WebSys`
-# # Migrated from PaypalAPI docs
-#
-# class PitforkPayments(models.Model):
-#     PaymentId   = models.AutoField(primary_key=True)
-#     GroupId     = models.ForeignKey(Question, on_delete=models.CASCADE)
-#     UserId      =  int NOT NULL,
-#     Amount      = decimal(5,2) NOT NULL,
-#     Paidbit     = models.IntegerField(default=, max_length=1)
-#     PaypalId    = varchar(50) NULL,
-#     PaidDate    = datetime NULL,
-#   PRIMARY KEY (PaymentId)
-# );
-#
-# CREATE TABLE IF NOT EXISTS `pitchfork_payouts` (
-#   PayoutId int NOT NULL auto_increment,
-#   GroupId int NOT NULL,
-#   UserId int NOT NULL,
-#   Amount decimal(5,2) NOT NULL,
-#   Paid bit NOT NULL,
-#   PaypalId varchar(50) NULL,
-#   PaidDate datetime NULL,
-#   PRIMARY KEY PayoutId
-# );
+    
+class Payout(models.Model):
+    payout_id   = models.AutoField(primary_key = True)
+    #GroupId     = models.ForeignKey(Question, on_delete=models.CASCADE)
+    group_id    = models.IntegerField(default = 0)
+    user_id     = models.IntegerField(default = 0)
+    amount      = models.DecimalField(max_digits = 5, decimal_places = 2)
+    paid_bit     = models.BooleanField(default = False)
+    paypal_id    = models.CharField(max_length = 50)
+    paid_date    = models.DateTimeField(null = True)

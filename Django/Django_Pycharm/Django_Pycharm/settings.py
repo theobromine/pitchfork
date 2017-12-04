@@ -65,6 +65,7 @@ TEMPLATES = [
             ],
         },
     },
+
 ]
 
 WSGI_APPLICATION = 'Django_Pycharm.wsgi.application'
@@ -100,6 +101,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+AUTH_PROFILE_MODULE = 'content.UserProfile'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
