@@ -1,49 +1,53 @@
 {% extends 'webapp/base.html' %}
 
 {% block content %}
-	<!-- Include Date Range Picker -->
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
-	<h3 align="center">Let's Make a Group!</h3>
-	<div id="maingroup">
-		<form id="makegroup">
-  			<div class="form-group">
-    			<label for="eventname">Event Name:</label>
-    			<input type="text" class="form-control" id="eventname">
-  			</div>
-  			<div class="form-group">
-        		<label class="control-label" for="date">Event Date:</label>
-        		<input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
-      		</div>
-      		<!-- trying to find a timepicker -->
-      		<div class="form-group">
-    			<label for="time">Event Time:</label>
-    			<input type="text" class="form-control" id="time">
-  			</div>
-      		<div class="form-group">
-        		<label class="control-label" for="members">Guest List:</label>
-        		<textarea rows="4" class="form-control" id="members" type="text" placeholder="Enter emails separated by commas..." multiple></textarea>
-      		</div>
-      		<div class="form-group">
-        		<label class="control-label" for="message">Message:</label>
-        		<textarea rows="3" class="form-control" name="message" type="text" placeholder="Tell invitees a little more about the event..."></textarea>
-      		</div>
-  			<button type="submit" class="btn btn-lg">Submit</button>
-		</form>
-		
-	</div>
-	<script>
-    $(document).ready(function(){
-      var date_input=$('input[name="date"]');
-      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-      var options={
-        format: 'mm/dd/yyyy',
-        container: container,
-        todayHighlight: true,
-        autoclose: true,
-      };
-      date_input.datepicker(options);
-    })
-	</script>
+    <!-- Include Date Range Picker -->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+    <h3 align="center">Let's Make a Group!</h3>
+    <div id="maingroup">
+        <form id="makegroup">
+            <div class="form-group">
+                <label for="eventname">Event Name:</label>
+                <input type="text" class="form-control" id="eventname">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="date">Event Date:</label>
+                <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
+            </div>
+            <!-- trying to find a timepicker -->
+            <div class="form-group">
+                <label for="time">Event Time:</label>
+                <input type="text" class="form-control" id="time">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="members">Guest List:</label>
+                <textarea rows="4" class="form-control" id="members" type="text"
+                          placeholder="Enter emails separated by commas..." multiple></textarea>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="message">Message:</label>
+                <textarea rows="3" class="form-control" name="message" type="text"
+                          placeholder="Tell invitees a little more about the event..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-lg">Submit</button>
+        </form>
+
+    </div>
+    <script>
+        $(document).ready(function () {
+            var date_input = $('input[name="date"]');
+            var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+            var options = {
+                format: 'mm/dd/yyyy',
+                container: container,
+                todayHighlight: true,
+                autoclose: true,
+            };
+            date_input.datepicker(options);
+        })
+    </script>
 
 {% endblock %}

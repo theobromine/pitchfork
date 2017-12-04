@@ -1,9 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.decorators import login_required
-
-from webapp.paypal import execute_payment
 from .forms.forms import SignUpForm
 from .tokens import account_activation_token
 
@@ -107,7 +104,7 @@ def reg_user(request):
             user.save()
             current_site = get_current_site(request)
             subject = 'Activate Your MySite Account'
-            message = render_to_string('webapp/account_activation_email.html', {
+            message = render_to_string('webapp/account/account_activation_email.html', {
                 'user': user,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
@@ -140,7 +137,7 @@ def activate(request, uidb64, token):
 
 
 def account_activation_sent(request):
-    return render(request, 'webapp/account_activation_sent.html')
+    return render(request, 'webapp/account/account_activation_sent.html')
 
 
 def user_home(request):
