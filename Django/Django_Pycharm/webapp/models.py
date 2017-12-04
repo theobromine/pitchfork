@@ -43,6 +43,20 @@ def update_user_profile(sender, instance, created, **kwargs):
 class Test(models.Model):
     test = models.CharField(max_length=20)
 
+class Item(models.Model):
+    # Item Name
+    name        = models.CharField(max_length=50, blank=False)
+    # Item Price
+    price       = models.DecimalField(max_digits=8, decimal_places=2)
+    # Who is bringing the item.
+    pitched     = models.ForeignKey(User, on_delete=models.CASCADE)
+    # A link to a picture of the item
+    picture     = models.CharField(max_length=200, blank=True)
+    # Has the item been confirmed by the admin?
+    confirmed   = models.BooleanField(default=False)
+
+
+
 
 # use `WebSys`
 # # Migrated from PaypalAPI docs
