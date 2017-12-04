@@ -13,6 +13,71 @@ a:hover {
 	text-decoration: none;
 }
 
+.border {
+	border-width: 2px;
+	border-radius: 10px;
+	border-color: grey;
+	border-style: solid;
+}
+
+/*group home*/
+
+.ghome {
+	margin-top:5px;
+	background-color: white;
+	height: 600px;
+}
+
+.guestlist {
+	height: 450px;
+	background-color: #dbffeb;
+}
+
+.guestlist .guests {
+	height: 75%;
+	overflow: scroll;
+	background-color: white;
+}
+
+.guestlist button {
+	margin-top:10px;
+	display: block;
+	margin:auto;
+	padding: 10px;
+}
+
+.itemlist {
+	height: 450px;
+	background-color: #dbdfff;
+}
+
+.items {
+	height: 75%;
+	overflow: scroll;
+	background-color: white;
+}
+
+.itemtable button {
+	display: block;
+	margin:auto;
+}
+
+.pitchlist {
+	height: 450px;
+	background-color: #fae0ff;
+}
+
+.pitches {
+	height: 75%;
+	overflow: scroll;
+	background-color: white;
+}
+
+.pitchtable button {
+	display: block;
+	margin:auto;
+}
+
 /*new group*/
 
 #makegroup {
