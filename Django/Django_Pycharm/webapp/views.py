@@ -17,9 +17,9 @@ from webapp.models import Question, Choice
 from . import paypal
 
 
-def index(request):
-    reg_user(request)
-    return render(request, 'webapp/index.html', {'form': SignUpForm} )
+def index(request, message):
+    return reg_user(request)
+    # return render(request, 'webapp/index.html', {'form': SignUpForm, 'message'} )
 
 
 def detail(request, question_id):
@@ -101,23 +101,17 @@ def reg_user(request):
         if form.is_valid():
             print("salda")
             user = form.save(commit=False)
-            user.is_active = False
+            user.is_active = True
             user.save()
             # current_site = get_current_site(request)
-            # subject = 'Activate Your MySite Account'
-            # message = render_to_string('webapp/account/account_activation_email.html', {
-            #     'user': user,
-            #     'domain': current_site.domain,
-            #     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-            #     'token': account_activation_ token.make_token(user),
-            # })
             # user.email_user(subject, message)
             print("user")
-            return render(request, 'webapp/index.html', {'form': form, 'message':"Congrats! Please sign in or go to /base/"})
+            message = "Success!"
+            return render(request, 'webapp/index.html', {'form': form, 'message':message})
     else:
-        print("unot")
         form = SignUpForm()
-    return render(request, 'webapp/index.html', {'form': form, 'message':"test"})
+        message = ''
+    return render(request, 'webapp/index.html', {'form': form, 'message':message})
 
 
 def activate(request, uidb64, token):

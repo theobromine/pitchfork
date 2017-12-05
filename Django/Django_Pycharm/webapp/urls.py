@@ -7,7 +7,7 @@ from . import views
 from django.views.generic.base import TemplateView
 
 urlpatterns = [
-    url(r'^$', views.index, name="index"),
+    url(r'^$', views.index, {'message':""}, name="index"),
     # ex: /polls/5/
     url(r'^(?P<question_id>[0-9]+)/$', views.detail, name='detail'),
     # ex: /polls/5/results/
