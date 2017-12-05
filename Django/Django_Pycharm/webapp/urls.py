@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 
 from . import views
+from django.views.generic.base import TemplateView
 
 urlpatterns = [
     url(r'^$', views.index, name="index"),
@@ -30,6 +31,7 @@ urlpatterns = [
         views.activate, name='activate'),
 
     url(r'^userhome', views.user_home, name='userhome'),
+    url(r'^logout/$', auth_views.logout, name='logout'),
     url(r'^newgroup', views.new_group, name='newgroup'),
     url(r'^settings', views.settings, name='settings'),
     url(r'^grouphome/(?P<group_id>[0-9]+)', views.group_home, name='grouphome')

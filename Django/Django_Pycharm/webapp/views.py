@@ -12,14 +12,14 @@ from django.template.loader import render_to_string
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.contrib.auth.models import User
-
+from django.contrib.auth import login, authenticate
 from webapp.models import Question, Choice
 from . import paypal
 
 
 def index(request):
     reg_user(request)
-    return render(request, 'webapp/index.html', {'form': SignUpForm})
+    return render(request, 'webapp/index.html', {'form': SignUpForm, 'form2':login} )
 
 
 def detail(request, question_id):

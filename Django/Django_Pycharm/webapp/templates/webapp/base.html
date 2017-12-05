@@ -40,6 +40,14 @@
     {% if message %}
     <h3>{{ message }}</h3>
     {% endif %}
+
+    {% if user.is_authenticated %}
+      <h3>Hi {{ user.username }}!</h3>
+      <a href="{% url 'webapp:userhome' %}">Go to your home page by clicking here!!!!</a>
+          <a href="{% url 'webapp:logout' %}">Logout here!!!!!</a>
+    {% else %}
+    <h1> You are not logged in</h1>
+    {% endif %}
 </nav>
 
 {% block content %}If you are seeing this please contact a site administrator.{% endblock %}
