@@ -37,6 +37,9 @@
             <li><a href="{% url 'webapp:login' %}"><span class="glyphicon glyphicon-log-in"></span> LOGIN</a></li>
         </ul>
     </div>
+    {% if message %}
+    <h3>{{ message }}</h3>
+    {% endif %}
 </nav>
 
 {% block content %}If you are seeing this please contact a site administrator.{% endblock %}

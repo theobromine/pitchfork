@@ -103,17 +103,17 @@ def reg_user(request):
             user = form.save(commit=False)
             user.is_active = False
             user.save()
-            current_site = get_current_site(request)
-            subject = 'Activate Your MySite Account'
-            message = render_to_string('webapp/account/account_activation_email.html', {
-                'user': user,
-                'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': account_activation_token.make_token(user),
-            })
-            user.email_user(subject, message)
+            # current_site = get_current_site(request)
+            # subject = 'Activate Your MySite Account'
+            # message = render_to_string('webapp/account/account_activation_email.html', {
+            #     'user': user,
+            #     'domain': current_site.domain,
+            #     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+            #     'token': account_activation_ token.make_token(user),
+            # })
+            # user.email_user(subject, message)
             print("user")
-            return redirect('webapp/account_activation_sent.html')
+            return render(request, 'webapp/base.html', {'form': form, 'message':"Congrats! Please sign in or go to /base/"})
     else:
         print("unot")
         form = SignUpForm()
