@@ -22,10 +22,15 @@ a:hover {
 
 /*group home*/
 
+#additem {
+	margin-top: 10px;
+	padding:10px;
+}
+
 .ghome {
 	margin-top:5px;
 	background-color: white;
-	height: 600px;
+	height: 800px;
 }
 
 .guestlist {
@@ -37,6 +42,7 @@ a:hover {
 	height: 75%;
 	overflow: scroll;
 	background-color: white;
+	margin-bottom: 10px;
 }
 
 .guestlist button {
@@ -65,6 +71,7 @@ a:hover {
 .pitchlist {
 	height: 450px;
 	background-color: #fae0ff;
+	margin-bottom: 20px;
 }
 
 .pitches {
@@ -76,6 +83,18 @@ a:hover {
 .pitchtable button {
 	display: block;
 	margin:auto;
+}
+
+.grouppay {
+	margin-top:20px;
+	margin-left: 150px;
+	margin-right: 150px;
+	padding-bottom: 10px;
+	background-color: #ddfffa;
+}
+
+#paypal-b {
+	margin-left: 1px;
 }
 
 /*new group*/
