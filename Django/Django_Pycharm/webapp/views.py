@@ -94,6 +94,7 @@ def paytest(request):
 
 def reg_user(request):
     print('mango')
+
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         print("potato")

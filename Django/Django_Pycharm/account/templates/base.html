@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <meta charset="utf-8">
+    <!-- custom CSS-->
+    <link rel=stylesheet href="{% static 'account//index.css' %}"/>
+
+    <!-- Scripts specefic to a page go here -->
+        {% block scripts %}
+{% endblock %}
+
+    <title>Pitchfork</title>
+</head>
+
+<body>
+<!--nav bar-->
+<nav class="navbar">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="{% url 'webapp:index' %}"><img id="logo" src="{% static "webapp/pitchforklogo.jpg" %}"></a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url 'webapp:index' %}">HOME</a></li>
+            <li><a href="{% url 'webapp:faq' %}">FAQ</a></li>
+            <li><a href="{% url 'webapp:info' %}">INFO</a></li>
+            <li><a href="{% url 'webapp:contact' %}">CONTACT</a></li>
+            <li><a href="{% url 'webapp:reg_user' %}"><span class="glyphicon glyphicon-user"></span> SIGN UP</a></li>
+            <li><a href="{% url 'webapp:login' %}"><span class="glyphicon glyphicon-log-in"></span> LOGIN</a></li>
+        </ul>
+    </div>
+</nav>
+
+{% block content %}If you are seeing this please contact a site administrator.{% endblock %}
+</body>
+
+</html>
