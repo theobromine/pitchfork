@@ -67,7 +67,6 @@ class Item(models.Model):
     # Has the item been confirmed by the admin?
     confirmed = models.BooleanField(default=False)
 
-
 #
 class Payment(models.Model):
     payment_id = models.AutoField(primary_key=True)

@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from webapp.models import Item 
+from django.forms import ModelForm
 
 
 
@@ -11,4 +13,9 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('username', 'email', 'password1', 'password2',)
 
+
+class ItemForm(ModelForm):
+	class Meta:
+		model= Item
+		fields = '__all__'
 

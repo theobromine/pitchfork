@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 
 from django.contrib.auth import login, authenticate
-from .forms.forms import SignUpForm
+from .forms.forms import SignUpForm, ItemForm
 from .tokens import account_activation_token
 
 # Create your views here.
@@ -167,6 +167,17 @@ def paypal_return(request):
     payer_id = request.GET.get("PayerID", "")
     group_id = paypal.paypal_return(payment_id, payer_id)
     return redirect("./grouphome/" + str(group_id))
+
+def add(request):
+    if request.method == 'POST':
+        form = ItemForm(request.POST)
+        if form.is_valid():
+            form.save()
+    return render(request,"./grouphome/" + str(group_id), {
+        'form':ItemForm()
+        })
+
+
 
 # def reg_user(request):
 #     context = {}

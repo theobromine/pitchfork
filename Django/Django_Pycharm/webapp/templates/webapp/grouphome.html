@@ -46,7 +46,19 @@
   				</tr>
 			</table>
 			</div>
-			<button id="additem" type="button" class="btn btn-default btn-md"> Add an Item</button>
+			 <form action="../grouphome/{{group_id}}" method="post">{% csrf_token %}
+     			<p><label for="name">Item Name:</label><input type="text" name="name"/></p>
+     			<p><label for="price">Price:</label><input type="text" name="name"/></p>
+    			<input type="submit" value="Submit"/>
+ 			</form>
+			<button id="additem" type="button" class="btn btn-default btn-md" onclick=""> Add an Item</button>
+			
+			<form action="../grouphome/{{group_id}}" method="post">
+    			<label for="your_name">Your name: </label>
+    			<input id="your_name" type="text" name="your_name" value="{{ current_name }}">
+    			<input type="submit" value="OK">
+			</form>
+
 		</div>
 		<div class="col-md-3 border pitchlist">
 			<h4 align="center">My Pitches</h4>
