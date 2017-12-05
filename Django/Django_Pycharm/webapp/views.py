@@ -19,7 +19,7 @@ from . import paypal
 
 def index(request):
     reg_user(request)
-    return render(request, 'webapp/index.html', {'form': SignUpForm, 'form2':login} )
+    return render(request, 'webapp/index.html', {'form': SignUpForm} )
 
 
 def detail(request, question_id):
@@ -113,11 +113,11 @@ def reg_user(request):
             # })
             # user.email_user(subject, message)
             print("user")
-            return render(request, 'webapp/base.html', {'form': form, 'message':"Congrats! Please sign in or go to /base/"})
+            return render(request, 'webapp/index.html', {'form': form, 'message':"Congrats! Please sign in or go to /base/"})
     else:
         print("unot")
         form = SignUpForm()
-    return render(request, 'webapp/signup.html', {'form': form})
+    return render(request, 'webapp/index.html', {'form': form, 'message':"test"})
 
 
 def activate(request, uidb64, token):

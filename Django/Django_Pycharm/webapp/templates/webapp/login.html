@@ -1,12 +1,12 @@
 {% block content %}
   <h2>Log in to My Site</h2>
-  {% if form2.errors %}
+  {% if form.errors %}
     <p style="color: red">Your username and password didn't match. Please try again.</p>
   {% endif %}
   <form method="post">
     {% csrf_token %}
     <input type="hidden" name="next" value="{{ next }}" />
-    {% for field in form2 %}
+    {% for field in form %}
       <p>
         {{ field.label_tag }}<br>
         {{ field }}<br>
