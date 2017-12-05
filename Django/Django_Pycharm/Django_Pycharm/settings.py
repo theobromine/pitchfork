@@ -126,13 +126,13 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
 STATICFILES_DIRS = (
-            os.path.join(BASE_DIR, 'staticfiles'),
-            )
+    os.path.join(BASE_DIR, 'account/staticfiles'),
+    os.path.join(BASE_DIR, 'webapp/staticfiles'),
+)
 
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-
 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'webapp/staticfiles')
 
@@ -141,4 +141,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 LOGIN_REDIRECT_URL = reverse_lazy('dashboard')
 LOGIN_URL = reverse_lazy('login')
 LOGOUT_URL = reverse_lazy('logout')
-

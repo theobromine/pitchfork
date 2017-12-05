@@ -1,5 +1,5 @@
+{% load staticfiles %}
 <!DOCTYPE html>
-{% load static %}
 <html lang="en">
 <head>
     <!-- Latest compiled and minified CSS -->
@@ -12,11 +12,11 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <meta charset="utf-8">
     <!-- custom CSS-->
-    <link rel=stylesheet href="{% static 'account//index.css' %}"/>
+    <link rel=stylesheet href="{% static 'webapp/index.css' %}"/>
 
     <!-- Scripts specefic to a page go here -->
-        {% block scripts %}
-{% endblock %}
+    {% block scripts %}
+    {% endblock %}
 
     <title>Pitchfork</title>
 </head>
