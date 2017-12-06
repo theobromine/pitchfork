@@ -118,7 +118,7 @@ def group_home(request, group_id):
     except:
         group_admin = None
 
-    if group_admin != None:
+    if group_admin is not None:
         is_admin = True
     else:
         is_admin = False
@@ -146,7 +146,7 @@ def invoice_confirmation(request, group_id):
     except:
         group_admin = None
 
-    if group_admin != None:
+    if group_admin is not None:
         is_admin = True
     else:
         is_admin = False
@@ -154,7 +154,7 @@ def invoice_confirmation(request, group_id):
     is_admin = is_admin | request.user.is_staff
     status = paypal.get_group_payment_statuses(user_id, group_id)
 
-    if is_admin != True or status["all_confirmed"] != True or status["group_invoiced_date"] != None:
+    if (is_admin is not True) or (status["all_confirmed"] is not True) or (status["group_invoiced_date"] is not None):
         return redirect("../grouphome/" + str(group_id))
 
     results = paypal.invoice_confirmation(group_id, request.build_absolute_uri("/paypal_return"))

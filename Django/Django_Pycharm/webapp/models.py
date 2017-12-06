@@ -1,12 +1,9 @@
-import datetime
-
-from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User, Group
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+
+
 # Create your models here.
-from django.utils import timezone
+
 
 # @receiver(post_save, sender=User)
 # def create_user_profile(sender, instance, created, **kwargs):
@@ -31,7 +28,7 @@ class Item(models.Model):
     # Who is bringing the item.
     pitched = models.ForeignKey(User, on_delete=models.CASCADE)
     # A link to a picture of the item
-    picture = models.CharField(max_length=200, blank=True)
+    picture = models.ImageField(upload_to='item/%Y/%m/%d', blank=True)
     # Has the item been confirmed by the admin?
     confirmed = models.BooleanField(default=False)
     group = models.ForeignKey(Group, on_delete=models.CASCADE)

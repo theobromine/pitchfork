@@ -1,9 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from webapp.models import Item 
+from webapp.models import Item
 from django.forms import ModelForm
-
 
 
 class SignUpForm(UserCreationForm):
@@ -15,7 +14,6 @@ class SignUpForm(UserCreationForm):
 
 
 class ItemForm(ModelForm):
-	class Meta:
-		model= Item
-		fields = '__all__'
-
+    class Meta:
+        model = Item
+        fields = '__all__'
