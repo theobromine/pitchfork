@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 
 from django.contrib.auth import login, authenticate
@@ -13,7 +14,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
-from webapp.models import GroupAdmin
+from webapp.models import GroupAdmin, Item
 from . import paypal
 
 
@@ -125,8 +126,9 @@ def group_home(request, group_id):
 
     is_admin = is_admin | request.user.is_staff
     status = paypal.get_group_payment_statuses(user_id, group_id)
+    items = Item.objects.filter(group_id=group_id)
     context = {"group_id": group_id, "is_admin": is_admin,
-               "status": status, }  # checks if they are an admin and displays only if they are.
+               "status": status, "items": items}  # checks if they are an admin and displays only if they are.
     return render(request, 'webapp/grouphome.html', context)
 
 
@@ -177,6 +179,11 @@ def add(request):
     return render(request, "./grouphome/" + str(group_id), {
         'form': ItemForm()
     })
+
+
+@login_required
+def test(request):
+    return render(request, 'webapp/test.html')
 
 # def reg_user(request):
 #     context = {}

@@ -7,7 +7,7 @@ from . import views
 from django.views.generic.base import TemplateView
 
 urlpatterns = [
-    url(r'^$', views.index, {'message':""}, name="index"),
+    url(r'^$', views.index, {'message': ""}, name="index"),
     # ex: /polls/5/
     url(r'^faq$', views.faq, name='faq'),
     url(r'^info', views.info, name='info'),
@@ -29,7 +29,8 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout, name='logout'),
     url(r'^newgroup', views.new_group, name='newgroup'),
     url(r'^settings', views.settings, name='settings'),
-    url(r'^grouphome/(?P<group_id>[0-9]+)', views.group_home, name='grouphome')
+    url(r'^grouphome/(?P<group_id>[0-9]+)', views.group_home, name='grouphome'),
+    url(r'^test', views.test, name='test')
 
 ]
 

@@ -138,6 +138,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 
 # Sets the login logout URL
-LOGIN_REDIRECT_URL = reverse_lazy('dashboard')
-LOGIN_URL = reverse_lazy('login')
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/login'
 LOGOUT_URL = reverse_lazy('logout')
