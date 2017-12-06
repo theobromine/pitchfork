@@ -91,3 +91,14 @@ class Payout(models.Model):
     paid_bit = models.BooleanField(default=False)
     paypal_id = models.CharField(max_length=50)
     paid_date = models.DateTimeField(null=True)
+    
+    
+class UserContribution(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, primary_key = True)
+    username = models.TextField()
+    contribution = models.DecimalField(max_digits=5, decimal_places=2)
+    email = models.TextField()
+    
+class Meta:
+    managed = False
+    

@@ -70,7 +70,7 @@ def paytest(request):
         receiver_email = request.POST.get('receiverEmail', "")
         reimbursement_amount = request.POST.get('reimbursementAmount', "")
         if payment_amount != "":
-            paypal_id = paypal.create_payment(payment_amount, True)
+            paypal_id = paypal.create_payment(payment_amount, request.build_absolute_uri())
             approval_url = paypal.get_payment_url(paypal_id)
             return redirect(approval_url)
         else:
@@ -171,7 +171,7 @@ def settings(request):
 
 
 def invoice_confirmation(request, group_id):
-    results = paypal.invoice_confirmation(group_id)
+    results = paypal.invoice_confirmation(group_id, request.build_absolute_uri("/paypal_return"))
     context = {"results": results, "group_id": group_id}
     return render(request, 'webapp/invoice_confirmation.html', context)
 

@@ -82,8 +82,8 @@
 			</table>
 			</div>
 			 <form action="../grouphome/{{group_id}}" method="post">{% csrf_token %}
-     			<p><label for="name">Item Name:</label><input type="text" name="name"/></p>
-     			<p><label for="price">Price:</label><input type="text" name="name"/></p>
+     			<p><label for="name">Item Name:&nbsp;</label><input type="text" name="name"/></p> <!--"&nbsp;" Adds a literal space-->
+     			<p><label for="price">Price:&nbsp;</label><input type="text" name="name"/></p>
     			<input type="submit" value="Submit"/>
  			</form>
 			<button id="additem" type="button" class="btn btn-default btn-md" onclick=""> Add an Item</button>
