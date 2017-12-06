@@ -2,7 +2,7 @@ import datetime
 
 from django.conf import settings
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 # Create your models here.
@@ -54,7 +54,11 @@ class Choice(models.Model):
 # def save_user_profile(sender, instance, **kwargs):
 #     instance.profile.save()
 
+class GroupAdmin(models.Model):
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    
 class Item(models.Model):
     # Item Name
     name = models.CharField(max_length=50, blank=False)
@@ -66,13 +70,13 @@ class Item(models.Model):
     picture = models.CharField(max_length=200, blank=True)
     # Has the item been confirmed by the admin?
     confirmed = models.BooleanField(default=False)
-
-#
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    
+    
 class Payment(models.Model):
     payment_id = models.AutoField(primary_key=True)
-    # GroupId     = models.ForeignKey(Question, on_delete=models.CASCADE)
-    group_id = models.IntegerField(default=0)
-    user_id = models.IntegerField(default=0)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=5, decimal_places=2)
     paid_bit = models.BooleanField(default=False)
     paypal_id = models.CharField(max_length=50)
@@ -81,9 +85,8 @@ class Payment(models.Model):
 
 class Payout(models.Model):
     payout_id = models.AutoField(primary_key=True)
-    # GroupId     = models.ForeignKey(Question, on_delete=models.CASCADE)
-    group_id = models.IntegerField(default=0)
-    user_id = models.IntegerField(default=0)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=5, decimal_places=2)
     paid_bit = models.BooleanField(default=False)
     paypal_id = models.CharField(max_length=50)

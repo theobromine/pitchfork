@@ -121,9 +121,9 @@ def generate_sender_batch_id():
 
 def invoice_confirmation(group_id):
     # TODO Sample Data, delete after database is set up, Currently hard coded.
-    user_contributions = [{"user_id": "user1@email.com", "contribution": 3},
-                          {"user_id": "user2@email.com", "contribution": 0},
-                          {"user_id": "user3@email.com", "contribution": 6}]
+    user_contributions = [{"user_id": 1, "username": "NameOfUser1", "email": "user1@email.com", "contribution": 3}, 
+                          {"user_id": 2, "username": "NameOfUser1", "email": "user2@email.com", "contribution": 0}, 
+                          {"user_id": 3, "username": "NameOfUser1", "email": "user3@email.com", "contribution": 6},]
     total_group_contribution = 0
     for user_contribution in user_contributions:
         total_group_contribution += user_contribution["contribution"]
@@ -141,12 +141,12 @@ def invoice_confirmation(group_id):
             # receiverEmail and user_id are the same thing.
             # senderItemID = user_id+"-"+group_id.
 
-            payout_id = create_payout(group_id, user_contribution["contribution"] - cost_per_user,
-                                      user_contribution["user_id"],
-                                      user_contribution["user_id"] + "-" + group_id)
+            payout_id = create_payout(group_id + "-" + generate_sender_batch_id(), user_contribution["contribution"] - cost_per_user,
+                                      user_contribution["email"],
+                                      str(user_contribution["user_id"]) + "-" + group_id)
             if payout_id is not None:
                 results["payouts"] = results["payouts"] + 1
-                payout = Models_payout(group_id=group_id, user_id=index, amount=user_contribution["difference"],
+                payout = Models_payout(group_id = group_id, user_id = user_contribution["user_id"], amount=user_contribution["difference"],
                                        # TODO change back to user_contribution["user_id"], Hard set
                                        paid_bit=True, paypal_id=payout_id, paid_date=datetime.datetime.now())
                 payout.save()
@@ -158,7 +158,7 @@ def invoice_confirmation(group_id):
 
             if payment_id is not None:
                 results["payments"] = results["payments"] + 1
-                payment = Models_payment(group_id=group_id, user_id=index,
+                payment = Models_payment(group_id = group_id, user_id = user_contribution["user_id"],
                                          amount=user_contribution["difference_non_neg"],
                                          # TODO change back to user_contribution["user_id"], Hard set
                                          paid_bit=False, paypal_id=payment_id, paid_date=None)

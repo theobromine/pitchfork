@@ -13,7 +13,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
-from webapp.models import Question, Choice
+from webapp.models import GroupAdmin
 from . import paypal
 
 
@@ -140,8 +140,22 @@ def user_home(request):
 
 
 def group_home(request, group_id):
-    user_id = 2  # TODO get currently logged in user, Currently hard coded.
-    is_admin = True  # TODO is_admin is currently hard coded.
+    user_id = request.user.id
+    print(group_id)
+    
+    try:
+        group_admin = GroupAdmin.objects.get(group_id=group_id, user_id=user_id)
+    except:
+        group_admin = None 
+    
+        
+    if group_admin != None:
+        is_admin = True
+    else:
+        is_admin = False
+    
+    is_admin = is_admin | request.user.is_staff  
+    #is_admin = False #Test
     status = paypal.get_group_payment_statuses(user_id, group_id)
     context = {"group_id": group_id, "is_admin": is_admin,
                "status": status, }  # checks if they are an admin and displays only if they are.

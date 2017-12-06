@@ -1,7 +1,7 @@
 {% extends 'webapp/base.html' %}
 
 {% block content %}
-
+<div id="Invoice_Confirmation">
 
 	<h1>Invoice Confirmation</h1>
 	<!-- Payouts: {{results.payouts}}<br>
@@ -12,11 +12,11 @@
 	Cost Per User: {{results.cost}} !-->
 
 Total Cost: ${{results.total_group_contribution|floatformat:2}} <br>
-Users: {{results.total}} <br>
+Number of Users: {{results.total}} <br>
 Cost Per User: ${{results.cost|floatformat:2}} <br><br>
 
 {% for user_contribution in results.user_contributions %}
-{{user_contribution.user_id}} contributed ${{user_contribution.contribution|floatformat:2}}, 
+{{user_contribution.username}} contributed ${{user_contribution.contribution|floatformat:2}}, 
 
 {% if user_contribution.difference < 0 %} <!-- Payment owed -->
 	they were billed ${{user_contribution.difference_non_neg|floatformat:2}}.
@@ -28,6 +28,6 @@ Cost Per User: ${{results.cost|floatformat:2}} <br><br>
 {% endfor %} <br>
 
 <form action="../grouphome/{{group_id}}"><input type="submit" value="Back to Group"></input></form>  
-
+</div>
 
 {% endblock %}
