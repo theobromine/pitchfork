@@ -141,7 +141,6 @@ def user_home(request):
 
 def group_home(request, group_id):
     user_id = request.user.id
-    print(group_id)
     
     try:
         group_admin = GroupAdmin.objects.get(group_id=group_id, user_id=user_id)
@@ -155,7 +154,6 @@ def group_home(request, group_id):
         is_admin = False
     
     is_admin = is_admin | request.user.is_staff  
-    #is_admin = False #Test
     status = paypal.get_group_payment_statuses(user_id, group_id)
     context = {"group_id": group_id, "is_admin": is_admin,
                "status": status, }  # checks if they are an admin and displays only if they are.
@@ -171,6 +169,26 @@ def settings(request):
 
 
 def invoice_confirmation(request, group_id):
+    user_id = request.user.id
+    
+    try:
+        group_admin = GroupAdmin.objects.get(group_id=group_id, user_id=user_id)
+    except:
+        group_admin = None 
+    
+        
+    if group_admin != None:
+        is_admin = True
+    else:
+        is_admin = False
+    
+    is_admin = is_admin | request.user.is_staff  
+    status = paypal.get_group_payment_statuses(user_id, group_id)
+    
+    if is_admin != True or status["all_confirmed"] != True or status["group_invoiced_date"] != None:
+        return redirect("../grouphome/" + str(group_id))
+    
+    
     results = paypal.invoice_confirmation(group_id, request.build_absolute_uri("/paypal_return"))
     context = {"results": results, "group_id": group_id}
     return render(request, 'webapp/invoice_confirmation.html', context)
