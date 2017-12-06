@@ -6,6 +6,7 @@ from webapp.models import UserContribution as Models_UserContribution
 from webapp.models import Payout as Models_payout
 from webapp.models import Payment as Models_payment
 from paypalrestsdk import Payment, Payout, ResourceNotFound
+from webapp.models import Item as Models_item
 
 
 def configure_paypal():
@@ -208,7 +209,16 @@ def get_group_payment_statuses(user_id, group_id):
     payment_amount = None
     payment_date = None
     group_payouts = Models_payout.objects.filter(group_id=group_id)
-
+    all_confirmed = False
+    
+    unconfirmed_items = Models_item.objects.filter(group_id = group_id, confirmed = False)
+    
+    if unconfirmed_items.count() == 0:
+        all_confirmed = True
+    else:
+        all_confirmed = False
+    print (all_confirmed)
+    
     if group_payouts.count() > 0:
         group_invoiced_date = group_payouts[0].paid_date
     else:
@@ -230,7 +240,7 @@ def get_group_payment_statuses(user_id, group_id):
 
     status = {"paypal_url": paypal_url, "reimbursement_date": reimbursement_date,
               "reimbursement_amount": reimbursement_amount, "payment_amount": payment_amount,
-              "payment_date": payment_date, "group_invoiced_date": group_invoiced_date}
+              "payment_date": payment_date, "group_invoiced_date": group_invoiced_date, "all_confirmed": all_confirmed}
 
     return status
 

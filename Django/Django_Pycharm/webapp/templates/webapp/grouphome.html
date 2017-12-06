@@ -26,9 +26,14 @@
 			{% if is_admin %}
 			<div  class="grouppay border" style="clear:both;text-align:center">
 					<h4>Admin Privileges</h4>
+					{% if status.all_confirmed %}
+					
 					<form action="../invoice_confirmation/{{group_id}}">
 						<button id="paypal-b" type="submit" class="btn btn-default btn-md">Send to Paypal</button>
 					</form>
+					{% else %}
+						<span>All items must be confirmed before sending to PayPal.</span>
+					{% endif %}
 			</div>			
 			{% endif %}
 			
