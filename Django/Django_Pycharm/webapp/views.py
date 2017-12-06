@@ -22,35 +22,6 @@ def index(request, message):
     # return render(request, 'webapp/index.html', {'form': SignUpForm, 'message'} )
 
 
-def detail(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'webapp/detail.html', {'question': question})
-
-
-def results(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'webapp/results.html', {'question': question})
-
-
-def vote(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    try:
-        selected_choice = question.choice_set.get(pk=request.POST['choice'])
-    except (KeyError, Choice.DoesNotExist):
-        # Redisplay the question voting form.
-        return render(request, 'webapp/detail.html', {
-            'question': question,
-            'error_message': "You didn't select a choice.",
-        })
-    else:
-        selected_choice.votes += 1
-        selected_choice.save()
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
-        return HttpResponseRedirect(reverse('webapp:results', args=(question.id,)))
-
-
 def faq(request):
     return render(request, 'webapp/faq.html')
 
@@ -107,11 +78,11 @@ def reg_user(request):
             # user.email_user(subject, message)
             print("user")
             message = "Success!"
-            return render(request, 'webapp/index.html', {'form': form, 'message':message})
+            return render(request, 'webapp/index.html', {'form': form, 'message': message})
     else:
         form = SignUpForm()
         message = ''
-    return render(request, 'webapp/index.html', {'form': form, 'message':message})
+    return render(request, 'webapp/index.html', {'form': form, 'message': message})
 
 
 def activate(request, uidb64, token):
@@ -141,19 +112,18 @@ def user_home(request):
 
 def group_home(request, group_id):
     user_id = request.user.id
-    
+
     try:
         group_admin = GroupAdmin.objects.get(group_id=group_id, user_id=user_id)
     except:
-        group_admin = None 
-    
-        
+        group_admin = None
+
     if group_admin != None:
         is_admin = True
     else:
         is_admin = False
-    
-    is_admin = is_admin | request.user.is_staff  
+
+    is_admin = is_admin | request.user.is_staff
     status = paypal.get_group_payment_statuses(user_id, group_id)
     context = {"group_id": group_id, "is_admin": is_admin,
                "status": status, }  # checks if they are an admin and displays only if they are.
@@ -170,25 +140,23 @@ def settings(request):
 
 def invoice_confirmation(request, group_id):
     user_id = request.user.id
-    
+
     try:
         group_admin = GroupAdmin.objects.get(group_id=group_id, user_id=user_id)
     except:
-        group_admin = None 
-    
-        
+        group_admin = None
+
     if group_admin != None:
         is_admin = True
     else:
         is_admin = False
-    
-    is_admin = is_admin | request.user.is_staff  
+
+    is_admin = is_admin | request.user.is_staff
     status = paypal.get_group_payment_statuses(user_id, group_id)
-    
+
     if is_admin != True or status["all_confirmed"] != True or status["group_invoiced_date"] != None:
         return redirect("../grouphome/" + str(group_id))
-    
-    
+
     results = paypal.invoice_confirmation(group_id, request.build_absolute_uri("/paypal_return"))
     context = {"results": results, "group_id": group_id}
     return render(request, 'webapp/invoice_confirmation.html', context)
@@ -200,16 +168,15 @@ def paypal_return(request):
     group_id = paypal.paypal_return(payment_id, payer_id)
     return redirect("./grouphome/" + str(group_id))
 
+
 def add(request):
     if request.method == 'POST':
         form = ItemForm(request.POST)
         if form.is_valid():
             form.save()
-    return render(request,"./grouphome/" + str(group_id), {
-        'form':ItemForm()
-        })
-
-
+    return render(request, "./grouphome/" + str(group_id), {
+        'form': ItemForm()
+    })
 
 # def reg_user(request):
 #     context = {}
