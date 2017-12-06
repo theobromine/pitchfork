@@ -86,10 +86,11 @@ a:hover {
 }
 
 .grouppay {
-	margin-top:20px;
+	margin-top:10px;
 	margin-left: 150px;
 	margin-right: 150px;
 	padding-bottom: 10px;
+	margin-bottom: 10px;
 	background-color: #ddfffa;
 }
 

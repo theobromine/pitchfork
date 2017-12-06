@@ -1,8 +1,42 @@
 {% extends 'webapp/base.html' %}
 
 {% block content %}
+
+			{% if status.group_invoiced_date != None %}
+		<div  class="grouppay border" style="clear:both;text-align:center">
+			{% if status.reimbursement_date != None %} {# User needs a Reimbursement #}
+					<span>Your reimbursement was paid on {{status.reimbursement_date}} for ${{status.reimbursement_amount}}.</span>
+
+			{% elif status.paypal_url != None %} {# User needs to make a payment #}
+					<span>Your payment of ${{status.payment_amount}} was due as of {{status.group_invoiced_date}}</span><br> 
+					<input type="submit" value="Make a Payment" onclick="window.location='{{status.paypal_url}}'"></input>
+				
+			{% elif status.payment_date != None %} {# User is paid in full #}
+					<span>Your payment was made on {{status.payment_date}} for ${{status.payment_amount}}, you are all set.</span>
+				
+			{% else %} {# User didnt need to pay in #}
+					<span>You contributed your fair share to the group, you are all set.</span>
+			
+			{% endif %}	
+			</div>
+		{% else %}
+			{% if is_admin %}
+			<div  class="grouppay border" style="clear:both;text-align:center">
+					<h4>Admin Privileges</h4>
+					{% if status.all_confirmed %}
+					
+					<form action="../invoice_confirmation/{{group_id}}">
+						<button id="paypal-b" type="submit" class="btn btn-default btn-md">Send to Paypal</button>
+					</form>
+					{% else %}
+						<span>All items must be confirmed before sending to PayPal.</span>
+					{% endif %}
+			</div>			
+			{% endif %}
+			
+		{% endif %}
+
 	<h3 align="center">Group Home</h3>
-	
 	<div class="col-md-1"></div>
 	<div class="col-md-10 ghome border">
 		<h4 align="center">Event Name</h4>
@@ -82,7 +116,7 @@
       				<div class="modal-body">
         				<form action="../grouphome/{{group_id}}" method="post">{% csrf_token %}
      						<p><label for="name">Item Name:&nbsp;</label><input type="text" name="name"/></p> <!--"&nbsp;" Adds a literal space-->
-     						<p><label for="price">Price:&nbsp;</label><input type="text" name="name"/></p>
+     						<p><label for="price">Price:&nbsp;$</label><input type="text" name="name"/></p>
     						<button type="submit" class="btn btn-info btn-lg" data-dismiss="modal">Add Item</button>
  						</form>
       				</div>
@@ -92,12 +126,6 @@
     			</div>
   				</div>
 			</div>
-			<form action="../grouphome/{{group_id}}" method="post">
-    			<label for="your_name">Your name: </label>
-    			<input id="your_name" type="text" name="your_name" value="{{ current_name }}">
-    			<input type="submit" value="OK">
-			</form>
-
 		</div>
 		<div class="col-md-3 border pitchlist">
 			<h4 align="center">My Pitches</h4>
@@ -116,42 +144,6 @@
 			</table>
 			</div>
 		</div>
-
-		{% if status.group_invoiced_date != None %}
-		<div  class="grouppay border" style="clear:both;text-align:center">
-			{% if status.reimbursement_date != None %} {# User needs a Reimbursement #}
-					<span>Your reimbursement was paid on {{status.reimbursement_date}} for ${{status.reimbursement_amount}}.</span>
-
-			{% elif status.paypal_url != None %} {# User needs to make a payment #}
-					<span>Your payment of ${{status.payment_amount}} was due as of {{status.group_invoiced_date}}</span><br> 
-					<input type="submit" value="Make a Payment" onclick="window.location='{{status.paypal_url}}'"></input>
-				
-			{% elif status.payment_date != None %} {# User is paid in full #}
-					<span>Your payment was made on {{status.payment_date}} for ${{status.payment_amount}}, you are all set.</span>
-				
-			{% else %} {# User didnt need to pay in #}
-					<span>You contributed your fair share to the group, you are all set.</span>
-			
-			{% endif %}	
-			</div>
-		{% else %}
-			{% if is_admin %}
-			<div  class="grouppay border" style="clear:both;text-align:center">
-					<h4>Admin Privileges</h4>
-					{% if status.all_confirmed %}
-					
-					<form action="../invoice_confirmation/{{group_id}}">
-						<button id="paypal-b" type="submit" class="btn btn-default btn-md">Send to Paypal</button>
-					</form>
-					{% else %}
-						<span>All items must be confirmed before sending to PayPal.</span>
-					{% endif %}
-			</div>			
-			{% endif %}
-			
-		{% endif %}
-
-		
 		
 </div>
 <div class="col-md-1"></div>
