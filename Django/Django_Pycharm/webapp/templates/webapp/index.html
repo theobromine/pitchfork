@@ -1,19 +1,24 @@
 {% extends 'webapp/base.html' %}
 
 {% block content %}
-<h2 align="center"><b>Welcome to Pitchfork!</b></h2>
-<div align="center" class="border index-content">
+
+
+
+{% include "webapp/bg.html" %}
+<div class="row mainpage">
+    <div class="border signup" class="col-md-10">
+        <div align="center">
+            <h2 align="center"><b>Welcome to Pitchfork!</b></h2>
+
 	<b><p>Have you ever gone crazy trying to plan a group event?</p>
 	<p>Did anyone bring the hotdogs?</p>
 	<p>Sally didn't pitch in for anything!</p>
 	<p>How will we ever split up costs evenly!?</p>
 	<p>Pitchfork is here to help</p>
-	<p>Sign Up below</p>
-	<h4><a href="{% url 'webapp:info' %}">OR click here to learn more</a></h4></b>
-</div>
+	<h2>Sign Up below</h2>
 
-<div class="row mainpage">
-    <div class="border signup" class="col-md-10">
+	<h4><a href="{% url 'webapp:info' %}">OR click here to learn more</a></h4></b>
+    </div>
         <h3 align="center">Pitchfork Sign Up</h3>
          {% include "webapp/signup.html" %}
 
