@@ -107,6 +107,9 @@
                         <td>{{ item.pitched }}</td>
                         <td><button type="button" class="btn btn-success"> Edit</button></td>
                         <td><button type="button" class="btn btn-danger"> Delete</button></td>
+			            {% if is_admin %}
+                            <td>{{ item.picture }}</td>
+                        {% endif %}
                         </tr>
                     {% endfor %}
 			</table>
