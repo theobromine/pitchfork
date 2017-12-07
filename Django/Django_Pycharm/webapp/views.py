@@ -18,23 +18,27 @@ from webapp.models import GroupAdmin, Item
 from . import paypal
 
 
-def index(request, message):
+def index(request):
     return reg_user(request)
     # return render(request, 'webapp/index.html', {'form': SignUpForm, 'message'} )
 
 
+@login_required
 def faq(request):
     return render(request, 'webapp/faq.html')
 
 
+@login_required
 def info(request):
     return render(request, 'webapp/info.html')
 
 
+@login_required
 def contact(request):
     return render(request, 'webapp/contact.html')
 
 
+@login_required
 def paytest(request):
     message = ""
     if request.method == "POST":
@@ -84,6 +88,7 @@ def reg_user(request):
     return render(request, 'webapp/index.html', {'form': form, 'message': message})
 
 
+@login_required
 def activate(request, uidb64, token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
@@ -101,6 +106,7 @@ def activate(request, uidb64, token):
         return render(request, 'webapp/account/account_activation_email.html')
 
 
+@login_required
 def account_activation_sent(request):
     return render(request, 'webapp/account/account_activation_sent.html')
 
@@ -159,14 +165,17 @@ def group_home(request, group_id):
     return render(request, 'webapp/grouphome.html', context)
 
 
+@login_required
 def new_group(request):
     return render(request, 'webapp/newgroup.html')
 
 
+@login_required
 def settings(request):
     return render(request, 'webapp/settings.html')
 
 
+@login_required
 def invoice_confirmation(request, group_id):
     user_id = request.user.id
 
@@ -191,6 +200,7 @@ def invoice_confirmation(request, group_id):
     return render(request, 'webapp/invoice_confirmation.html', context)
 
 
+@login_required
 def paypal_return(request):
     payment_id = request.GET.get("paymentId", "")
     payer_id = request.GET.get("PayerID", "")
@@ -198,6 +208,7 @@ def paypal_return(request):
     return redirect("../grouphome/" + str(group_id))
 
 
+@login_required
 def add(request):
     if request.method == 'POST':
         print("here")
