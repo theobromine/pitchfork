@@ -5,7 +5,7 @@
     {% if status.group_invoiced_date != None %}
         <div class="grouppay border" style="clear:both;text-align:center">
             {% if status.reimbursement_date != None %} {# User needs a Reimbursement #}
-                <span>Your reimbursement was paid on {{ status.reimbursement_date }} for ${{ status.reimbursement_amount }}.</span>
+                <span>Your reimbursement was paid on {{ status.reimbursement_date }} for ${{ status.reimbursement_amount }}, you are all set.</span>
 
             {% elif status.paypal_url != None %} {# User needs to make a payment #}
                 <span>Your payment of ${{ status.payment_amount }} was due as of {{ status.group_invoiced_date }}</span>
