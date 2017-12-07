@@ -30,10 +30,9 @@
         </div>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="{% url 'webapp:index' %}">HOME</a></li>
-            <li><a href="{% url 'webapp:info' %}">INFO</a></li>
             <li><a href="{% url 'webapp:contact' %}">CONTACT</a></li>
-            <li><a href="{% url 'webapp:reg_user' %}"><span class="glyphicon glyphicon-user"></span> SIGN UP</a></li>
-            <li><a href="{% url 'webapp:login' %}"><span class="glyphicon glyphicon-log-in"></span> LOGIN</a></li>
+            <li><a href="{% url 'webapp:userhome' %}">USER HOME</a></li>
+            <li><a href="{% url 'webapp:logout' %}">LOGOUT</a></span></li>
         </ul>
     </div>
     {% if message %}
@@ -41,10 +40,8 @@
     {% endif %}
 
     {% if user.is_authenticated %}
-    <div>
+    <div align="right">
         <p>Hi {{ user.username }}!</p>
-        <a href="{% url 'webapp:userhome' %}">Go to your home page by clicking here!!!!</a>
-        <a href="{% url 'webapp:logout' %}">Logout here!!!!!</a>
     </div>
     {% else %}
 
