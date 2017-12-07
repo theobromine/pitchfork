@@ -96,15 +96,16 @@
                             <td>{{ item.name }}</td>
                             <td>{{ item.price }}</td>
                             <td>{{ item.pitched }}</td>
-                            <td>
-                                <button type="button" class="btn btn-success"> Edit</button>
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-danger"> Delete</button>
-                            </td>
+
                             {% if is_admin and item.confirmed %}
+                                <td><button type="button" class="btn btn-success"> Edit</button></td>
+                                <td><button type="button" class="btn btn-danger"> Delete</button></td>
                                 <td><img src="{{ item.picture.url }}" alt="" width="100"></td>
+                            {% else %}
+                                <td></td>
+                                <td></td>
                             {% endif %}
+
                             {% if item.confirmed %}
                                 <td>Pitched by {{ item.pitched.username }}</td>
                             {% else %}
@@ -138,16 +139,16 @@
                             <h4 class="modal-title">Add an Item</h4>
                         </div>
                         <div class="modal-body">
-                            <form action="../grouphome/{{ group_id }}" method="post">
-                                {% csrf_token %}
-                                <p><label for="name">Item Name:&nbsp;</label><input type="text" name="name"/></p>
-                                <!--"&nbsp;" Adds a literal space-->
-                                <p><label for="price">Price:&nbsp;$</label><input type="text" name="name"/></p>
-                                <button type="submit" class="btn btn-info btn-lg" data-dismiss="modal">Add Item</button>
-                            </form>
+
+                        <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit">Add item</button>
+                        </form>
+
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-default" data-dismiss="modal">Cancel</button>
                         </div>
                     </div>
                 </div>

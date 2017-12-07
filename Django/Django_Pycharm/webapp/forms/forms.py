@@ -16,7 +16,7 @@ class SignUpForm(UserCreationForm):
 class ItemForm(ModelForm):
     class Meta:
         model = Item
-        fields = '__all__'
+        fields = {'name', 'price'}
 
 
 class ItemPicture(ModelForm):

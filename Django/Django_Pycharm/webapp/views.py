@@ -12,7 +12,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth import login, authenticate
 from webapp.models import GroupAdmin, Item
 from . import paypal
@@ -112,6 +112,7 @@ def user_home(request):
 
 @login_required
 def group_home(request, group_id):
+
     user_id = request.user.id
 
     group_admin = GroupAdmin.objects.filter(group_id=group_id, user_id=user_id)
@@ -127,7 +128,7 @@ def group_home(request, group_id):
     status = paypal.get_group_payment_statuses(user_id, group_id)
     items = Item.objects.filter(group_id=group_id)
     context = {"group_id": group_id, "is_admin": is_admin,
-               "status": status, "items": items}  # checks if they are an admin and displays only if they are.
+               "status": status, "items": items, "form": ItemForm}  # checks if they are an admin and displays only if they are.
 
     # upload photo
     if request.method == 'POST' and 'picture' in request.FILES:
@@ -141,6 +142,19 @@ def group_home(request, group_id):
             item.pitched_id = request.user.id
             item.save()
             return redirect(reverse('webapp:grouphome', args=[group_id]))
+    if (request.method == 'POST' and request.POST['price']):
+        #Still doesnt work
+        print("here2")
+        form = ItemForm(request.POST) #Gets item form
+        if form.is_valid():
+            print(Group.objects.filter(id=group_id)[0].id)
+            print(Group.objects.filter(id=group_id)[0])
+            # form.fields['group_id'].initial = '1'
+            # error that wants group_id but cant possibly be in our DB
+            print(form)
+            item = form.save(commit=False)
+            item.group = Group.objects.filter(id=group_id)[0]
+            item.save()
 
     return render(request, 'webapp/grouphome.html', context)
 
@@ -154,6 +168,8 @@ def settings(request):
 
 
 def invoice_confirmation(request, group_id):
+
+
     user_id = request.user.id
 
     group_admin = GroupAdmin.objects.filter(group_id=group_id, user_id=user_id)
@@ -186,6 +202,7 @@ def paypal_return(request):
 
 def add(request):
     if request.method == 'POST':
+        print("here")
         form = ItemForm(request.POST)
         if form.is_valid():
             form.save()

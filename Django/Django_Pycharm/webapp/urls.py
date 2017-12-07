@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^newgroup', views.new_group, name='newgroup'),
     url(r'^settings', views.settings, name='settings'),
     url(r'^grouphome/(?P<group_id>[0-9]+)', views.group_home, name='grouphome'),
+    url(r'^grouphome/(?P<group_id>[0-9]+)/add', views.add, name='add'),
     url(r'^test', views.test, name='test')
 
 ]

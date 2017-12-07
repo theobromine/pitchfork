@@ -19,6 +19,9 @@ class GroupAdmin(models.Model):
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    def get_group(self):
+        return self.group
+
 
 class Item(models.Model):
     # Item Name

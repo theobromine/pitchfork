@@ -42,9 +42,11 @@
     {% endif %}
 
     {% if user.is_authenticated %}
-      <h3>Hi {{ user.username }}!</h3>
-      <a href="{% url 'webapp:userhome' %}">Go to your home page by clicking here!!!!</a>
-          <a href="{% url 'webapp:logout' %}">Logout here!!!!!</a>
+    <div style="text-align:center">
+        <h3>Hi {{ user.username }}!</h3>
+        <a href="{% url 'webapp:userhome' %}">Go to your home page by clicking here!!!!</a>
+        <a href="{% url 'webapp:logout' %}">Logout here!!!!!</a>
+    </div>
     {% else %}
     <h4> You are not logged in</h4>
     <a href="{% url 'webapp:login' %}">Please login</a>
