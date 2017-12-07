@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 
 from django.contrib.auth import login, authenticate
-from .forms.forms import SignUpForm, ItemForm
+from .forms.forms import SignUpForm, ItemForm, ItemPicture
 from .tokens import account_activation_token
 
 # Create your views here.
@@ -51,7 +51,7 @@ def paytest(request):
             if paypal.create_payout(sender_batch_id, reimbursement_amount, receiver_email, sender_item_id):
                 message = "Your payout has been Successfully executed."
             else:
-                message = "Unfortunately, your payout was unsucessful."
+                message = "Unfortunately, your payout was unsuccessful."
     payer_id = request.GET.get("PayerID", "")
     payment_id = request.GET.get("paymentId", "")
 
@@ -59,14 +59,12 @@ def paytest(request):
         if paypal.execute_payment(payer_id, payment_id):
             message = "Your payment has been Successfully executed."
         else:
-            message = "Unfortunately, your payment was unsucessful."
+            message = "Unfortunately, your payment was unsuccessful."
     context = {"message": message}
     return render(request, 'webapp/paytest.html', context)
 
 
 def reg_user(request):
-    print('mango')
-
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         print("potato")
@@ -107,10 +105,12 @@ def account_activation_sent(request):
     return render(request, 'webapp/account/account_activation_sent.html')
 
 
+@login_required
 def user_home(request):
     return render(request, 'webapp/userhome.html')
 
 
+@login_required
 def group_home(request, group_id):
     user_id = request.user.id
 
@@ -182,7 +182,16 @@ def add(request):
 
 @login_required
 def test(request):
-    return render(request, 'webapp/test.html')
+    if request.method == 'POST' and request.FILES['myfile']:
+        form = ItemForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('webapp/test.html')
+    else:
+        form = ItemForm()
+    return render(request, 'webapp/test.html', {
+        'form': form
+    })
 
 # def reg_user(request):
 #     context = {}

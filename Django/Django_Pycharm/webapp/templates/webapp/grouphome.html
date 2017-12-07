@@ -2,164 +2,211 @@
 
 {% block content %}
 
-			{% if status.group_invoiced_date != None %}
-		<div  class="grouppay border" style="clear:both;text-align:center">
-			{% if status.reimbursement_date != None %} {# User needs a Reimbursement #}
-					<span>Your reimbursement was paid on {{status.reimbursement_date}} for ${{status.reimbursement_amount}}.</span>
+    {% if status.group_invoiced_date != None %}
+        <div class="grouppay border" style="clear:both;text-align:center">
+            {% if status.reimbursement_date != None %} {# User needs a Reimbursement #}
+                <span>Your reimbursement was paid on {{ status.reimbursement_date }} for ${{ status.reimbursement_amount }}.</span>
 
-			{% elif status.paypal_url != None %} {# User needs to make a payment #}
-					<span>Your payment of ${{status.payment_amount}} was due as of {{status.group_invoiced_date}}</span><br> 
-					<input type="submit" value="Make a Payment" onclick="window.location='{{status.paypal_url}}'"></input>
-				
-			{% elif status.payment_date != None %} {# User is paid in full #}
-					<span>Your payment was made on {{status.payment_date}} for ${{status.payment_amount}}, you are all set.</span>
-				
-			{% else %} {# User didnt need to pay in #}
-					<span>You contributed your fair share to the group, you are all set.</span>
-			
-			{% endif %}	
-			</div>
-		{% else %}
-			{% if is_admin %}
-			<div  class="grouppay border" style="clear:both;text-align:center">
-					<h4>Admin Privileges</h4>
-					{% if status.all_confirmed %}
-					
-					<form action="../invoice_confirmation/{{group_id}}">
-						<button id="paypal-b" type="submit" class="btn btn-default btn-md">Send to Paypal</button>
-					</form>
-					{% else %}
-						<span>All items must be confirmed before sending to PayPal.</span>
-					{% endif %}
-			</div>			
-			{% endif %}
-			
-		{% endif %}
+            {% elif status.paypal_url != None %} {# User needs to make a payment #}
+                <span>Your payment of ${{ status.payment_amount }} was due as of {{ status.group_invoiced_date }}</span>
+                <br>
+                <input type="submit" value="Make a Payment" onclick="window.location='{{ status.paypal_url }}'"></input>
 
-	<h3 align="center">Group Home</h3>
-	<div class="col-md-1"></div>
-	<div class="col-md-10 ghome border">
-		<h4 align="center">Event Name</h4>
-		<div align="center"><i><var id="event_date">12/23/2017 &nbsp;</var><var id="event_place">Troy,NY</var></i></div>
-		<div class="col-md-3 border guestlist">
-			<h4 align="center">Guest List</h4>
-			<div class="border guests">
-				<ul class="list-group">
-  					<li class="list-group-item">Sydney Ruzicka</li>
-  					<li class="list-group-item">Elisa Franssen</li>
-  					<li class="list-group-item">Isaac Llewellyn</li>
-  					<li class="list-group-item">SummerRay A. Morrow</li>
-  					<li class="list-group-item">Ruowen Qin</li>
-				</ul>
-			</div>
-			<button type="button" class="btn btn-default btn-md" onclick="" data-toggle="modal" data-target="#friendModal"> Invite a Friend</button>
-			<!-- Modal -->
-			<div id="friendModal" class="modal fade" role="dialog">
-  				<div class="modal-dialog">
-    			<!-- Modal content-->
-    			<div class="modal-content">
-      				<div class="modal-header">
-        				<button type="button" class="close" data-dismiss="modal">&times;</button>
-        				<h4 class="modal-title">Invite a Friend</h4>
-      				</div>
-      				<div class="modal-body">
-        				<form action="../grouphome/{{group_id}}" method="post">{% csrf_token %}
-     						<p><label for="email">Friend's Email: &nbsp;</label><input type="email" name="email"/></p>
-    						<button type="submit" class="btn btn-info btn-lg" data-dismiss="modal">Invite</button>
- 						</form>
-      				</div>
-      				<div class="modal-footer">
-      					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-      				</div>
-    			</div>
-  				</div>
-			</div>
-		</div>
-		<div class="col-md-6 border itemlist">
-			<h4 align="center">Who's Bringing What?</h4>
-			<div class="border items">
-				<table style="width:100%" class="table itemtable">
-  				<tr>
-    				<th>Item</th>
-    				<th>Cost</th> 
-    				<th>Pitched?</th>
-    				<th>Edit</th>
-    				<th>Delete</th>
-  				</tr>
-  				<tr>
-  					<td>Burgers</td>
-  					<td>$7.99</td>
-  					<td><button type="button" class="btn btn-info"> Pitch Me!</button></td>
-  					<td><button type="button" class="btn btn-success"> Edit</button></td>
-  					<td><button type="button" class="btn btn-danger"> Delete</button></td>
-  				</tr>
-  				<tr>
-  					<td>Buns</td>
-  					<td>$3.00</td>
-  					<td>Pitched by Sydney</td>
-  					<td><button type="button" class="btn btn-success"> Edit</button></td>
-  					<td><button type="button" class="btn btn-danger"> Delete</button></td>
-  				</tr>
+            {% elif status.payment_date != None %} {# User is paid in full #}
+                <span>Your payment was made on {{ status.payment_date }} for ${{ status.payment_amount }}, you are all set.</span>
+
+            {% else %} {# User didnt need to pay in #}
+                <span>You contributed your fair share to the group, you are all set.</span>
+
+            {% endif %}
+        </div>
+    {% else %}
+        {% if is_admin %}
+            <div class="grouppay border" style="clear:both;text-align:center">
+                <h4>Admin Privileges</h4>
+                {% if status.all_confirmed %}
+
+                    <form action="../invoice_confirmation/{{ group_id }}">
+                        <button id="paypal-b" type="submit" class="btn btn-default btn-md">Send to Paypal</button>
+                    </form>
+                {% else %}
+                    <span>All items must be confirmed before sending to PayPal.</span>
+                {% endif %}
+            </div>
+        {% endif %}
+
+    {% endif %}
+
+    <h3 align="center">Group Home</h3>
+    <div class="col-md-1"></div>
+    <div class="col-md-10 ghome border">
+        <h4 align="center">Event Name</h4>
+        <div align="center"><i><var id="event_date">12/23/2017 &nbsp;</var><var id="event_place">Troy,NY</var></i></div>
+        <div class="col-md-3 border guestlist">
+            <h4 align="center">Guest List</h4>
+            <div class="border guests">
+                <ul class="list-group">
+                    <li class="list-group-item">Sydney Ruzicka</li>
+                    <li class="list-group-item">Elisa Franssen</li>
+                    <li class="list-group-item">Isaac Llewellyn</li>
+                    <li class="list-group-item">SummerRay A. Morrow</li>
+                    <li class="list-group-item">Ruowen Qin</li>
+                </ul>
+            </div>
+            <button type="button" class="btn btn-default btn-md" onclick="" data-toggle="modal"
+                    data-target="#friendModal"> Invite a Friend
+            </button>
+            <!-- Modal -->
+            <div id="friendModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Invite a Friend</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form action="../grouphome/{{ group_id }}" method="post">{% csrf_token %}
+                                <p><label for="email">Friend's Email: &nbsp;</label><input type="email" name="email"/>
+                                </p>
+                                <button type="submit" class="btn btn-info btn-lg" data-dismiss="modal">Invite</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 border itemlist">
+            <h4 align="center">Who's Bringing What?</h4>
+            <div class="border items">
+                <table style="width:100%" class="table itemtable">
+                    <tr>
+                        <th>Item</th>
+                        <th>Cost</th>
+                        <th>Pitched?</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    <tr>
+                        <td>Burgers</td>
+                        <td>$7.99</td>
+                        <td>
+                            <form method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <label>
+                                    <div style="height:0;width: 0;overflow:hidden">
+                                        <input type="file" id="fileInput" name="fileInput"/>
+                                    </div>
+                                    <button id="submitButton" type="button" class="btn btn-info"
+                                            onclick="chooseFile();"> Pitch Me!
+                                    </button>
+                                </label>
+                            </form>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-success"> Edit</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger"> Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Buns</td>
+                        <td>$3.00</td>
+                        <td>Pitched by Sydney</td>
+                        <td>
+                            <button type="button" class="btn btn-success"> Edit</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger"> Delete</button>
+                        </td>
+                    </tr>
                     {% for item in items %}
                         <tr>
-                        <td>{{ item.name }}</td>
-                        <td>{{ item.price }}</td>
-                        <td>{{ item.pitched }}</td>
-                        <td><button type="button" class="btn btn-success"> Edit</button></td>
-                        <td><button type="button" class="btn btn-danger"> Delete</button></td>
-			            {% if is_admin %}
-                            <td>{{ item.picture }}</td>
-                        {% endif %}
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.price }}</td>
+                            <td>{{ item.pitched }}</td>
+                            <td>
+                                <button type="button" class="btn btn-success"> Edit</button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger"> Delete</button>
+                            </td>
+                            {% if is_admin %}
+                                <td>{{ item.picture }}</td>
+                            {% endif %}
                         </tr>
                     {% endfor %}
-			</table>
-			</div>
- 			<!-- Trigger item modal with a button -->
-			<button id="additem" type="button" class="btn btn-default btn-md" onclick="" data-toggle="modal" data-target="#itemModal"> Add an Item</button>
-			<!-- Modal -->
-			<div id="itemModal" class="modal fade" role="dialog">
-  				<div class="modal-dialog">
-    			<!-- Modal content-->
-    			<div class="modal-content">
-      				<div class="modal-header">
-        				<button type="button" class="close" data-dismiss="modal">&times;</button>
-        				<h4 class="modal-title">Add an Item</h4>
-      				</div>
-      				<div class="modal-body">
-        				<form action="../grouphome/{{group_id}}" method="post">{% csrf_token %}
-     						<p><label for="name">Item Name:&nbsp;</label><input type="text" name="name"/></p> <!--"&nbsp;" Adds a literal space-->
-     						<p><label for="price">Price:&nbsp;$</label><input type="text" name="name"/></p>
-    						<button type="submit" class="btn btn-info btn-lg" data-dismiss="modal">Add Item</button>
- 						</form>
-      				</div>
-      				<div class="modal-footer">
-      					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-      				</div>
-    			</div>
-  				</div>
-			</div>
-		</div>
-		<div class="col-md-3 border pitchlist">
-			<h4 align="center">My Pitches</h4>
-			<div class="border pitches">
-				<table style="width:100%" class="table pitchtable">
-  				<tr>
-    				<th>Item</th>
-    				<th>Got It?</th>
-    				<th></th>
-  				</tr>
-  				<tr>
-  					<td>Burgers</td>
-  					<td><button type="button" class="btn btn-success">Yes</button></td>
-  					<td><button type="button" class="btn btn-danger">No</button></td>
-  				</tr>
-			</table>
-			</div>
-		</div>
-		
-</div>
-<div class="col-md-1"></div>
-	
-	
+                </table>
+            </div>
+            <!-- Trigger item modal with a button -->
+            <button id="additem" type="button" class="btn btn-default btn-md" onclick="" data-toggle="modal"
+                    data-target="#itemModal"> Add an Item
+            </button>
+            <!-- Modal -->
+            <div id="itemModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add an Item</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form action="../grouphome/{{ group_id }}" method="post">{% csrf_token %}
+                                <p><label for="name">Item Name:&nbsp;</label><input type="text" name="name"/></p>
+                                <!--"&nbsp;" Adds a literal space-->
+                                <p><label for="price">Price:&nbsp;$</label><input type="text" name="name"/></p>
+                                <button type="submit" class="btn btn-info btn-lg" data-dismiss="modal">Add Item</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 border pitchlist">
+            <h4 align="center">My Pitches</h4>
+            <div class="border pitches">
+                <table style="width:100%" class="table pitchtable">
+                    <tr>
+                        <th>Item</th>
+                        <th>Got It?</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>Burgers</td>
+                        <td>
+                            <button type="button" class="btn btn-success">Yes</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger">No</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-1"></div>
+
+    <script>
+        function chooseFile() {
+            $("#fileInput").click();
+        }
+
+        $('form #submitButton').on('change', function () {
+            this.form.submit();
+        });
+
+    </script>
+
+
 {% endblock %}
+
 
