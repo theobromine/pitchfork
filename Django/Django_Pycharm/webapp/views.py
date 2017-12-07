@@ -38,7 +38,6 @@ def contact(request):
     return render(request, 'webapp/contact.html')
 
 
-@login_required
 def paytest(request):
     message = ""
     if request.method == "POST":
