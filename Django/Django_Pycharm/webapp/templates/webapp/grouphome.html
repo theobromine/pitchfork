@@ -98,8 +98,12 @@
                             <td>{{ item.pitched }}</td>
 
                             {% if is_admin and item.confirmed %}
-                                <td><button type="button" class="btn btn-success"> Edit</button></td>
-                                <td><button type="button" class="btn btn-danger"> Delete</button></td>
+                                <td>
+                                    <button type="button" class="btn btn-success"> Edit</button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger"> Delete</button>
+                                </td>
                                 <td><img src="{{ item.picture.url }}" alt="" width="100"></td>
                             {% else %}
                                 <td></td>
@@ -116,7 +120,9 @@
                                             <input type="text" name="itemID" hidden value="{{ item.id }}"/>
                                             <input type="file" name="picture" style="opacity:0; height:0;width:0;"
                                                    class="btn autosubmit"/>
-                                            <button type="button" class="btn btn-info pitch_b" onclick="click_upload()">Pitch Me!</button>
+                                            <button type="button" class="btn btn-info pitch_b" onclick="click_upload()">
+                                                Pitch Me!
+                                            </button>
                                         </label>
                                     </form>
                                 </td>
@@ -140,11 +146,11 @@
                         </div>
                         <div class="modal-body">
 
-                        <form method="post">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                        <button type="submit">Add item</button>
-                        </form>
+                            <form method="post">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <button type="submit">Add item</button>
+                            </form>
 
                         </div>
                         <div class="modal-footer">
