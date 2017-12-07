@@ -130,11 +130,17 @@ def group_home(request, group_id):
                "status": status, "items": items}  # checks if they are an admin and displays only if they are.
 
     # upload photo
-    if request.method == 'POST' and 'fileInput' in request.FILES:
-        form = ItemForm(request.POST, request.FILES)
+    if request.method == 'POST' and 'picture' in request.FILES:
+        item_id = int(request.POST['itemID'])
+        item = Item.objects.get(id=item_id)
+        form = ItemPicture(instance=item, files=request.FILES)
+
         if form.is_valid():
             form.save()
-            return redirect('webapp/grouphome' + str(group_id))
+            item.confirmed = 1
+            item.pitched_id = request.user.id
+            item.save()
+            return redirect(reverse('webapp:grouphome', args=[group_id]))
 
     return render(request, 'webapp/grouphome.html', context)
 
@@ -175,7 +181,7 @@ def paypal_return(request):
     payment_id = request.GET.get("paymentId", "")
     payer_id = request.GET.get("PayerID", "")
     group_id = paypal.paypal_return(payment_id, payer_id)
-    return redirect("./grouphome/" + str(group_id))
+    return redirect("../grouphome/" + str(group_id))
 
 
 def add(request):

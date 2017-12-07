@@ -27,6 +27,8 @@ SECRET_KEY = 'uq_4_9#sqtu@*sxli-lky9sw&+6^718#2jv+h6e!ee_dlpljsk'
 DEBUG = True
 
 ALLOWED_HOSTS = ['.worldpara.com',
+                 '127.0.0.1',
+                 'localhost',
                  ]
 
 # Application definition

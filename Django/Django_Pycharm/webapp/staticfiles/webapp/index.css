@@ -59,7 +59,7 @@ a:hover {
 }
 
 .guestlist {
-    height: 450px;
+    height: 60%;
     background-color: #dbffeb;
 }
 
@@ -78,7 +78,7 @@ a:hover {
 }
 
 .itemlist {
-    height: 450px;
+    height: 60%;
     background-color: #dbdfff;
 }
 
@@ -94,7 +94,7 @@ a:hover {
 }
 
 .pitchlist {
-    height: 450px;
+    height: 60%;
     background-color: #fae0ff;
     margin-bottom: 20px;
 }

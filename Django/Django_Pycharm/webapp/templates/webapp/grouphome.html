@@ -102,23 +102,20 @@
                             <td>
                                 <button type="button" class="btn btn-danger"> Delete</button>
                             </td>
-                            {% if is_admin %}
-                                <td><img src="{{ item.picture }}" alt=""></td>
+                            {% if is_admin and item.confirmed %}
+                                <td><img src="{{ item.picture.url }}" alt="" width="100"></td>
                             {% endif %}
                             {% if item.confirmed %}
                                 <td>Pitched by {{ item.pitched.username }}</td>
                             {% else %}
                                 <td>
-                                    <form method="post" enctype="multipart/form-data" id="pic_form"
-                                          action="{% url 'webapp:grouphome' item.group_id %}">
+                                    <form method="post" enctype="multipart/form-data" id="pic_form">
                                         {% csrf_token %}
                                         <label>
-                                            <div style="height:0;width: 0;overflow:hidden">
-                                                <input type="file" id="fileInput" name="fileInput"/>
-                                            </div>
-                                            <button id="submitButton" type="button" class="btn btn-info"
-                                                    onclick="chooseFile();"> Pitch Me!
-                                            </button>
+                                            <input type="text" name="itemID" hidden value="{{ item.id }}"/>
+                                            <input type="file" name="picture" style="opacity:0; height:0;width:0;"
+                                                   class="btn autosubmit"/>
+                                            <button type="button" class="btn btn-info" onclick="click_upload()">Pitch Me!</button>
                                         </label>
                                     </form>
                                 </td>
@@ -165,19 +162,19 @@
                         <th>Got It?</th>
                         <th></th>
                     </tr>
-					{% for item in items %}
-					{% if item.pitched.id == user.id %}
-                    <tr>
-                        <td>{{item.name}}</td>
-                        <td>
-                            <button type="button" class="btn btn-success">Yes</button>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-danger">No</button>
-                        </td>
-                    </tr>
-					{% endif %}
-					{% endfor %}
+                    {% for item in items %}
+                        {% if item.pitched.id == user.id %}
+                            <tr>
+                                <td>{{ item.name }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-success">Yes</button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger">No</button>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
                 </table>
             </div>
         </div>
@@ -186,16 +183,13 @@
     <div class="col-md-1"></div>
 
     <script>
-        function chooseFile() {
-            $("#fileInput").click();
-            doSubmit();
-        }
-        
-        function doSubmit() {
-            var form = document.getElementById('pic_form');
-            form.submit();
-        }
+        $('form .autosubmit').on('change', function () {
+            this.form.submit();
+        });
 
+        function click_upload() {
+            document.getElementsByClassName("autosubmit").click();
+        }
     </script>
 
 

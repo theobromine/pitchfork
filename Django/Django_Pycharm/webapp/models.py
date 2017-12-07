@@ -26,9 +26,9 @@ class Item(models.Model):
     # Item Price
     price = models.DecimalField(max_digits=8, decimal_places=2)
     # Who is bringing the item.
-    pitched = models.ForeignKey(User, on_delete=models.CASCADE)
+    pitched = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     # A link to a picture of the item
-    picture = models.ImageField(upload_to='item/%Y/%m/%d', blank=True)
+    picture = models.ImageField(upload_to='item/%Y/%m/%d', null=True, blank=True)
     # Has the item been confirmed by the admin?
     confirmed = models.BooleanField(default=False)
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
