@@ -100,7 +100,7 @@ def activate(request, uidb64, token):
         login(request, user)
         return redirect('webapp/paytest.html')
     else:
-        return render(request, 'webapp/account_activation_invalid.html')
+        return render(request, 'webapp/account/account_activation_email.html')
 
 
 def account_activation_sent(request):
@@ -116,7 +116,7 @@ def group_home(request, group_id):
 
     try:
         group_admin = GroupAdmin.objects.get(group_id=group_id, user_id=user_id)
-    except:
+    except ValueError:
         group_admin = None
 
     if group_admin is not None:
