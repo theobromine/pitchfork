@@ -162,8 +162,10 @@
                         <th>Got It?</th>
                         <th></th>
                     </tr>
+					{% for item in items %}
+					{% if item.pitched.id == user.id %}
                     <tr>
-                        <td>Burgers</td>
+                        <td>{{item.name}}</td>
                         <td>
                             <button type="button" class="btn btn-success">Yes</button>
                         </td>
@@ -171,6 +173,8 @@
                             <button type="button" class="btn btn-danger">No</button>
                         </td>
                     </tr>
+					{% endif %}
+					{% endfor %}
                 </table>
             </div>
         </div>
