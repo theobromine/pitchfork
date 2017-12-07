@@ -1,240 +1,235 @@
 body {
-	font-family: 'Raleway', sans-serif;
-	background-color: rgb(230, 243, 255);
+    font-family: 'Raleway', sans-serif;
+    background-color: rgb(230, 243, 255);
 }
 
 a {
-	color:black;
-	text-decoration: none;
+    color: black;
+    text-decoration: none;
 }
 
 a:hover {
-	color:#7fb4ff;
-	text-decoration: none;
+    color: #7fb4ff;
+    text-decoration: none;
 }
 
 .border {
-	border-width: 2px;
-	border-radius: 10px;
-	border-color: grey;
-	border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: grey;
+    border-style: solid;
 }
 
 /*login page*/
 
 .loginpage {
-	margin-left: 150px;
-	margin-right: 150px;
-	margin-top: 100px;
-	background-color: #ddfffa;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 10%;
+    background-color: #ddfffa;
 }
 
 .loginpage input[type=text] {
-	width:250px;
+    width: 250px;
 }
 
 .loginpage input[type=password] {
-	width:250px;
+    width: 250px;
 }
 
 .loginpage p {
-	margin-left: 350px;
+    margin-left: 350px;
 }
 
 .loginpage button {
-	margin-left: 430px;
+    margin-top: 20px;
 }
 
 /*group home*/
 
 #additem {
-	margin-top: 10px;
-	padding:10px;
+    margin-top: 10px;
+    padding: 10px;
 }
 
 .ghome {
-	margin-top:5px;
-	background-color: white;
-	height: 800px;
+    margin-top: 5px;
+    background-color: white;
+    height: 800px;
 }
 
 .guestlist {
-	height: 450px;
-	background-color: #dbffeb;
+    height: 450px;
+    background-color: #dbffeb;
 }
 
 .guestlist .guests {
-	height: 75%;
-	overflow: scroll;
-	background-color: white;
-	margin-bottom: 10px;
+    height: 75%;
+    overflow: scroll;
+    background-color: white;
+    margin-bottom: 10px;
 }
 
 .guestlist button {
-	margin-top:10px;
-	display: block;
-	margin:auto;
-	padding: 10px;
+    margin-top: 10px;
+    display: block;
+    margin: auto;
+    padding: 10px;
 }
 
 .itemlist {
-	height: 450px;
-	background-color: #dbdfff;
+    height: 450px;
+    background-color: #dbdfff;
 }
 
 .items {
-	height: 75%;
-	overflow: scroll;
-	background-color: white;
+    height: 75%;
+    overflow: scroll;
+    background-color: white;
 }
 
 .itemtable button {
-	display: block;
-	margin:auto;
+    display: block;
+    margin: auto;
 }
 
 .pitchlist {
-	height: 450px;
-	background-color: #fae0ff;
-	margin-bottom: 20px;
+    height: 450px;
+    background-color: #fae0ff;
+    margin-bottom: 20px;
 }
 
 .pitches {
-	height: 75%;
-	overflow: scroll;
-	background-color: white;
+    height: 75%;
+    overflow: scroll;
+    background-color: white;
 }
 
 .pitchtable button {
-	display: block;
-	margin:auto;
+    display: block;
+    margin: auto;
 }
 
 .grouppay {
-	margin-top:10px;
-	margin-left: 150px;
-	margin-right: 150px;
-	padding-bottom: 10px;
-	margin-bottom: 10px;
-	background-color: #ddfffa;
+    margin-top: 10px;
+    margin-left: 150px;
+    margin-right: 150px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    background-color: #ddfffa;
 }
 
 #paypal-b {
-	margin-left: 1px;
+    margin-left: 1px;
 }
 
 /*new group*/
 
 #makegroup {
-	margin-top: 20px;
+    margin-top: 20px;
 }
 
 #maingroup {
-	border-width: 2px;
-	border-radius: 10px;
-	border-color: grey;
-	border-style: solid;
-	margin-left: 20%;
-	margin-right: 20%;
-	height: 550px;
-	margin-top: 20px;
-	background-color: #f4f4f4;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: grey;
+    border-style: solid;
+    margin-left: 20%;
+    margin-right: 20%;
+    height: 550px;
+    margin-top: 20px;
+    background-color: #f4f4f4;
 }
-
-
 
 /* user home */
 
 .mainpage {
- 	margin-left: 20%;
- 	margin-top: 50px;
+    margin-left: 20%;
+    margin-top: 50px;
 }
 
 .home {
-	border-width: 2px;
-	border-radius: 10px;
-	border-color: grey;
-	border-style: solid;
-	padding:5px;
-	background-color:#ddfffa;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: grey;
+    border-style: solid;
+    padding: 5px;
+    background-color: #ddfffa;
 
 }
 
 #events, #mygroups {
-	border-width: 2px;
-	border-color: grey;
-	border-style: solid;
-	height: 330px;
-	background-color: white;
-	margin:10px;
+    border-width: 2px;
+    border-color: grey;
+    border-style: solid;
+    height: 330px;
+    background-color: white;
+    margin: 10px;
 }
 
 #upcoming {
-	margin-top: 80px;
-	margin-right: 15px;
-	height: 400px;
+    margin-top: 80px;
+    margin-right: 15px;
+    height: 400px;
 }
 
 #currentgroups {
-	margin-top: 80px;
-	margin-left: 15px;
-	height: 400px;
+    margin-top: 80px;
+    margin-left: 15px;
+    height: 400px;
 }
 
 #newgroup {
-	margin-top: 80px;
-	margin-left: 15px;
-	height: 190px;
+    margin-top: 80px;
+    margin-left: 15px;
+    height: 190px;
 }
 
 #settings {
-	margin-top: 20px;
-	margin-left: 15px;
-	height: 190px;
+    margin-top: 20px;
+    margin-left: 15px;
+    height: 190px;
 }
-
-
 
 /*main page CSS */
 
 #signup {
-	border-width: 1px;
-	border-color: black;
-	border-style: solid;
-	background-color: lightgrey;
-	border-radius:10px;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    background-color: lightgrey;
+    border-radius: 10px;
 }
 
 #login {
-	border-width: 1px;
-	border-color: black;
-	border-style: solid;
-	background-color: lightgrey;
-	margin-left: 8%;
-	border-radius:10px;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    background-color: lightgrey;
+    margin-left: 8%;
+    border-radius: 10px;
 }
 
-
 .btn {
-	margin-bottom: 10px;
-	margin-left: 30%;
+    margin-bottom: 10px;
+    margin-left: 30%;
 }
 
 .navbar {
-	background-color: white;
-	border-width: 2px;
-	border-color: grey;
+    background-color: white;
+    border-width: 2px;
+    border-color: grey;
 }
 
 #logo {
-	height: 50px;
+    height: 50px;
 }
 
 .form-group {
-	width: 70%;
-	margin-left: 10%;
+    width: 70%;
+    margin-left: 10%;
 }
 
-#Invoice_Confirmation{
-	text-align: center;
+#Invoice_Confirmation {
+    text-align: center;
 }

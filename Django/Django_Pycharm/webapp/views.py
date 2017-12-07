@@ -114,9 +114,8 @@ def user_home(request):
 def group_home(request, group_id):
     user_id = request.user.id
 
-    try:
-        group_admin = GroupAdmin.objects.get(group_id=group_id, user_id=user_id)
-    except ValueError:
+    group_admin = GroupAdmin.objects.filter(group_id=group_id, user_id=user_id)
+    if len(group_admin) == 0:
         group_admin = None
 
     if group_admin is not None:
