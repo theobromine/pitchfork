@@ -100,6 +100,11 @@
   					<td><button type="button" class="btn btn-success"> Edit</button></td>
   					<td><button type="button" class="btn btn-danger"> Delete</button></td>
   				</tr>
+                  <p>Testing</p>
+                    {% for choice in item %}
+                                          <p>Testing 1;</p>
+                        <tr>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</tr>
+                    {% endfor %}
 			</table>
 			</div>
  			<!-- Trigger item modal with a button -->
