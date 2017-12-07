@@ -33,6 +33,9 @@ class Item(models.Model):
     confirmed = models.BooleanField(default=False)
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.name
+
 
 class Payment(models.Model):
     payment_id = models.AutoField(primary_key=True)
