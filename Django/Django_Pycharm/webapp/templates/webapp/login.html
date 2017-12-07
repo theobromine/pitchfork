@@ -1,7 +1,9 @@
 {% extends 'webapp/base.html' %}
 {% block content %}
+    
+<h2 align="center"><b>Welcome Back!</b></h2>
     <div class="border loginpage">
-        <h2 align="center">Pitchfork Log In</h2>
+        <h3 align="center">Pitchfork Log In</h3>
         {% if form.errors %}
             <p style="color: red">Your username and password didn't match. Please try again.</p>
         {% endif %}

@@ -1,10 +1,20 @@
 {% extends 'webapp/base.html' %}
 
 {% block content %}
-<h3 align="center">Welcome to Pitchfork!</h3>
+<h2 align="center"><b>Welcome to Pitchfork!</b></h2>
+<div align="center" class="index-content">
+	<b><p>Have you ever gone crazy trying to plan a group event?</p>
+	<p>Did anyone bring the hotdogs?</p>
+	<p>Sally didn't pitch in for anything!</p>
+	<p>How will we ever split up costs evenly!?</p>
+	<p>Pitchfork is here to help</p>
+	<p>Sign Up below</p>
+	<p><a href="{% url 'webapp:info' %}">OR click here to learn more</a></p></b>
+</div>
+
 <div class="row mainpage">
-    <div id="signup" class="col-md-10">
-        <h4>Sign up</h4>
+    <div class="border signup" class="col-md-10">
+        <h3 align="center">Pitchfork Sign Up</h3>
          {% include "webapp/signup.html" %}
 
         <div>{{ rlt }}</div>
@@ -12,6 +22,6 @@
     <!--<div id="login" class="col-md-4">-->
 
 <!--</div>div-->
-
+</div>
 
 {% endblock %}

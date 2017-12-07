@@ -30,7 +30,6 @@
         </div>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="{% url 'webapp:index' %}">HOME</a></li>
-            <li><a href="{% url 'webapp:faq' %}">FAQ</a></li>
             <li><a href="{% url 'webapp:info' %}">INFO</a></li>
             <li><a href="{% url 'webapp:contact' %}">CONTACT</a></li>
             <li><a href="{% url 'webapp:reg_user' %}"><span class="glyphicon glyphicon-user"></span> SIGN UP</a></li>
@@ -48,8 +47,8 @@
         <a href="{% url 'webapp:logout' %}">Logout here!!!!!</a>
     </div>
     {% else %}
-    <h4> You are not logged in</h4>
-    <a href="{% url 'webapp:login' %}">Please login</a>
+
+    <a href="{% url 'webapp:login' %}">You are not logged in</a>
     {% endif %}
 </nav>
 

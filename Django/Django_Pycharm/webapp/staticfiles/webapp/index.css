@@ -6,6 +6,7 @@ body {
 a {
     color: black;
     text-decoration: none;
+    font-weight: bold;
 }
 
 a:hover {
@@ -25,12 +26,17 @@ a:hover {
 .loginpage {
     margin-left: 20%;
     margin-right: 20%;
-    margin-top: 10%;
+    margin-top: 5%;
     background-color: #ddfffa;
 }
 
 .loginpage input[type=text] {
     width: 250px;
+}
+
+
+.loginpage label {
+    margin-top: 10px;
 }
 
 .loginpage input[type=password] {
@@ -43,6 +49,7 @@ a:hover {
 
 .loginpage button {
     margin-top: 20px;
+    margin-right: 10px;
 }
 
 /*group home*/
@@ -193,21 +200,46 @@ a:hover {
 
 /*main page CSS */
 
-#signup {
-    border-width: 1px;
-    border-color: black;
-    border-style: solid;
-    background-color: lightgrey;
-    border-radius: 10px;
+.index-content {
+    margin-left: 20%;
+    margin-right: 20%;
+    font-size:16px;
 }
 
-#login {
-    border-width: 1px;
-    border-color: black;
-    border-style: solid;
-    background-color: lightgrey;
-    margin-left: 8%;
-    border-radius: 10px;
+.index-content p {
+    margin-top: 25px;
+}
+
+.index-content a {
+    color:#333333;
+}
+
+.index-content a:hover {
+    color: #b799ff;
+    text-decoration: none;
+}
+
+.signup {
+    background-color: #ddfffa;
+    margin-right: 20%;
+    padding-left: 100px;
+    padding-right: 100px;
+
+}
+
+.signup h2 {
+    margin-bottom: 20px;
+}
+
+.signup input {
+    width:250px;
+    margin-left: 10px;
+    margin-right: 30%;
+}
+
+.signup label {
+    width:100px;
+    text-align: right;
 }
 
 .btn {
