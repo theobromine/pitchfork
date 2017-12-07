@@ -90,40 +90,7 @@
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
-                    <tr>
-                        <td>Burgers</td>
-                        <td>$7.99</td>
-                        <td>
-                            <form method="post" enctype="multipart/form-data">
-                                {% csrf_token %}
-                                <label>
-                                    <div style="height:0;width: 0;overflow:hidden">
-                                        <input type="file" id="fileInput" name="fileInput"/>
-                                    </div>
-                                    <button id="submitButton" type="button" class="btn btn-info"
-                                            onclick="chooseFile();"> Pitch Me!
-                                    </button>
-                                </label>
-                            </form>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-success"> Edit</button>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-danger"> Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Buns</td>
-                        <td>$3.00</td>
-                        <td>Pitched by Sydney</td>
-                        <td>
-                            <button type="button" class="btn btn-success"> Edit</button>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-danger"> Delete</button>
-                        </td>
-                    </tr>
+
                     {% for item in items %}
                         <tr>
                             <td>{{ item.name }}</td>
@@ -138,6 +105,22 @@
                             {% if is_admin %}
                                 <td>{{ item.picture }}</td>
                             {% endif %}
+                            {% if item.pitched %}
+                            <td>Pitched by {{ item.pitched }}</td>
+                            {% else %}
+                            <td>
+                                <form method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <label>
+                                        <div style="height:0;width: 0;overflow:hidden">
+                                            <input type="file" id="fileInput" name="fileInput"/>
+                                        </div>
+                                        <button id="submitButton" type="button" class="btn btn-info"
+                                                onclick="chooseFile();"> Pitch Me!
+                                        </button>
+                                    </label>
+                                </form>
+                            </td>                            {% endif %}
                         </tr>
                     {% endfor %}
                 </table>

@@ -1,6 +1,6 @@
 # pitchfork
 Project Pitchfork
-
+Most of our code is selfdocumented. We followed the basic "django style".
 Steps to get running:
 
 Make sure you have some sort of working python 3. It needs to have pip / brew / cygwin-apt.
