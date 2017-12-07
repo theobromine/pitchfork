@@ -7,7 +7,7 @@ from . import views
 from django.views.generic.base import TemplateView
 
 urlpatterns = [
-    url(r'^$', views.user_home,  name="index"),
+    url(r'^$', views.index, {'message': ""}, name="index"),
     # ex: /polls/5/
     url(r'^faq$', views.faq, name='faq'),
     url(r'^info', views.info, name='info'),

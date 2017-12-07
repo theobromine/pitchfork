@@ -15,8 +15,8 @@
     <link rel=stylesheet href="{% static 'webapp/index.css' %}"/>
 
     <!-- Scripts specefic to a page go here -->
-    {% block scripts %}
-    {% endblock %}
+        {% block scripts %}
+{% endblock %}
 
     <title>Pitchfork</title>
 </head>
@@ -32,38 +32,24 @@
             <li><a href="{% url 'webapp:index' %}">HOME</a></li>
             <li><a href="{% url 'webapp:info' %}">INFO</a></li>
             <li><a href="{% url 'webapp:contact' %}">CONTACT</a></li>
-            {% if not request.user.is_authenticated %}
-                <li><a href="{% url 'webapp:reg_user' %}"><span class="glyphicon glyphicon-user"></span> SIGN UP</a>
-                </li>
-                <li><a href="{% url 'webapp:login' %}"><span class="glyphicon glyphicon-log-in"></span> LOGIN</a></li>
-            {% else %}
-                <li><a href="{% url 'webapp:logout' %}">LOGOUT</a></li>
-
-            {% endif %}
+            <li><a href="{% url 'webapp:reg_user' %}"><span class="glyphicon glyphicon-user"></span> SIGN UP</a></li>
+            <li><a href="{% url 'webapp:login' %}"><span class="glyphicon glyphicon-log-in"></span> LOGIN</a></li>
         </ul>
     </div>
     {% if message %}
-        <h1>{{ message }}</h1>
+    <h1>{{ message }}</h1>
     {% endif %}
 
     {% if user.is_authenticated %}
-<<<<<<< HEAD
     <div style="text-align: center">
         <p>Hi2 {{ user.username }}!</p>
         <a href="{% url 'webapp:userhome' %}">Go to your home page by clicking here!!!!</a>
         <p></p>
         <a href="{% url 'webapp:logout' %}">Logout by clicking here!!!!!</a>
     </div>
-=======
-        <div>
-            <p>Hi {{ user.username }}!</p>
-            <a href="{% url 'webapp:userhome' %}">Go to your home page by clicking here!!!!</a>
-            <a href="{% url 'webapp:logout' %}">Logout here!!!!!</a>
-        </div>
->>>>>>> 40f29de6bf9aeec9c535859000ca00a00463da9a
     {% else %}
 
-        <a href="{% url 'webapp:login' %}">You are not logged in</a>
+    <a href="{% url 'webapp:login' %}">You are not logged in</a>
     {% endif %}
 </nav>
 
