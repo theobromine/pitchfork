@@ -4,36 +4,38 @@
 
     <h3 align="center">Home</h3>
     <div class="row">
-    	<div class="col-md-1"></div>
-   	 	<div id="upcoming" class="col-md-3 home">
-   	 		<h4 align="center">Upcoming Events</h4>
-   	 		<div id="events">
-   	 			<ul class="list-group">
-  					<li class="list-group-item">Picnic &nbsp; <i>Tomorrow</i></li>
-  					<li class="list-group-item">Finals Crying Session &nbsp; <i>12/10/2017</i></li>
-  					<li class="list-group-item">Christmas Party &nbsp; <i>12/24/2017</i></li>
-				</ul>
-   	 		</div>
-   	 	</div>
-    	<div id="currentgroups" class="col-md-3 home">
-    		<h4 align="center">My Current Groups</h4>
-    		<div id="mygroups">
-   	 			<div class="list-group">
-  					<a href="{% url 'webapp:grouphome' 1 %}" class="list-group-item">Christmas Party</a>
-				</div>
-   	 		</div>
-    	</div>
-    	<div class="col-md-3">
-    		<div id="newgroup" class="row home">
-    			<h4 align="center"><a href="{% url 'webapp:newgroup' %}">New Group</a></h4>
-    			</br><center><i>Need Plans? </br> Make a new group and invite friends!</i></center>
-    		</div>
-    		<div id="settings" class="row home">
-    			<h4 align="center"><a href="{% url 'webapp:settings' %}">Settings</a></h4>
-    			</br><center><i>Forgot your password? </br> We got you</i></center>
-    		</div>
-    	</div>
-    	<div class="col-md-1"></div>
+        <div class="col-md-1"></div>
+        <div id="upcoming" class="col-md-3 home">
+            <h4 align="center">Upcoming Events</h4>
+            <div id="events">
+                <ul class="list-group">
+                    <li class="list-group-item">Picnic &nbsp; <i>Tomorrow</i></li>
+                    <li class="list-group-item">Finals Crying Session &nbsp; <i>12/10/2017</i></li>
+                    <li class="list-group-item">Christmas Party &nbsp; <i>12/24/2017</i></li>
+                </ul>
+            </div>
+        </div>
+        <div id="currentgroups" class="col-md-3 home">
+            <h4 align="center">My Current Groups</h4>
+            <div id="mygroups">
+                <div class="list-group">
+                    <a href="{% url 'webapp:grouphome' 1 %}" class="list-group-item">Christmas Party</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div id="newgroup" class="row home">
+                <h4 align="center"><a href="{% url 'webapp:newgroup' %}">New Group</a></h4>
+                <br>
+                <div style="text-align: center;"><i>Need Plans? <br> Make a new group and invite friends!</i></div>
+            </div>
+            <div id="settings" class="row home">
+                <h4 align="center"><a href="{% url 'webapp:settings' %}">Settings</a></h4>
+                <br>
+                <div style="text-align: center;"><i>Forgot your password? <br> We got you</i></div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
     </div>
 
 {% endblock %}
