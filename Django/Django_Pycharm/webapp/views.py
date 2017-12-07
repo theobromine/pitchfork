@@ -128,6 +128,14 @@ def group_home(request, group_id):
     items = Item.objects.filter(group_id=group_id)
     context = {"group_id": group_id, "is_admin": is_admin,
                "status": status, "items": items}  # checks if they are an admin and displays only if they are.
+
+    # upload photo
+    if request.method == 'POST' and 'fileInput' in request.FILES:
+        form = ItemForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('webapp/grouphome' + str(group_id))
+
     return render(request, 'webapp/grouphome.html', context)
 
 
@@ -142,9 +150,9 @@ def settings(request):
 def invoice_confirmation(request, group_id):
     user_id = request.user.id
 
-    try:
-        group_admin = GroupAdmin.objects.get(group_id=group_id, user_id=user_id)
-    except:
+    group_admin = GroupAdmin.objects.filter(group_id=group_id, user_id=user_id)
+
+    if len(group_admin) == 0:
         group_admin = None
 
     if group_admin is not None:

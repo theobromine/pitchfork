@@ -10,7 +10,7 @@
             {% elif status.paypal_url != None %} {# User needs to make a payment #}
                 <span>Your payment of ${{ status.payment_amount }} was due as of {{ status.group_invoiced_date }}</span>
                 <br>
-                <input type="submit" value="Make a Payment" onclick="window.location='{{ status.paypal_url }}'"></input>
+                <input type="submit" value="Make a Payment" onclick="window.location='{{ status.paypal_url }}'"/>
 
             {% elif status.payment_date != None %} {# User is paid in full #}
                 <span>Your payment was made on {{ status.payment_date }} for ${{ status.payment_amount }}, you are all set.</span>
@@ -103,24 +103,26 @@
                                 <button type="button" class="btn btn-danger"> Delete</button>
                             </td>
                             {% if is_admin %}
-                                <td>{{ item.picture }}</td>
+                                <td><img src="{{ item.picture }}" alt=""></td>
                             {% endif %}
-                            {% if item.pitched %}
-                            <td>Pitched by {{ item.pitched }}</td>
+                            {% if item.confirmed %}
+                                <td>Pitched by {{ item.pitched.username }}</td>
                             {% else %}
-                            <td>
-                                <form method="post" enctype="multipart/form-data">
-                                    {% csrf_token %}
-                                    <label>
-                                        <div style="height:0;width: 0;overflow:hidden">
-                                            <input type="file" id="fileInput" name="fileInput"/>
-                                        </div>
-                                        <button id="submitButton" type="button" class="btn btn-info"
-                                                onclick="chooseFile();"> Pitch Me!
-                                        </button>
-                                    </label>
-                                </form>
-                            </td>                            {% endif %}
+                                <td>
+                                    <form method="post" enctype="multipart/form-data" id="pic_form"
+                                          action="{% url 'webapp:grouphome' item.group_id %}">
+                                        {% csrf_token %}
+                                        <label>
+                                            <div style="height:0;width: 0;overflow:hidden">
+                                                <input type="file" id="fileInput" name="fileInput"/>
+                                            </div>
+                                            <button id="submitButton" type="button" class="btn btn-info"
+                                                    onclick="chooseFile();"> Pitch Me!
+                                            </button>
+                                        </label>
+                                    </form>
+                                </td>
+                            {% endif %}
                         </tr>
                     {% endfor %}
                 </table>
@@ -139,7 +141,8 @@
                             <h4 class="modal-title">Add an Item</h4>
                         </div>
                         <div class="modal-body">
-                            <form action="../grouphome/{{ group_id }}" method="post">{% csrf_token %}
+                            <form action="../grouphome/{{ group_id }}" method="post">
+                                {% csrf_token %}
                                 <p><label for="name">Item Name:&nbsp;</label><input type="text" name="name"/></p>
                                 <!--"&nbsp;" Adds a literal space-->
                                 <p><label for="price">Price:&nbsp;$</label><input type="text" name="name"/></p>
@@ -185,11 +188,13 @@
     <script>
         function chooseFile() {
             $("#fileInput").click();
+            doSubmit();
         }
-
-        $('form #submitButton').on('change', function () {
-            this.form.submit();
-        });
+        
+        function doSubmit() {
+            var form = document.getElementById('pic_form');
+            form.submit();
+        }
 
     </script>
 

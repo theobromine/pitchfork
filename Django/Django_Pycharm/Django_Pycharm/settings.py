@@ -26,7 +26,8 @@ SECRET_KEY = 'uq_4_9#sqtu@*sxli-lky9sw&+6^718#2jv+h6e!ee_dlpljsk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.worldpara.com',
+                 ]
 
 # Application definition
 
