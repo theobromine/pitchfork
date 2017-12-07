@@ -98,6 +98,7 @@ a:hover {
 .itemtable button {
     display: block;
     margin: auto;
+    margin-left: 1px;
 }
 
 .pitchlist {
