@@ -41,7 +41,7 @@
     {% endif %}
 
     {% if user.is_authenticated %}
-        <div style="text-align: center">
+        <div>
         <p>Hi {{ user.username }}!</p>
         <a href="{% url 'webapp:userhome' %}">Go to your home page by clicking here!!!!</a>
             <p></p>
