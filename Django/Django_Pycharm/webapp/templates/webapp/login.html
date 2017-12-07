@@ -1,6 +1,7 @@
 {% extends 'webapp/base.html' %}
 {% block content %}
-  <h2>Log in to My Site</h2>
+  <div class="border loginpage">
+  <h2 align="center">Pitchfork Log In</h2>
   {% if form.errors %}
     <p style="color: red">Your username and password didn't match. Please try again.</p>
   {% endif %}
@@ -19,7 +20,8 @@
         {% endif %}
       </p>
     {% endfor %}
-    <button type="submit">Log in</button>
+    <button type="submit" class="btn btn-default btn-lg" >Log in</button>
     <!--<a href="{% url 'webapp:reg_user' %}">New to My Site? Sign up</a>-->
   </form>
+  </div>
 {% endblock %}
