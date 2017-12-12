@@ -1,3 +1,4 @@
 Django==1.11.7
 paypalrestsdk==1.13.1
 mysqlclient
+django-paypal
