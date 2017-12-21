@@ -19,13 +19,13 @@ from django.contrib import admin
 
 from django.conf import settings
 from django.conf.urls.static import static
+from django.urls import path
 
 urlpatterns = [
     # url(r'^', include('webapp.urls', namespace='webapp')),
-    url(r'^', include('webapp.urls', namespace='webapp')),
-    url(r'^admin/', admin.site.urls),
-    url(r'^account/', include('account.urls')),
-    # url('social-auth/', include('social.apps.django_app.urls', namespace='social')),
+    path('', include('webapp.urls', namespace='webapp')),
+    path('admin/', admin.site.urls),
+    path('account/', include('account.urls')),
 
 ]
 
